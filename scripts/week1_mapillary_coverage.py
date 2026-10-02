@@ -12,7 +12,7 @@ import os
 import urllib.parse
 import urllib.request
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from week1_area_density import CANDIDATES
@@ -64,7 +64,7 @@ def main() -> None:
         x1, y1, x2, y2 = bbox
         images = fetch(bbox, token)
         years = Counter(
-            datetime.fromtimestamp(i["captured_at"] / 1000, timezone.utc).year
+            datetime.fromtimestamp(i["captured_at"] / 1000, UTC).year
             for i in images
             if i.get("captured_at")
         )

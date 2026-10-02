@@ -1,10 +1,10 @@
 # 0003: Survey areas
 
-- **Status:** Proposed (awaiting owner confirmation)
+- **Status:** Accepted (2026-10-02): Rittenhouse, East Passyunk, Roxborough
 - **Date:** 2026-10-02
 - **Evidence:** `scripts/week1_area_density.py`, `week1_mapillary_coverage.py`, `week1_frontage_coverage.py`
 
-## Decision (proposed)
+## Decision
 
 | Profile | Area | Rough box (lng_min, lat_min, lng_max, lat_max) |
 |---|---|---|

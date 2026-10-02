@@ -6,7 +6,7 @@ Run: python3 scripts/week1_frontage_coverage.py   (needs MAPILLARY_TOKEN, see th
 """
 
 import math
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from week1_area_density import CANDIDATES, FOOD_TYPES, sql
 from week1_mapillary_coverage import fetch, load_token
@@ -51,7 +51,7 @@ def main() -> None:
             (
                 i["geometry"]["coordinates"][1],
                 i["geometry"]["coordinates"][0],
-                datetime.fromtimestamp(i["captured_at"] / 1000, timezone.utc).year,
+                datetime.fromtimestamp(i["captured_at"] / 1000, UTC).year,
             )
             for i in fetch(bbox, token)
             if i.get("captured_at")
