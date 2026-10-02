@@ -3,9 +3,10 @@
 Yelp is not used this week (see decisions 0001 and 0002).
 
 ## Blocking checks
-- [ ] **Mapillary coverage** for each candidate area (Rittenhouse / Washington Square West, East Passyunk, Chestnut Hill or a Northeast neighborhood). Record image counts and capture dates.
-- [ ] **Parcel land use** on OpenDataPhilly: dataset name, fields, update date, license.
-- [ ] **Business / food licenses** on OpenDataPhilly: fields, whether food establishments are identifiable, update date, license.
+- [ ] **Mapillary coverage** for each candidate area (Rittenhouse, East Passyunk, Chestnut Hill, Mayfair). Needs a free `MAPILLARY_TOKEN` in `.env`, then `python3 scripts/week1_mapillary_coverage.py` (written, not yet run).
+- [x] **Parcel land use**: OPA `category_code_description` plus PCPC Land Use polygons (updated Dec 2025). See `docs/data-sources.md`.
+- [x] **Business / food licenses**: updated daily, food types identifiable, point geometry on every row. See `docs/data-sources.md`.
+- [x] Density check of candidate boxes: `python3 scripts/week1_area_density.py`
 - [ ] Lock the three areas and record the decision in `docs/decisions/0003-survey-areas.md`.
 
 ## Setup
