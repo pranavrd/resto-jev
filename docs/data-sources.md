@@ -28,6 +28,11 @@ Terms: City of Philadelphia license (as-is, user bears responsibility, City rese
 - **Caveat:** 3-digit sub-classes are populated for only a small fraction of commercial parcels (212 Food Service: ~83), so it can't validate restaurant versus retail. Licenses carry that eval.
 
 ## Not yet checked
-- **Mapillary:** needs a free developer token. The Graph API returns HTTP 500 without one. Run `scripts/week1_mapillary_coverage.py` once `MAPILLARY_TOKEN` is set in `.env`.
 - **OSM:** pulled via OSMnx at ingest; attribution (ODbL) required.
 - **Building footprints:** OSM buildings are the plan. The City also publishes footprints; check at ingest whether they are cleaner and which has better address attributes.
+
+## Mapillary (checked 2026-10-02)
+- Graph API v4, images endpoint with a bbox query; requires a free developer client token (`MAPILLARY_TOKEN` in `.env`).
+- Coverage is concentrated on main commercial streets and is mostly 2018–2020, so imagery is 6–8 years older than the licence and OSM data. Per-area results are in `docs/decisions/0003-survey-areas.md`.
+- Image counts vary slightly between API runs; snapshot IDs and capture dates at ingest.
+- Images are CC BY-SA 4.0. Cache IDs and captions only, and attribute if images are shown.

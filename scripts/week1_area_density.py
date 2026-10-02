@@ -16,6 +16,10 @@ CANDIDATES = {
     "east_passyunk": (-75.1710, 39.9235, -75.1630, 39.9295),
     "chestnut_hill": (-75.2115, 40.0735, -75.2055, 40.0790),
     "mayfair_ne": (-75.0575, 40.0355, -75.0495, 40.0415),
+    # Round 2 (low-density alternatives, added after thin Mapillary coverage in round 1)
+    "mt_airy": (-75.1960, 40.0510, -75.1880, 40.0570),
+    "roxborough": (-75.2195, 40.0345, -75.2115, 40.0405),
+    "holmesburg": (-75.0330, 40.0370, -75.0250, 40.0430),
 }
 
 FOOD_TYPES = (
