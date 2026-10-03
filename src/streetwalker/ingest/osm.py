@@ -74,11 +74,30 @@ def ingest_pois(conn: psycopg.Connection, area: Area, area_id: int) -> int:
 
 
 def ingest_streets(conn: psycopg.Connection, area: Area, area_id: int) -> int:
-    graph = ox.graph_from_polygon(area.polygon, network_type="walk", retain_all=True, truncate_by_edge=True)
-    edges = ox.graph_to_gdfs(graph, nodes=False).reset_index()
+    # network_type="all", not "walk": the walk filter silently drops many residential streets
+    # (about 200 in Roxborough), which leaves houses with no street to front onto.
+    # to_undirected stores one edge per physical segment instead of one per travel direction.
+    graph = ox.convert.to_undirected(
+        ox.graph_from_polygon(area.polygon, network_type="all", retain_all=True, truncate_by_edge=True)
+    )
+    nodes, edges = ox.graph_to_gdfs(graph)
+    edges = edges.reset_index()
+    xy = {int(n): (r.x, r.y) for n, r in nodes.iterrows()}
     conn.execute("DELETE FROM osm_street WHERE area_id = %s", (area_id,))
+    conn.execute("DELETE FROM osm_node WHERE area_id = %s", (area_id,))
+    with conn.cursor() as cur:
+        cur.executemany(
+            "INSERT INTO osm_node (area_id, id, geom) VALUES (%s, %s, ST_SetSRID(ST_MakePoint(%s, %s), 4326))",
+            [(area_id, n, x, y) for n, (x, y) in xy.items()],
+        )
     rows = []
     for e in edges.itertuples():
+        geom = e.geometry
+        ux, uy = xy[int(e.u)]
+        if (geom.coords[0][0] - ux) ** 2 + (geom.coords[0][1] - uy) ** 2 > (
+            geom.coords[-1][0] - ux
+        ) ** 2 + (geom.coords[-1][1] - uy) ** 2:
+            geom = geom.reverse()  # store every geometry oriented u -> v
         rows.append(
             (
                 area_id, int(e.u), int(e.v), int(e.key),
@@ -86,7 +105,7 @@ def ingest_streets(conn: psycopg.Connection, area: Area, area_id: int) -> int:
                 json.dumps(e.highway) if isinstance(e.highway, list) else e.highway,
                 json.dumps(e.name) if isinstance(e.name, list) else (None if _is_missing(e.name) else e.name),
                 float(e.length),
-                e.geometry.wkt,
+                geom.wkt,
             )
         )
     with conn.cursor() as cur:

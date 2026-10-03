@@ -1,4 +1,4 @@
-"""Usage: python -m streetwalker.ingest [osm|city|mapillary|all] [--area SLUG]"""
+"""Usage: python -m streetwalker.ingest [osm|streets|city|mapillary|all] [--area SLUG]"""
 
 import argparse
 from functools import partial
@@ -10,7 +10,7 @@ from streetwalker.ingest import city, mapillary, osm
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("source", nargs="?", default="all", choices=["osm", "city", "mapillary", "all"])
+    ap.add_argument("source", nargs="?", default="all", choices=["osm", "streets", "city", "mapillary", "all"])
     ap.add_argument("--area", help="limit to one area slug")
     args = ap.parse_args()
 
@@ -33,8 +33,9 @@ def main() -> None:
                 steps += [
                     ("osm buildings", partial(osm.ingest_buildings, conn, area, area_id)),
                     ("osm pois", partial(osm.ingest_pois, conn, area, area_id)),
-                    ("osm streets", partial(osm.ingest_streets, conn, area, area_id)),
                 ]
+            if args.source in ("osm", "streets", "all"):
+                steps.append(("osm streets", partial(osm.ingest_streets, conn, area, area_id)))
             if args.source in ("city", "all"):
                 steps += [
                     ("opa parcels", partial(city.ingest_parcels, conn, area)),
