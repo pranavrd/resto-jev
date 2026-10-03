@@ -2,7 +2,7 @@
 
 A deterministic street survey of three Philadelphia areas. Each building is classified (residential, commercial, restaurant, cafe, and so on) with Jev decisions over OSM tags and geometry, escalating to street imagery and a local vision model only when confidence is low. Its restaurant universe feeds TableMap, a ranking and review-chat layer.
 
-Status: Week 3, ground truth and rule baselines done (tags-only baseline: commercial-any F1 0.47 on the frozen test split; with context 0.66). Jev classification next. See [docs/week1-checklist.md](docs/week1-checklist.md) and [docs/decisions/](docs/decisions/).
+Status: Week 3, ground truth and baselines done (tags-only 0.47, with geometry and context 0.66-0.72 commercial-any F1 on the frozen test split; intervals are about +/-0.2). Jev classification next. See [docs/week1-checklist.md](docs/week1-checklist.md) and [docs/decisions/](docs/decisions/).
 
 ## Data policy
 

@@ -107,14 +107,14 @@ def build_area(conn: psycopg.Connection, area_id: int, slug: str) -> int:
         serving, retail = licences.get(bid, [0, 0])
         out.append((
             bid, CROSSWALK_VERSION, c1, c2, lu, opa_cat, opa, label_status(lu, opa), bid in split_ids,
-            serving, retail, serving > 0, assignment[group_of[bid]],
+            serving, retail, serving > 0, assignment[group_of[bid]], group_of[bid],
         ))
     conn.execute("DELETE FROM ground_truth WHERE building_id IN (SELECT id FROM building WHERE area_id = %s)", (area_id,))
     with conn.cursor() as cur:
         cur.executemany(
             "INSERT INTO ground_truth (building_id, crosswalk_version, land_use_c1, land_use_c2, d1_class, opa_category, "
-            "opa_class, label_status, split_footprint, food_serving_licenses, food_retail_licenses, d3_food, split) "
-            "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+            "opa_class, label_status, split_footprint, food_serving_licenses, food_retail_licenses, d3_food, split, group_key) "
+            "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
             out,
         )
     return len(out)

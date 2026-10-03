@@ -12,6 +12,8 @@ import sys
 from collections import Counter, defaultdict
 
 from streetwalker import db
+from streetwalker.bootstrap import grouped_bootstrap
+from streetwalker.calibration import ece
 from streetwalker.groundtruth import D1_CLASSES
 from streetwalker.metrics import accuracy, binary, confusion, macro_f1, per_class
 
@@ -21,7 +23,7 @@ LOG = db.ROOT / "docs" / "test-set-log.md"
 
 def load(conn, baseline: str, splits: tuple[str, ...], area: str | None, status: str):
     sql = """
-        SELECT a.slug, g.d1_class, g.d3_food, g.label_status, g.split, p.d1_class, p.d3_food, p.rule
+        SELECT a.slug, g.d1_class, g.d3_food, g.label_status, g.split, p.d1_class, p.d3_food, p.rule, p.confidence, g.group_key
         FROM ground_truth g JOIN baseline_prediction p ON p.building_id = g.building_id AND p.baseline = %s
         JOIN building b ON b.id = g.building_id JOIN area a ON a.id = b.area_id
         WHERE g.split = ANY(%s)"""
@@ -31,7 +33,7 @@ def load(conn, baseline: str, splits: tuple[str, ...], area: str | None, status:
         args.append(area)
     if status == "agree":
         sql += " AND g.label_status IN ('agree', 'land_use_only')"  # drop only the disputed labels
-    return conn.execute(sql, args).fetchall()
+    return conn.execute(sql + " ORDER BY g.building_id", args).fetchall()
 
 
 def fmt_row(label: str, s) -> str:
@@ -73,7 +75,7 @@ def report(rows: list, title: str) -> None:
 
 def compare(conn, baselines: list[str], split: str, area: str | None, status: str) -> None:
     print(f"split={split} area={area or 'all'} labels={status}")
-    print(f"{'baseline':10s} {'n':>5s} {'D1 acc':>7s} {'macroF1':>8s} | commercial-any P    R   F1 | D3 food P    R   F1")
+    print(f"{'baseline':13s} {'n':>5s} {'D1 acc':>7s} {'macroF1':>8s} | commercial-any P    R   F1 | D3 food P    R   F1 |   ECE")
     for name in baselines:
         rows = load(conn, name, SPLITS[split], area, status)
         truth, pred = [r[1] for r in rows], [r[5] for r in rows]
@@ -81,7 +83,45 @@ def compare(conn, baselines: list[str], split: str, area: str | None, status: st
         commercial = {"commercial", "mixed-use"}
         c = binary([t in commercial for t in truth], [p in commercial for p in pred])
         f = binary([r[2] for r in rows], [r[6] for r in rows])
-        print(f"{name:10s} {len(rows):5d} {accuracy(truth, pred):7.3f} {macro_f1(stats):8.3f} | {'':15s}{c.precision:4.2f} {c.recall:4.2f} {c.f1:4.2f} | {'':9s}{f.precision:4.2f} {f.recall:4.2f} {f.f1:4.2f}")
+        conf = [r[8] for r in rows]
+        calib = f"{ece(conf, [t == p for t, p in zip(truth, pred, strict=True)]):6.3f}" if all(c is not None for c in conf) else "     -"
+        print(f"{name:13s} {len(rows):5d} {accuracy(truth, pred):7.3f} {macro_f1(stats):8.3f} | {'':15s}{c.precision:4.2f} {c.recall:4.2f} {c.f1:4.2f} | {'':9s}{f.precision:4.2f} {f.recall:4.2f} {f.f1:4.2f} | {calib}")
+
+
+COMMERCIAL = {"commercial", "mixed-use"}
+
+
+def _comm_f1(rows: list[tuple[bool, bool]]) -> float:
+    return binary([t for t, _ in rows], [p for _, p in rows]).f1
+
+
+def _acc(rows: list[tuple[str, str]]) -> float:
+    return sum(t == p for t, p in rows) / len(rows) if rows else 0.0
+
+
+def compare_bootstrap(conn, baselines: list[str], split: str, area: str | None, status: str, n: int) -> None:
+    """95% street-grouped intervals for each baseline, and paired F1 differences against the first one."""
+    loaded = {b: load(conn, b, SPLITS[split], area, status) for b in baselines}
+    base = loaded[baselines[0]]
+    print(f"\nstreet-grouped bootstrap, {n} resamples, 95% intervals; difference is paired vs {baselines[0]}")
+    print(f"{'baseline':13s} {'D1 acc':>22s} {'commercial-any F1':>24s} {'F1 difference':>24s}")
+    for name, rows in loaded.items():
+        groups = [r[9] for r in rows]
+        acc_pairs = [(r[1], r[5]) for r in rows]
+        f1_pairs = [(r[1] in COMMERCIAL, r[5] in COMMERCIAL) for r in rows]
+        alo, ahi = grouped_bootstrap(acc_pairs, groups, _acc, n)
+        flo, fhi = grouped_bootstrap(f1_pairs, groups, _comm_f1, n)
+        diff = "-"
+        if name != baselines[0]:
+            triples = [(r[1] in COMMERCIAL, r[5] in COMMERCIAL, q[5] in COMMERCIAL) for r, q in zip(rows, base, strict=True)]
+
+            def delta(ts):
+                return binary([t for t, _, _ in ts], [p for _, p, _ in ts]).f1 - binary([t for t, _, _ in ts], [q for _, _, q in ts]).f1
+
+            point = delta(triples)
+            dlo, dhi = grouped_bootstrap(triples, groups, delta, n)
+            diff = f"{point:+.2f} [{dlo:+.2f}, {dhi:+.2f}]"
+        print(f"{name:13s} {_acc(acc_pairs):6.3f} [{alo:.3f}, {ahi:.3f}]   {_comm_f1(f1_pairs):5.2f} [{flo:.2f}, {fhi:.2f}]   {diff:>24s}")
 
 
 def main() -> None:
@@ -92,6 +132,7 @@ def main() -> None:
     ap.add_argument("--status", default="all", choices=["all", "agree"])
     ap.add_argument("--final", action="store_true", help="required to touch the frozen test split")
     ap.add_argument("--compare", nargs="+", metavar="BASELINE", help="one summary row per baseline instead of the full report")
+    ap.add_argument("--bootstrap", type=int, metavar="N", help="with --compare: street-grouped bootstrap intervals (N resamples)")
     args = ap.parse_args()
 
     if "test" in SPLITS[args.split]:
@@ -106,6 +147,8 @@ def main() -> None:
     if args.compare:
         with db.connect() as conn:
             compare(conn, args.compare, args.split, args.area, args.status)
+            if args.bootstrap:
+                compare_bootstrap(conn, args.compare, args.split, args.area, args.status, args.bootstrap)
         return
 
     with db.connect() as conn:

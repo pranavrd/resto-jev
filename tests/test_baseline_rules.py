@@ -159,3 +159,27 @@ def test_v3_corridor_rule_only_fires_for_silent_attached_untagged_buildings_on_c
     assert predict_v3(street_payload("tertiary", walls=0)).d1 == "residential"  # free-standing: not a corridor rowhouse
     assert predict_v3(street_payload("tertiary", building="semidetached_house")).d1 == "residential"
     assert predict_v3(street_payload("tertiary", block_pois=0)).d1 == "residential"  # no known businesses on the block
+
+
+def test_multiclass_log_loss_respects_custom_class_order():
+    from streetwalker.metrics import multiclass_log_loss
+
+    classes = ("zebra", "apple")  # deliberately not alphabetical
+    probs = [[0.9, 0.1], [0.2, 0.8]]
+    good = multiclass_log_loss(["zebra", "apple"], probs, classes)
+    assert good == pytest.approx(-(__import__("math").log(0.9) + __import__("math").log(0.8)) / 2)
+    bad = multiclass_log_loss(["apple", "zebra"], probs, classes)  # confidently wrong
+    assert bad > good * 5
+
+
+def test_grouped_bootstrap_resamples_groups_and_is_deterministic():
+    from streetwalker.bootstrap import grouped_bootstrap
+
+    rows = [1.0] * 10 + [0.0] * 10
+    groups = ["a"] * 10 + ["b"] * 10  # two groups: resampling whole groups yields means of 0, 0.5 or 1 only
+    lo, hi = grouped_bootstrap(rows, groups, lambda r: sum(r) / len(r), n=400, seed=1)
+    assert (lo, hi) == (0.0, 1.0)
+    assert grouped_bootstrap(rows, groups, lambda r: sum(r) / len(r), n=400, seed=1) == (lo, hi)
+    many = [1.0, 0.0] * 50  # one building per group: ordinary bootstrap, interval is narrow around 0.5
+    lo2, hi2 = grouped_bootstrap(many, [str(i) for i in range(100)], lambda r: sum(r) / len(r), n=400, seed=1)
+    assert 0.35 < lo2 < 0.5 < hi2 < 0.65

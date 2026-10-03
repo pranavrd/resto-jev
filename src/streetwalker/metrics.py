@@ -1,5 +1,6 @@
 """Classification metrics with no dependencies, so every number in the write-up is reproducible."""
 
+import math
 from collections import Counter
 from dataclasses import dataclass
 
@@ -46,3 +47,10 @@ def binary(truth: list[bool], pred: list[bool]) -> ClassStats:
     t = ["pos" if x else "neg" for x in truth]
     p = ["pos" if x else "neg" for x in pred]
     return per_class(t, p, ["pos"])[0]
+
+
+def multiclass_log_loss(truth: list[str], probs: list[list[float]], classes: tuple[str, ...] | list[str]) -> float:
+    """Mean negative log probability of the true class. Columns of `probs` follow `classes` in the order
+    given (sklearn's log_loss silently assumes sorted order, which misaligns custom class orders)."""
+    index = {c: i for i, c in enumerate(classes)}
+    return -sum(math.log(max(row[index[t]], 1e-15)) for t, row in zip(truth, probs, strict=True)) / len(truth)
