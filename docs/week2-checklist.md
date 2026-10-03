@@ -6,7 +6,7 @@
 - [x] Integrity checks: full coverage, continuity, orientation
 - [x] Frontage assignment: segment, side and position per building (`building` table, decision 0005, 16 tests)
 - [x] Ordered encounters and the `walk_event` log (one per building, verified)
-- [ ] Evidence bundles: OSM tags, POIs, geometry, neighbour context
+- [x] Evidence bundles v1: OSM tags, POIs, geometry, neighbour context (decision 0006, 20 tests, signal audit)
 - [ ] Replay prototype (deck.gl path layer, buildings lighting up as encountered)
 
 Exit: a replayable walk for each area with an evidence bundle per building.
