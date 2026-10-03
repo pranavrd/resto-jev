@@ -19,3 +19,8 @@ __pycache__/
 .ruff_cache/
 .ipynb_checkpoints/
 .DS_Store
+
+# Web viewer
+web/node_modules/
+web/dist/
+web/public/data/
