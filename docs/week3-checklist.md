@@ -6,8 +6,10 @@
 - [x] Rule baselines v1 (tags), v2 (+ geometry), v3 (+ context) with evaluation
 - [x] Gradient-boosted baselines on geometry, tags and context (decision 0008): gbm-full ties rules-v3 within noise
 - [x] Jev 100-building trial (decision 0009): matches baselines on tagged buildings, weaker and overconfident on silent ones
-- [ ] Jev D1 to D3 over all buildings (about $0.17; gives natural-prevalence calibration and stacker data)
-- [ ] Calibration analysis (reliability diagram, ECE)
-- [ ] Tier 0 accuracy and calibration per area, compared with the baselines
+- [x] Jev D1 to D3 over all 3,795 buildings: $0.164, 0 errors (decision 0010)
+- [x] Calibration analysis: Jev ECE 0.093 (overconfident), GBMs 0.02 to 0.03; reliability bins in `evaluate`
+- [x] Tier 0 accuracy and calibration per area, compared with the baselines (0010)
 
 Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_API_KEY` (map from `JEV_API_KEY` in-process), pin `jev-1.13.0`, ask one thing per field, Jev reads literally and is weak at counting (we pass computed facts), tune each confidence bar separately. Evaluate Jev on all 3,795 buildings.
+
+**Week 3 exit met 2026-10-03:** Tier 0 accuracy and calibration per area, compared with the baselines.

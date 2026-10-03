@@ -9,3 +9,7 @@ The test split is frozen (decision 0007). Every evaluation that touches it is ap
 | 2026-10-03 22:09 UTC | rules-v3 | test | all areas | all |
 | 2026-10-03 22:26 UTC | rules-v1, rules-v2, rules-v3, gbm-geometry, gbm-tags, gbm-full | test | all areas | all |
 | 2026-10-03 22:27 UTC | rules-v3, rules-v1, gbm-tags, gbm-full | test | all areas | all |
+| 2026-10-03 23:07 UTC | jev-p1, rules-v3, gbm-full, gbm-tags, rules-v1 | heldout | all areas | all |
+| 2026-10-03 23:07 UTC | jev-p1, rules-v3, gbm-full | heldout | rittenhouse | all |
+| 2026-10-03 23:07 UTC | jev-p1, rules-v3, gbm-full | heldout | east_passyunk | all |
+| 2026-10-03 23:07 UTC | jev-p1, rules-v3, gbm-full | heldout | roxborough | all |

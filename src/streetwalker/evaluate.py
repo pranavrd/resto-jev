@@ -13,11 +13,11 @@ from collections import Counter, defaultdict
 
 from streetwalker import db
 from streetwalker.bootstrap import grouped_bootstrap
-from streetwalker.calibration import ece
+from streetwalker.calibration import ece, reliability_bins
 from streetwalker.groundtruth import D1_CLASSES
 from streetwalker.metrics import accuracy, binary, confusion, macro_f1, per_class
 
-SPLITS = {"train": ("train",), "dev": ("dev",), "trainval": ("train", "dev"), "test": ("test",), "all": ("train", "dev", "test")}
+SPLITS = {"train": ("train",), "dev": ("dev",), "trainval": ("train", "dev"), "test": ("test",), "heldout": ("dev", "test"), "all": ("train", "dev", "test")}
 LOG = db.ROOT / "docs" / "test-set-log.md"
 
 
@@ -64,6 +64,13 @@ def report(rows: list, title: str) -> None:
     print(f"commercial-any (commercial or mixed-use): P {comm.precision:.2f} R {comm.recall:.2f} F1 {comm.f1:.2f} (n_true={comm.support})")
     food = binary([r[2] for r in rows], [r[6] for r in rows])
     print(f"D3 food-serving (licence truth):           P {food.precision:.2f} R {food.recall:.2f} F1 {food.f1:.2f} (n_true={food.support})")
+
+    conf = [r[8] for r in rows]
+    if all(c is not None for c in conf):
+        correct = [t == p for t, p in zip(truth, pred, strict=True)]
+        print(f"D1 calibration: ECE {ece(conf, correct):.3f}")
+        for b in reliability_bins(conf, correct, 10):
+            print(f"  confidence {b.lo:.1f}-{b.hi:.1f}: n={b.n:5d}  mean confidence {b.mean_confidence:.2f}  accuracy {b.accuracy:.2f}")
 
     by_rule: dict[str, list[bool]] = defaultdict(list)
     for r in rows:

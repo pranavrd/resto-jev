@@ -46,7 +46,7 @@ D3 food: precision 0.83, recall 0.45 (F1 0.59) at any threshold from 0.3 to 0.5.
 
 ## Implications for the cascade (Week 4)
 
-- **Do not gate escalation on Jev's argmax confidence alone.** Triage silent buildings with a separate risk score. The GBM already ranks commercial-any better than Jev (AUROC 0.85 against 0.78), so a candidate gate is: escalate when the building is silent and the GBM's p(commercial or mixed) is not near zero, or when Jev and the GBM disagree.
+- **Correction (see 0010):** the trial sample over-represented hard cases, which made Jev's confidence look useless as a gate. At natural prevalence a low-confidence gate recovers real recall (0.67 at 10% escalation), but a risk gate does better (0.80). The original point stands in softer form: triage silent buildings with a risk score, not confidence alone. The GBM already ranks commercial-any better than Jev (AUROC 0.85 against 0.78), so a candidate gate is: escalate when the building is silent and the GBM's p(commercial or mixed) is not near zero, or when Jev and the GBM disagree.
 - **A calibrated stacker** over Jev's distribution plus the evidence features may beat either model alone and gives a confidence that means something. It needs Jev's answers on the train and dev buildings.
 - **Jev's best use is interpretation of rich evidence** (names, tags, POIs: D2 and D3) and the imagery captions at tier 1, where the text finally contains the signal. Silent rowhouses need imagery, not a better prompt.
 - Natural-prevalence numbers need a full run: **about $0.17 and 10 minutes for all 3,795 buildings**, which also gives the stacker its training data.
