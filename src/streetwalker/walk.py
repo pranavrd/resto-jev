@@ -22,12 +22,21 @@ STREET_TYPES = {
 }
 
 
+def _highway_values(highway: str) -> list[str]:
+    return json.loads(highway) if highway.startswith("[") else [highway]
+
+
 def is_street(highway: str | None) -> bool:
     """highway may be a plain tag or a JSON list (OSMnx merges tags); any street value qualifies."""
+    return bool(highway) and any(v in STREET_TYPES for v in _highway_values(highway))
+
+
+def is_service(highway: str | None) -> bool:
+    """True when the only street-type value is `service` (alley, driveway, parking aisle)."""
     if not highway:
         return False
-    values = json.loads(highway) if highway.startswith("[") else [highway]
-    return any(v in STREET_TYPES for v in values)
+    street_values = [v for v in _highway_values(highway) if v in STREET_TYPES]
+    return bool(street_values) and all(v == "service" for v in street_values)
 
 
 @dataclass(frozen=True)

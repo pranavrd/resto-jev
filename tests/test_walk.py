@@ -3,7 +3,7 @@ from itertools import pairwise
 
 import pytest
 
-from streetwalker.walk import StreetEdge, is_street, plan_walk
+from streetwalker.walk import StreetEdge, is_service, is_street, plan_walk
 
 
 def xy(n: int) -> dict[int, tuple[float, float]]:
@@ -106,3 +106,12 @@ def test_never_longer_than_naive_baseline():
 )
 def test_is_street(highway, expected):
     assert is_street(highway) is expected
+
+
+@pytest.mark.parametrize(
+    ("highway", "expected"),
+    [("service", True), ("residential", False), ('["service", "footway"]', True), ('["secondary", "service"]', False),
+     ("footway", False), (None, False)],
+)
+def test_is_service(highway, expected):
+    assert is_service(highway) is expected
