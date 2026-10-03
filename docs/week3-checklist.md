@@ -5,7 +5,8 @@
 - [x] Frozen street-grouped train/dev/test split with a logged test gate
 - [x] Rule baselines v1 (tags), v2 (+ geometry), v3 (+ context) with evaluation
 - [x] Gradient-boosted baselines on geometry, tags and context (decision 0008): gbm-full ties rules-v3 within noise
-- [ ] Jev D1 to D3 over all buildings (needs `JEV_API_KEY` in `.env`)
+- [x] Jev 100-building trial (decision 0009): matches baselines on tagged buildings, weaker and overconfident on silent ones
+- [ ] Jev D1 to D3 over all buildings (about $0.17; gives natural-prevalence calibration and stacker data)
 - [ ] Calibration analysis (reliability diagram, ECE)
 - [ ] Tier 0 accuracy and calibration per area, compared with the baselines
 
