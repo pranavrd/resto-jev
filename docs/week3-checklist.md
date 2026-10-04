@@ -44,6 +44,9 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [x] Agreement read in the download (two versions, 2021 and 2023); differences and the working rule recorded in 0001
 - [x] Yelp business file extracted to `data/yelp/` (gitignored), Philadelphia loaded into the local DB
 - [x] Places linked to Yelp businesses with confidence tiers; results kept in `docs/private/` (gitignored)
-- [ ] Extract the review file (large; needs disk space) and attach reviews to the usable links
+- [x] Reviews of the usable links loaded by streaming the file out of the zip (nothing written to disk), `user_id` dropped (decision 0020)
+- [x] Jev aspect scoring (food, atmosphere, service, value) over every loaded review, plausibility-checked, not validated
+- [ ] Aspect labelling guidelines and a labelled set of about 500 reviews (the owner's time), then baseline vs Jev
+- [ ] Place-level rating with Bayesian shrinkage and recency
 - [ ] Confirm which agreement version Yelp showed at the 2026-10-03 download (0001); the Data's term ends 2027-10-03
 

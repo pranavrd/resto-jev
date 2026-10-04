@@ -17,6 +17,7 @@ class Answer:
     answer: str | None
     probs: dict | None
     confidence: float | None
+    score: float | None = None  # Score questions only: position along the levels, 0 to the top level
 
 
 @dataclass(frozen=True)
@@ -40,13 +41,15 @@ def make_client() -> TypeSafeClient:
 
 
 def parse(response) -> list[Answer]:
-    """Normalise a SystemOneResponse. Yes/no answers become answer 'true'/'false' with confidence max(p, 1-p)."""
+    """Normalise a SystemOneResponse. Yes/no answers become answer 'true'/'false' with confidence max(p, 1-p); a Score keeps its position in `score` and its level probabilities in `probs`."""
     out = []
     for name, a in response.answers.items():
         if a.type == "choice":
             out.append(Answer(name, a.choice, dict(a.probabilities), a.confidence))
         elif a.type == "noul":
             out.append(Answer(name, "true" if a.noul >= 0.5 else "false", {"yes": a.noul}, max(a.noul, 1 - a.noul)))
+        elif a.type == "score":
+            out.append(Answer(name, f"{a.score:.3f}", {str(k): v for k, v in a.probabilities.items()}, a.confidence, a.score))
     return out
 
 

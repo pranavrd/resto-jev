@@ -9,6 +9,7 @@ from streetwalker.yelp_match import (
     confidence,
     distinct_name,
     find_aliases,
+    is_dining,
     match,
     name_sim,
     place_addresses,
@@ -114,3 +115,13 @@ def test_the_matcher_is_deterministic(n):
     businesses = [biz(f"y{i}", f"Place {i}", f"{100 + i} Oak St", x=i * 5.0, b=i) for i in range(5, 0, -1)]
     one = [(m.place_idx, m.biz_idx) for m in match(places, businesses)]
     assert one == [(m.place_idx, m.biz_idx) for m in match(places, businesses)] and len(one) == 5
+
+
+def test_only_dining_listings_can_be_usable():
+    assert is_dining("Restaurants, Italian") and is_dining("Coffee & Tea, Bakeries, Food") and is_dining("Bars, Nightlife")
+    assert not is_dining("Fruits & Veggies, Specialty Food, Food, Grocery")  # "Food" alone is a market
+    assert not is_dining("Hotels & Travel, Restaurants, Hotels")  # a hotel's reviews are about rooms, even with a restaurant inside
+    assert not is_dining(None)
+    hotel = YBiz("y1", "Lucky Noodle", "100 Oak St", 0.0, 0.0, 1, True, 10, 1, False)
+    (m,) = match([place(1, "Lucky Noodle")], [hotel])
+    assert m.confidence == "low" and "not a dining listing" in m.basis  # a perfect name and address, still not usable

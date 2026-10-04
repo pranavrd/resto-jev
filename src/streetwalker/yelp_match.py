@@ -28,6 +28,21 @@ MIN_SCORE = 0.45
 NEAR_BUILDING_M = 15.0
 
 
+# A listing has to be somewhere people eat or drink to carry reviews of a restaurant. "Food" alone is a grocery or a market, and
+# a hotel's reviews are about rooms and staff even when the hotel has a restaurant.
+DINING_CATEGORIES = {
+    "Restaurants", "Bars", "Cafes", "Coffee & Tea", "Bakeries", "Pubs", "Breweries", "Pizza", "Delis", "Sandwiches", "Ice Cream & Frozen Yogurt",
+    "Desserts", "Fast Food", "Diners", "Breakfast & Brunch", "Juice Bars & Smoothies", "Bubble Tea", "Food Trucks", "Gastropubs", "Beer Bar",
+    "Wine Bars", "Cocktail Bars", "Sports Bars", "Lounges", "Nightlife",
+}
+LODGING_CATEGORIES = {"Hotels", "Hotels & Travel", "Bed & Breakfast"}
+
+
+def is_dining(categories: str | None) -> bool:
+    cats = {c.strip() for c in (categories or "").split(",")}
+    return bool(cats & DINING_CATEGORIES) and not (cats & LODGING_CATEGORIES)
+
+
 @dataclass(frozen=True)
 class YPlace:
     id: int
@@ -50,6 +65,7 @@ class YBiz:
     is_open: bool = True
     review_count: int = 0
     name_count: int = 1  # Yelp food businesses in Philadelphia with this distinctive name (1 = unique; a chain has many)
+    dining: bool = True  # categories say people eat or drink here (not a grocery, not a hotel)
 
 
 @dataclass(frozen=True)
@@ -193,6 +209,8 @@ def match(places: list[YPlace], businesses: list[YBiz]) -> list[YMatch]:
             conf = "medium"  # successor or multi-venue licence: the identity is ambiguous
         if "unique in the city" in basis:
             conf = "medium"  # a distinctive name alone, with no address or building to confirm it
+        if not businesses[j].dining:
+            conf, basis = "low", basis + " (not a dining listing)"  # right business perhaps, but its reviews are not about a restaurant
         out.append(YMatch(i, j, s, basis, sim, d, conf))
     return out
 
@@ -225,7 +243,7 @@ def load(conn) -> tuple[list[YPlace], list[int], list[YBiz], list[dict]]:
         """,
         (NEAR_BUILDING_M,),
     ).fetchall():
-        businesses.append(YBiz(bid, name, addr, x, y, nb, bool(is_open), reviews or 0, counts[distinct_name(name)]))
+        businesses.append(YBiz(bid, name, addr, x, y, nb, bool(is_open), reviews or 0, counts[distinct_name(name)], is_dining(cats)))
         meta.append({"stars": stars, "categories": cats, "area": area})
     return places, ids, businesses, meta
 
@@ -262,6 +280,8 @@ def link_places(conn) -> list[YMatch]:
             "INSERT INTO yelp_link (place_id, business_id, score, basis, name_sim, dist_m, confidence) VALUES (%s, %s, %s, %s, %s, %s, %s)",
             (ids[m.place_idx], businesses[m.biz_idx].id, m.score, m.basis, m.name_sim, m.dist_m, m.confidence),
         )
+    # reviews (and the scores derived from them) belong to usable links only; drop those of businesses no longer linked
+    conn.execute("DELETE FROM yelp_review WHERE business_id NOT IN (SELECT business_id FROM yelp_link_usable UNION SELECT business_id FROM yelp_alias)")
     return matches
 
 
