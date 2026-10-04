@@ -139,6 +139,13 @@ def main() -> None:
         if conn.execute("SELECT EXISTS (SELECT 1 FROM transit_stop)").fetchone()[0]:
             print("enrich:", enrich_places(conn))  # rebuilding place cleared the neighborhood and transit columns
             conn.commit()
+        if conn.execute("SELECT EXISTS (SELECT 1 FROM yelp_business)").fetchone()[0]:
+            from streetwalker.yelp_match import (
+                link_places,  # imported here: the Yelp half is optional and private
+            )
+
+            print(f"yelp: relinked {len(link_places(conn))} places")  # rebuilding place deleted its links
+            conn.commit()
 
 
 if __name__ == "__main__":

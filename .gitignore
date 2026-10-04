@@ -1,6 +1,9 @@
 # Data stays out of git. Yelp data and anything derived from it must never be committed (see docs/decisions/0001).
 data/*
 !data/.gitkeep
+
+# Write-ups that contain numbers or examples from the Yelp Data stay local (decision 0019, agreement 4E)
+docs/private/
 *.parquet
 *.csv.gz
 *.dump

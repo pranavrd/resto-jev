@@ -27,7 +27,26 @@ The owner downloaded the dataset (`Yelp-JSON.zip`, kept outside the repository) 
 
 This is the owner's reading of the agreement they accepted, and it is more permissive than the July 2023 reading in the table below (§1/§3 academic-use definition, §3 pre-publication review, §4A display, §4D third parties, §4E disclosure). The assistant did not see that agreement text and cannot reconcile the two, so the owner's reading governs and the earlier sections are kept as the historical analysis. The fallback plans in "Decision (proposed)" items 3 to 5 (no hosted demo, redacted video, local-only aspect scoring) are therefore not required; the gating items in "Open items" about eligibility, the consent email and the Jev question are closed by this verification.
 
-What stays regardless: `data/` and the dataset are never committed, the raw files are not redistributed, derived tables are treated as private until the owner decides otherwise, and there is no Yelp branding or implied endorsement. Open item: record the version and date of the agreement that was accepted, next to the download, so the reading can be checked later.
+What stays regardless: `data/` and the dataset are never committed, the raw files are not redistributed, derived tables are treated as private until the owner decides otherwise, and there is no Yelp branding or implied endorsement. Open item (partly closed 2026-10-04): the agreement versions in the download are recorded below; still to confirm which one Yelp showed when the owner accepted it.
+
+## What the agreement files in the download say (read 2026-10-04)
+
+The download (`Yelp-JSON.zip`, saved 2026-10-03) contains **two versions** of the terms:
+
+| | `Dataset_User_Agreement.pdf` (inside the data tar, file dated 2022) | "Yelp Dataset Documentation & ToS copy.pdf" (the owner's copy, dated 2025) |
+|---|---|---|
+| Last updated | **February 16, 2021** | **July 7, 2023** |
+| Purpose (§1) | "academic project ... or for non-commercial purposes" | "academic project as part of an ongoing course of study" |
+| License (§3) | "non-commercial use" by nonprofits, government, educational institutions, think tanks | "academic use", same list of entities |
+| §4D | no use "on behalf of any third party" | no "share or make available the Data to any third party" |
+
+The **same in both**: pre-publication review (§3: findings from any public presentation or publication involving the Data or the Yelp name go to Yelp first, approved within five business days); no public display of the Data, "especially reviews" (§4A); no disclosing summaries or metrics about the Data on any website or to third parties, except what academic purposes need (§4E); derivative works are Yelp's property (§5); a 12-month term from download, then delete all Data and copies (§10).
+
+How this sits with the owner's reading (2026-10-04, above): private use of derived scores is consistent with both. The points to check **before anything is public**: the §3 review requirement (the owner's reading is that it is not needed; both texts contain it), §4A and §4E (public display of review text or of metrics about the Data). On sending review text to hosted services such as Jev, the 2021 §4D ("on behalf of") is narrower than the 2023 §4D ("share or make available"); the owner has decided it is allowed, and the wording is recorded here so that decision is an informed one. Which version Yelp showed at the 2026-10-03 download is not known; confirm it.
+
+**Term:** effective from the download date, 2026-10-03, so it ends **2027-10-03**; delete the Data and everything derived from it by then, or renew.
+
+**Working rule that follows** (decision 0019): metrics and examples derived from the Yelp Data are kept in `docs/private/` (gitignored), not in the decision records; the records describe methods only. Nothing derived from the Data is exposed through the API or the web viewer.
 
 ## Owner note on public hosting (2026-10-03)
 

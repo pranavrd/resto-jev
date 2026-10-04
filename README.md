@@ -69,6 +69,10 @@ curl 'localhost:8000/places?lat=39.9496&lng=-75.1715&radius_m=300&kind=bar&max_r
 
 The map UI is described in [web/README.md](web/README.md).
 
+## Yelp link (private)
+
+Census places are linked to Yelp Open Dataset businesses by name, address and building (`yelp_match.py`, [decision 0019](docs/decisions/0019-yelp-match.md)). The Yelp Data and anything derived from it stay on this machine: nothing here exposes it, and the figures live in a gitignored file. Read the Yelp terms in [decision 0001](docs/decisions/0001-yelp-license-and-showcase.md) before showing anything derived from it.
+
 ## Attribution
 
 Map data © OpenStreetMap contributors (ODbL). Business licenses and land use: City of Philadelphia via OpenDataPhilly. Transit: SEPTA GTFS. Neighborhood boundaries: OpenDataPhilly, CC BY 4.0, Robert Cheetham / Azavea. Street imagery: Mapillary, CC BY-SA 4.0.

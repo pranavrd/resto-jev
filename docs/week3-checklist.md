@@ -40,3 +40,10 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [ ] Fill the human-time row of the cost table and re-state the curve with a real reviewer
 - [ ] Optional: a stronger VLM for Tier 1 (7B, 5.5 GB download, needs approval); a Rittenhouse-aware Tier 0
 
+## Yelp half, step 1: the match (decision 0019)
+- [x] Agreement read in the download (two versions, 2021 and 2023); differences and the working rule recorded in 0001
+- [x] Yelp business file extracted to `data/yelp/` (gitignored), Philadelphia loaded into the local DB
+- [x] Places linked to Yelp businesses with confidence tiers; results kept in `docs/private/` (gitignored)
+- [ ] Extract the review file (large; needs disk space) and attach reviews to the usable links
+- [ ] Confirm which agreement version Yelp showed at the 2026-10-03 download (0001); the Data's term ends 2027-10-03
+
