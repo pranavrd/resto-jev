@@ -106,6 +106,27 @@ def meta(conn: Conn) -> dict:
     }
 
 
+@app.get("/transit/stops")
+def transit_stops(
+    conn: Conn,
+    area: Annotated[Literal["rittenhouse", "east_passyunk", "roxborough"] | None, Query()] = None,
+    margin_m: Annotated[float, Query(ge=0, le=2000, description="With area: include stops this far outside it")] = 600,
+) -> dict:
+    """SEPTA stops as GeoJSON, with the routes calling there and weekday stop-times."""
+    sql = "SELECT s.feed, s.stop_id, s.name, ST_X(s.geom) AS lng, ST_Y(s.geom) AS lat, s.modes, s.weekday_trips, s.service FROM transit_stop s"
+    params: dict = {}
+    if area:
+        sql += " JOIN area a ON a.slug = %(area)s AND ST_DWithin(s.geom::geography, a.geom::geography, %(m)s)"
+        params = {"area": area, "m": margin_m}
+    features = [
+        {"type": "Feature", "id": f"{r['feed']}:{r['stop_id']}", "geometry": {"type": "Point", "coordinates": [r["lng"], r["lat"]]},
+         "properties": {"name": r["name"], "modes": r["modes"], "weekday_trips": r["weekday_trips"],
+                        "routes": sorted({k.rsplit("|", 1)[0] for k in r["service"]})}}
+        for r in conn.execute(sql + " ORDER BY s.feed, s.stop_id", params).fetchall()
+    ]
+    return {"type": "FeatureCollection", "features": features, "attribution": ATTRIBUTION}
+
+
 @app.get("/places")
 def places(conn: Conn, pq: Filters) -> dict:
     items, total = run(conn, pq)

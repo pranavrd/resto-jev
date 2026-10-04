@@ -28,4 +28,4 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 ## TableMap half, non-Yelp parts (Week 5 item, done early)
 - [x] SEPTA GTFS stops and weekday service near the areas, City neighborhoods, per-place transit context (decision 0017); stop counts verified against raw GTFS
 - [x] Place search API (`/places`, `/places.geojson`, `/places/{id}`, `/meta`), no Yelp fields, 16 new tests (decision 0017)
-- [ ] Map UI over `/places.geojson`
+- [x] Map UI: places by kind, filters mapped one-to-one to API parameters, SEPTA stops and a 400 m ring for the selected place (web/README.md)

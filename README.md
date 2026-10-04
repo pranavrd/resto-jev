@@ -48,8 +48,13 @@ Each place carries its neighborhood and SEPTA context (nearest stop and rail sto
 .venv/bin/python -m streetwalker.ingest septa neighborhoods   # SEPTA GTFS (22 MB) and neighborhood polygons
 .venv/bin/python -m streetwalker.enrich                       # write context onto each place
 .venv/bin/uvicorn streetwalker.api:app --port 8000            # interactive docs at http://localhost:8000/docs
+cd web && npm run dev                                         # map UI at http://localhost:5173 (proxies /api to the API)
 curl 'localhost:8000/places?lat=39.9496&lng=-75.1715&radius_m=300&kind=bar&max_rail_m=400&sort=distance'
 ```
+
+![Places map](docs/img/places-rittenhouse.jpg)
+
+The map UI is described in [web/README.md](web/README.md).
 
 ## Attribution
 

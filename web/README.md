@@ -1,4 +1,18 @@
-# StreetWalker replay viewer
+# StreetWalker web viewer
+
+React + Vite + deck.gl, with two views switched from the top-left (`#/places` and `#/replay`): the **places map** over the search API, and the **walk replay**.
+
+## Places map
+
+Search and filter the restaurant census and see each place's SEPTA access. Needs the API running (`.venv/bin/uvicorn streetwalker.api:app --port 8000`); Vite proxies `/api` to it.
+
+- **Map:** places coloured by kind; places the filters exclude stay as hollow rings; SEPTA stops coloured by mode (subway, trolley, rail, bus) and sized by weekday service; footprints and streets for the chosen area come from the replay export, so run `export_replay` once or the map shows points only.
+- **Filters:** name or address search, area, kind, rail stop within 200/400/800 m, weekday departures within 400 m, which source lists the place, confidence, sort. Every control maps to one `/places` parameter (`src/places/query.ts`, tested).
+- **Selecting a place** (list or map; Esc clears) shows its details, nearest stop and rail, routes, a 400 m ring and the stops inside it.
+- Text search zooms to its results. Slow answers cannot overwrite newer ones (in-flight requests are aborted).
+- No Yelp data or fields (decision 0017).
+
+## Walk replay
 
 React + Vite + deck.gl viewer that replays the survey walk: the walker moves along each street, buildings light up as they are encountered, and clicking a building shows the evidence text Jev is given.
 

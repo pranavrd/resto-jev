@@ -74,3 +74,13 @@ def test_no_yelp_fields_are_exposed(client):
     first = client.get("/places", params={"limit": 1}).json()["items"][0]
     detail = client.get(f"/places/{first['id']}").json()
     assert not any("yelp" in k.lower() or "rating" in k.lower() or "review" in k.lower() for k in {*first, *detail})
+
+
+def test_transit_stops_are_scoped_by_area_and_carry_routes(client):
+    near = client.get("/transit/stops", params={"area": "roxborough"}).json()
+    everywhere = client.get("/transit/stops").json()
+    assert 0 < len(near["features"]) < len(everywhere["features"])
+    props = near["features"][0]["properties"]
+    assert props["routes"] and props["weekday_trips"] > 0 and props["modes"]
+    tight = client.get("/transit/stops", params={"area": "roxborough", "margin_m": 0}).json()
+    assert len(tight["features"]) < len(near["features"])
