@@ -19,4 +19,4 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [x] Tier 1 groundwork (decision 0012): local MLX Qwen2.5-VL-3B (6.8 s per image), image selection for every building (32% coverage), 20-building pilot
 - [x] East Passyunk panorama crops (decision 0013): Jev recall 0.29 to 0.67 on the 136 covered buildings; neighbour-sign false positives found
 - [x] D5 check and tighter crops (decision 0014): strict own-sign attribution leaves imagery adding about 0.05 recall to Jev and almost nothing beyond the stacker; D5 on text alone does not work
-- [ ] Decide the imagery tier's future: OCR on the crops, full-frontage scanning, 7B model, or stop and move to the downstream product
+- [x] OCR experiment (decision 0015): Apple Vision reads centre text on 17% of commercial/mixed crops (VLM 20%); 6 of 6 reviewed failures had no legible sign. Imagery tier is data-limited; stopping model changes there

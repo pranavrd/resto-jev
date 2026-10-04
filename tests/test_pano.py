@@ -136,3 +136,14 @@ def test_not_visible_is_not_a_sign():
 
     assert parse_caption("Street level: not visible\nAwning or sign on that building: not visible").sign is None
     assert parse_caption_v4("Street level: not visible\nSign on the centre building: Not visible.\nSigns on neighbouring buildings: none").center_sign is None
+
+
+def test_name_match_tolerates_partial_reads_but_not_unrelated_text():
+    from streetwalker.ocr import name_match
+
+    assert name_match(["MOON, IGHT"], "MoonNight LLC")
+    assert name_match(["PISTOLA", "DEL SUR"], "Pistola Del Sur Holdings LLC")
+    assert name_match(["Sally's Hair Shop"], "SALLYS HAIR SHOP INC")
+    assert not name_match(["CITY FITNESS"], "MoonNight LLC")
+    assert not name_match(["ATM"], "ATM Services LLC")  # too short to count
+    assert not name_match([], "Anything")
