@@ -47,3 +47,14 @@ export function applyKey(d: Draft, key: string): Outcome {
   }
   return { draft: d }
 }
+
+/** A click on a button in row `row`: answer that row (key '1' to '5' or 'n'), whichever row was active. Pure, so a click and the
+ * keyboard go through the same code. */
+export function choose(d: Draft, row: number, key: string): Draft {
+  return applyKey({ ...d, active: row }, key).draft
+}
+
+/** A click on a row's background: make it the active row, keeping every answer. */
+export function activate(d: Draft, row: number): Draft {
+  return { ...d, active: row }
+}

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { ASPECTS, applyKey, complete, emptyDraft } from './keys'
+import { ASPECTS, activate, applyKey, choose, complete, emptyDraft } from './keys'
 import type { Answers, Aspect, Draft } from './keys'
 
 interface Schema {
@@ -137,12 +137,15 @@ export function LabelApp() {
         {schema?.aspects.map((s, row) => {
           const value = draft.answers[s.aspect]
           return (
-            <section key={s.aspect} className={row === draft.active ? 'aspectrow active' : 'aspectrow'} onClick={() => setDraft({ ...draft, active: row })}>
+            <section key={s.aspect} className={row === draft.active ? 'aspectrow active' : 'aspectrow'} onClick={() => setDraft((d) => activate(d, row))}>
               <h2>
                 {s.aspect} <span className="muted">· {s.definition}</span>
               </h2>
               <div className="levels">
-                <button className={value === null ? 'lv on none' : 'lv none'} disabled={!item || busy} onClick={() => setDraft(applyKey({ ...draft, active: row }, 'n').draft)} title="The review says nothing about this">
+                <button className={value === null ? 'lv on none' : 'lv none'} disabled={!item || busy} onClick={(e) => {
+                    e.stopPropagation() // the row's own click handler must not run after this one
+                    setDraft((d) => choose(d, row, 'n'))
+                  }} title="The review says nothing about this">
                   <kbd>n</kbd> Not mentioned
                 </button>
                 {LEVEL_NAMES.map((name, level) => (
@@ -151,9 +154,9 @@ export function LabelApp() {
                     className={value === level ? 'lv on' : 'lv'}
                     disabled={!item || busy}
                     title={s.levels[level]}
-                    onClick={() => {
-                      const out = applyKey({ ...draft, active: row }, String(level + 1))
-                      setDraft(out.draft)
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setDraft((d) => choose(d, row, String(level + 1)))
                     }}
                   >
                     <kbd>{level + 1}</kbd> {name}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { ASPECTS, applyKey, complete, emptyDraft } from './keys'
+import { ASPECTS, activate, applyKey, choose, complete, emptyDraft } from './keys'
 import type { Draft } from './keys'
 
 const press = (d: Draft, ...keys: string[]) => keys.reduce((acc, k) => applyKey(acc.draft, k), { draft: d } as ReturnType<typeof applyKey>)
@@ -56,5 +56,35 @@ describe('applyKey', () => {
       expect(action).toBeUndefined()
       expect(draft).toEqual(emptyDraft())
     }
+  })
+})
+
+describe('clicks', () => {
+  it('a click answers the row it is in, whichever row is active', () => {
+    const d = choose(emptyDraft(), 2, '5') // service row, while food is active
+    expect(d.answers.service).toBe(4)
+    expect(d.answers.food).toBeUndefined()
+  })
+
+  it('a click on "not mentioned" is an answer', () => {
+    expect(choose(emptyDraft(), 3, 'n').answers.value).toBeNull()
+  })
+
+  it('clicking a row background keeps every answer and only moves the active row', () => {
+    const answered = choose(choose(emptyDraft(), 0, '3'), 1, '1')
+    const moved = activate(answered, 3)
+    expect(moved.active).toBe(3)
+    expect(moved.answers).toEqual(answered.answers)
+  })
+
+  it('applying a click and then a stale row activation cannot undo the answer when updates are functional', () => {
+    // the bug: the button handler answered, then the row's handler wrote back a draft captured before the answer
+    const before = emptyDraft()
+    const stale = activate(before, 0) // what the row handler used to compute from the old closure
+    const buggy = stale // overwrote the answer
+    expect(buggy.answers.food).toBeUndefined()
+    // with functional updates each handler receives the latest draft, so the answer survives
+    const after = activate(choose(before, 0, '5'), 0)
+    expect(after.answers.food).toBe(4)
   })
 })
