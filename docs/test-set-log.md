@@ -13,3 +13,4 @@ The test split is frozen (decision 0007). Every evaluation that touches it is ap
 | 2026-10-03 23:07 UTC | jev-p1, rules-v3, gbm-full | heldout | rittenhouse | all |
 | 2026-10-03 23:07 UTC | jev-p1, rules-v3, gbm-full | heldout | east_passyunk | all |
 | 2026-10-03 23:07 UTC | jev-p1, rules-v3, gbm-full | heldout | roxborough | all |
+| 2026-10-04 02:27 UTC | jev-p1, stack-lr, stack-gbm, gbm-full, rules-v3 | heldout | all areas | all |

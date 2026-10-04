@@ -21,7 +21,7 @@ from threadpoolctl import threadpool_limits
 
 from streetwalker import db
 from streetwalker.calibration import ece
-from streetwalker.features import CATEGORICAL, FEATURE_SETS, ROADS, extract
+from streetwalker.features import CATEGORICAL, FEATURE_SETS, JEV_D2, ROADS, extract, jev_features
 from streetwalker.groundtruth import D1_CLASSES
 from streetwalker.metrics import accuracy, binary, macro_f1, multiclass_log_loss, per_class
 
@@ -41,19 +41,31 @@ CATEGORIES = {
     "building_cat": ["yes", "house", "apartments", "residential_other", "commercial", "civic", "industrial",
                      "accessory", "other"],
     "road_class": [*ROADS, "other"],
+    "jev_d2": list(JEV_D2),
 }
 COMMERCIAL_ANY = [D1_CLASSES.index("commercial"), D1_CLASSES.index("mixed-use")]
 
 
-def load(conn: psycopg.Connection) -> pd.DataFrame:
+def load(conn: psycopg.Connection, with_jev: bool = False) -> pd.DataFrame:
+    """Evidence features for every building. with_jev adds Jev's answers from the latest full run."""
     rows = conn.execute(
         "SELECT g.building_id, g.split, g.group_key, g.d1_class, g.d3_food, a.slug, e.payload "
         "FROM ground_truth g JOIN evidence e ON e.building_id = g.building_id AND e.tier = 0 "
         "JOIN building b ON b.id = g.building_id JOIN area a ON a.id = b.area_id ORDER BY g.building_id"
     ).fetchall()
-    feats = pd.DataFrame([extract(r[6]) for r in rows])
+    jev = {}
+    if with_jev:
+        run_id = conn.execute("SELECT max(id) FROM jev_run WHERE purpose LIKE 'full-%'").fetchone()[0]
+        for bid, probs, conf, p_food, d2 in conn.execute(
+            "SELECT d1.building_id, d1.probs, d1.confidence, d3.probs->>'yes', d2.answer FROM decision d1 "
+            "JOIN decision d2 ON d2.run_id = d1.run_id AND d2.building_id = d1.building_id AND d2.question = 'd2' "
+            "JOIN decision d3 ON d3.run_id = d1.run_id AND d3.building_id = d1.building_id AND d3.question = 'd3' "
+            "WHERE d1.run_id = %s AND d1.question = 'd1' AND d1.error IS NULL", (run_id,)):
+            jev[bid] = jev_features(probs, conf, float(p_food), d2)
+    feats = pd.DataFrame([{**extract(r[6]), **(jev[r[0]] if with_jev else {})} for r in rows])
     for col in CATEGORICAL:
-        feats[col] = pd.Categorical(feats[col], categories=CATEGORIES[col])
+        if col in feats:
+            feats[col] = pd.Categorical(feats[col], categories=CATEGORIES[col])
     meta = pd.DataFrame(rows, columns=["building_id", "split", "group_key", "d1", "d3", "area", "payload"]).drop(columns="payload")
     return pd.concat([meta, feats], axis=1)
 
@@ -157,68 +169,74 @@ def store(conn: psycopg.Connection, name: str, ids, d1_probs: np.ndarray, d3_pro
         )
 
 
+def fit_set(conn, df, folds, tv, te, name: str, cols: list[str], importance: bool = False):
+    """Tune by grouped CV on train + dev, store out-of-fold (train, dev) and final-model (test) predictions."""
+    classes = D1_CLASSES
+    y = df["d1"].to_numpy()
+    y3 = df["d3"].to_numpy().astype(int)
+    X = df[cols]
+    Xtv = X[tv].reset_index(drop=True)
+    print(f"== {name}: {len(cols)} features", flush=True)
+    ll, params, oof = choose(Xtv, y[tv], folds, classes, "D1")
+
+    # D3 (food-serving): binary model, decision threshold tuned on out-of-fold F1
+    d3_best = None
+    for p3 in GRID:
+        oof3 = np.zeros(tv.sum())
+        for tr, va in folds:
+            with threadpool_limits(limits=4):
+                m = make_model(p3).fit(Xtv.iloc[tr], y3[tv][tr])
+                oof3[va] = m.predict_proba(Xtv.iloc[va])[:, 1]
+        l3 = log_loss(y3[tv], oof3)
+        if d3_best is None or l3 < d3_best[0]:
+            d3_best = (l3, p3, oof3)
+    _, p3, oof3 = d3_best
+    tau = best_threshold(y3[tv], oof3)
+    print(f"    chosen D1 {params} (log-loss {ll:.4f}); D3 {p3}, threshold {tau:.2f}", flush=True)
+
+    with threadpool_limits(limits=8):
+        final1 = make_model(params).fit(Xtv, y[tv])
+        final3 = make_model(p3).fit(Xtv, y3[tv])
+        test_d1 = full_proba(final1, X[te], classes)
+        test_d3 = final3.predict_proba(X[te])[:, 1]
+
+    d1_all = np.zeros((len(df), len(classes)))
+    d3_all = np.zeros(len(df))
+    d1_all[tv], d1_all[te] = oof, test_d1
+    d3_all[tv], d3_all[te] = oof3, test_d3
+    store(conn, name, df["building_id"].to_numpy(), d1_all, d3_all, tau)
+    conn.commit()
+    report_oof(name, df[tv].reset_index(drop=True), oof, oof3, tau)
+    if importance:
+        print("  permutation importance on held-out folds (increase in log-loss):")
+        for fname, g in permutation_importance(Xtv, y[tv], folds, classes, params)[:14]:
+            print(f"    {fname:22s} {g:+.4f}")
+    print(flush=True)
+    return name, params, p3, tau
+
+
+def prepare(conn: psycopg.Connection, with_jev: bool = False):
+    """Data, train+dev / test masks and the street-grouped folds. Identical folds for every model."""
+    df = load(conn, with_jev)
+    tv = (df["split"] != "test").to_numpy()
+    folds = list(StratifiedGroupKFold(N_FOLDS, shuffle=True, random_state=SEED).split(
+        np.zeros(tv.sum()), df["d1"].to_numpy()[tv], df["group_key"][tv]))
+    print(f"train+dev {tv.sum()} buildings in {df['group_key'][tv].nunique()} street groups; {(~tv).sum()} test held out\n")
+    return df, tv, ~tv, folds
+
+
+PLAIN_SETS = ["geometry", "tags", "full"]
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sets", nargs="+", default=list(FEATURE_SETS), choices=list(FEATURE_SETS))
+    ap.add_argument("--sets", nargs="+", default=PLAIN_SETS, choices=PLAIN_SETS)
     args = ap.parse_args()
-
     with db.connect() as conn:
         db.migrate(conn)
-        df = load(conn)
-        classes = D1_CLASSES
-        tv = (df["split"] != "test").to_numpy()
-        te = ~tv
-        y = df["d1"].to_numpy()
-        y3 = df["d3"].to_numpy().astype(int)
-        folds = list(StratifiedGroupKFold(N_FOLDS, shuffle=True, random_state=SEED).split(
-            np.zeros(tv.sum()), y[tv], df["group_key"][tv]))
-        print(f"train+dev {tv.sum()} buildings in {df['group_key'][tv].nunique()} street groups; test {te.sum()} held out\n")
-
-        summary = []
-        for fs in args.sets:
-            cols = FEATURE_SETS[fs]
-            X = df[cols]
-            Xtv = X[tv].reset_index(drop=True)
-            print(f"== gbm-{fs}: {len(cols)} features", flush=True)
-            ll, params, oof = choose(Xtv, y[tv], folds, classes, "D1")
-
-            # D3 (food-serving): binary model, decision threshold tuned on out-of-fold F1
-            d3_best = None
-            for p3 in GRID:
-                oof3 = np.zeros(tv.sum())
-                for tr, va in folds:
-                    with threadpool_limits(limits=4):
-                        m = make_model(p3).fit(Xtv.iloc[tr], y3[tv][tr])
-                        oof3[va] = m.predict_proba(Xtv.iloc[va])[:, 1]
-                l3 = log_loss(y3[tv], oof3)
-                if d3_best is None or l3 < d3_best[0]:
-                    d3_best = (l3, p3, oof3)
-            _, p3, oof3 = d3_best
-            tau = best_threshold(y3[tv], oof3)
-            print(f"    chosen D1 {params} (log-loss {ll:.4f}); D3 {p3}, threshold {tau:.2f}", flush=True)
-
-            # final models on all of train + dev predict the test rows
-            with threadpool_limits(limits=8):
-                final1 = make_model(params).fit(Xtv, y[tv])
-                final3 = make_model(p3).fit(Xtv, y3[tv])
-                test_d1 = full_proba(final1, X[te], classes)
-                test_d3 = final3.predict_proba(X[te])[:, 1]
-
-            ids = df["building_id"].to_numpy()
-            d1_all = np.zeros((len(df), len(classes)))
-            d3_all = np.zeros(len(df))
-            d1_all[tv], d1_all[te] = oof, test_d1
-            d3_all[tv], d3_all[te] = oof3, test_d3
-            store(conn, f"gbm-{fs}", ids, d1_all, d3_all, tau)
-            conn.commit()
-            report_oof(f"gbm-{fs}", df[tv].reset_index(drop=True), oof, oof3, tau)
-            summary.append((fs, params, p3, tau))
-            if fs == "full":
-                print("  permutation importance on held-out folds (increase in log-loss):")
-                for name, g in permutation_importance(Xtv, y[tv], folds, classes, params)[:14]:
-                    print(f"    {name:22s} {g:+.4f}")
-            print(flush=True)
-        print("params:", json.dumps({fs: {"d1": p, "d3": p3, "d3_threshold": t} for fs, p, p3, t in summary}))
+        df, tv, te, folds = prepare(conn)
+        summary = [fit_set(conn, df, folds, tv, te, f"gbm-{fs}", FEATURE_SETS[fs], fs == "full") for fs in args.sets]
+        print("params:", json.dumps({n: {"d1": p, "d3": p3, "d3_threshold": t} for n, p, p3, t in summary}))
 
 
 if __name__ == "__main__":

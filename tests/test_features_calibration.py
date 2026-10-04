@@ -3,7 +3,15 @@ import math
 import pytest
 
 from streetwalker.calibration import ece, reliability_bins
-from streetwalker.features import CATEGORICAL, FEATURE_SETS, building_category, extract
+from streetwalker.features import (
+    CATEGORICAL,
+    FEATURE_SETS,
+    JEV,
+    JEV_CLASSES,
+    building_category,
+    extract,
+    jev_features,
+)
 
 
 def bundle(**over):
@@ -31,8 +39,9 @@ def bundle(**over):
 
 def test_extract_covers_every_feature_set():
     f = extract(bundle())
-    for cols in FEATURE_SETS.values():
-        assert set(cols) <= set(f)
+    for name, cols in FEATURE_SETS.items():
+        if name != "stack":  # the stack set also needs Jev's answers
+            assert set(cols) <= set(f)
     assert f["n_pois"] == 2 and f["n_pois_contained"] == 1 and f["n_pois_nearby"] == 1
     assert f["has_food"] == 1 and f["has_retail"] == 1 and f["has_business"] == 1
     assert f["road_class"] == "tertiary" and f["is_corner"] == 1
@@ -55,7 +64,7 @@ def test_no_street_name_area_or_order_features():
         assert not banned & set(cols)
     f = extract(bundle())
     assert "Spruce Street" not in f.values()
-    assert CATEGORICAL <= set(FEATURE_SETS["full"])
+    assert {"building_cat", "road_class"} <= set(FEATURE_SETS["full"]) and "jev_d2" in CATEGORICAL
 
 
 def test_building_category():
@@ -78,3 +87,12 @@ def test_reliability_bins_edges():
     bins = reliability_bins([0.05, 0.95, 1.0], [False, True, True], n_bins=10)
     assert [b.n for b in bins] == [1, 2]  # 1.0 lands in the last bin
     assert bins[1].accuracy == 1.0 and bins[1].mean_confidence == pytest.approx(0.975)
+
+
+def test_jev_features_and_stack_set():
+    probs = dict.fromkeys(JEV_CLASSES, 0.0) | {"residential": 0.7, "commercial": 0.1, "mixed-use": 0.2}
+    j = jev_features(probs, 0.7, 0.3, "retail")
+    assert j["jev_p_comm_any"] == pytest.approx(0.3) and j["jev_conf"] == 0.7 and j["jev_d2"] == "retail"
+    assert set(JEV) == set(j)
+    assert set(FEATURE_SETS["stack"]) == set(FEATURE_SETS["full"]) | set(JEV)
+    assert not set(JEV) & set(FEATURE_SETS["full"])  # the plain GBMs never see Jev's answers

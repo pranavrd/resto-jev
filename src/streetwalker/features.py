@@ -35,12 +35,25 @@ CONTEXT = [
     "road_class", "is_corner", "seg_n_business_pois", "seg_poi_density", "seg_frac_attached",
     "nb_n", "nb_n_with_pois", "nb_n_attached", "nb_n_with_use_tags", "nb_mean_area_m2", "nb_nearest_poi_rel",
 ]
+# Jev's own answers (tier 0, prompt p1), used by the stacker: the D1 distribution, its confidence, the
+# probability of food service (D3) and the commercial type it picked (D2). Never present in the plain GBMs.
+JEV_CLASSES = ("residential", "commercial", "mixed-use", "industrial", "civic-institutional", "vacant", "other")
+JEV = [f"jev_p_{c}" for c in JEV_CLASSES] + ["jev_conf", "jev_p_comm_any", "jev_p_food", "jev_d2"]
+JEV_D2 = ("restaurant", "cafe", "bar", "retail", "grocery", "office", "personal services", "other", "none")
 FEATURE_SETS = {
     "geometry": GEOMETRY,
     "tags": GEOMETRY + TAGS,
     "full": GEOMETRY + TAGS + CONTEXT,
+    "stack": GEOMETRY + TAGS + CONTEXT + JEV,
 }
-CATEGORICAL = {"building_cat", "road_class"}
+CATEGORICAL = {"building_cat", "road_class", "jev_d2"}
+
+
+def jev_features(d1_probs: dict, confidence: float, p_food: float, d2: str) -> dict:
+    f = {f"jev_p_{c}": d1_probs[c] for c in JEV_CLASSES}
+    f.update({"jev_conf": confidence, "jev_p_comm_any": d1_probs["commercial"] + d1_probs["mixed-use"],
+              "jev_p_food": p_food, "jev_d2": d2})
+    return f
 
 
 def building_category(btag: str) -> str:

@@ -13,3 +13,7 @@
 Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_API_KEY` (map from `JEV_API_KEY` in-process), pin `jev-1.13.0`, ask one thing per field, Jev reads literally and is weak at counting (we pass computed facts), tune each confidence bar separately. Evaluate Jev on all 3,795 buildings.
 
 **Week 3 exit met 2026-10-03:** Tier 0 accuracy and calibration per area, compared with the baselines.
+
+## Stackers (started Week 4 early)
+- [x] stack-lr and stack-gbm over Jev's answers (decision 0011): calibrated (ECE 0.012 to 0.018), +0.13 commercial-any F1 over raw Jev held-out
+- [ ] Tier 1: imagery selection, vision-model caption, D5 relevance, re-ask (needs a VLM plan for an M2 16 GB: local MLX first, Kaggle as fallback)
