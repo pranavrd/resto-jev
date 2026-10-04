@@ -114,3 +114,25 @@ def test_parse_caption_variants():
     assert echoed.sign is None  # the model repeated the instruction
     assert parse_caption("something unstructured").street_level == "unknown"
     assert parse_caption("Street level: entrance door with steps\nAwning or sign on that building: 'Nati's'").sign == "Nati's"
+
+
+def test_parse_caption_v4_separates_target_and_neighbour_signs():
+    from streetwalker.vlm import parse_caption_v4
+
+    a = parse_caption_v4(
+        "Street level: shop window or storefront.\nSign on the centre building: NAILS\nSigns on neighbouring buildings: CITY FITNESS, Favors"
+    )
+    assert (a.street_level, a.center_sign, a.neighbour_signs) == ("shop window or storefront", "NAILS", "CITY FITNESS, Favors")
+    b = parse_caption_v4("Street level: not visible\nSign on the centre building: none\nSigns on neighbouring buildings: none")
+    assert b.center_sign is None and b.neighbour_signs is None
+    echoed = parse_caption_v4(
+        "Street level: plain wall\nSign on the centre building: the exact text of a sign or awning attached to the building at the very centre of the picture, or none\nSigns on neighbouring buildings: none"
+    )
+    assert echoed.center_sign is None
+
+
+def test_not_visible_is_not_a_sign():
+    from streetwalker.vlm import parse_caption, parse_caption_v4
+
+    assert parse_caption("Street level: not visible\nAwning or sign on that building: not visible").sign is None
+    assert parse_caption_v4("Street level: not visible\nSign on the centre building: Not visible.\nSigns on neighbouring buildings: none").center_sign is None

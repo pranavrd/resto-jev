@@ -82,8 +82,9 @@ def main() -> None:
             print(f"  {label:40s} " + "   ".join(f"{c:>9s}" for c in cells))
     print()
     print("Part 3: realistic imagery. Only buildings with a usable photo (or a panorama to cut a view from) can be")
-    print("escalated, and imagery resolves only a fraction r of the commercial ones it is shown (pilots: about 0.45 for")
-    print("photos; panorama crops lifted Jev's recall from 0.29 to 0.67 on the buildings they cover).")
+    print("escalated, and imagery resolves only a fraction r of the commercial ones it is shown. Pilot estimates of r for")
+    print("buildings Jev missed: 0.45 (photos, 20 buildings), 0.54 (wide panorama crops, neighbour signs included) and 0.14")
+    print("(tight panorama crops with strict own-sign attribution: 11 of 76).")
     with db.connect() as conn:
         photo = {r[0] for r in conn.execute("SELECT building_id FROM image_pick")}
         pano = {r[0] for r in conn.execute("SELECT building_id FROM pano_pick")}
@@ -94,7 +95,7 @@ def main() -> None:
         print(f"  {'gate, resolution r':44s} " + " ".join(f"{int(r * 100):>3d}% esc" + " " * 6 for r in RATES))
         stack_rk = [risk(preds["stack-gbm"][i][2]) for i in ids]
         g_score = [0 if p else (a + b) / 2 for p, a, b in zip(jev_pos, jev_rk, stack_rk, strict=True)]
-        for r_res in (1.0, 0.45):
+        for r_res in (1.0, 0.45, 0.14):
             order = sorted((i for i in range(n) if avail[i]), key=lambda i: -g_score[i])
             cells = []
             for rate in RATES:

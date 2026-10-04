@@ -69,3 +69,24 @@ def build_questions(version: str = PROMPT_VERSION) -> dict:
             },
         ),
     }
+
+
+D5_INSTRUCTIONS = (
+    "A vision model described a street photo that was aimed at the target building. Does the description say that "
+    "the target building itself has a shop sign, awning, shop window or entrance, as opposed to saying nothing "
+    "about it or only describing neighbouring buildings?"
+)
+
+
+def build_tier1_questions(version: str = PROMPT_VERSION) -> dict:
+    """Tier 1: the D1 to D3 questions plus D5, which asks whether the photo description is about the target building."""
+    return {
+        **build_questions(version),
+        "d5": Noul(
+            instructions=D5_INSTRUCTIONS,
+            criteria={
+                "true": "The description reports a sign, awning, shop window or entrance on the target building itself.",
+                "false": "The description says the ground floor is not visible, or reports signs only on neighbouring buildings.",
+            },
+        ),
+    }

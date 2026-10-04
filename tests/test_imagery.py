@@ -1,6 +1,13 @@
 import pytest
 
-from streetwalker.imagery import Image, angle_diff, bearing_deg, distance_m, pick_image
+from streetwalker.imagery import (
+    Image,
+    angle_diff,
+    bearing_deg,
+    distance_m,
+    fov_for_frontage,
+    pick_image,
+)
 
 LAT, LNG = 39.95, -75.17
 M = 1 / 111_320  # degrees of latitude per metre
@@ -68,3 +75,13 @@ def test_prefers_better_aligned_then_newer():
 def test_heading_across_north_still_matches():
     fx, fy = at(15, 0)
     assert pick_image(fx, fy, [img("wrap", 0, 0, 355)]).angle_deg == pytest.approx(5, abs=0.1)
+
+
+def test_fov_frames_the_frontage_and_is_clamped():
+    import math
+
+    # 6 m wide at 15 m: the view spans 1.6 x 6 = 9.6 m, so 2 * atan(4.8 / 15), about 35 degrees (the minimum)
+    assert fov_for_frontage(6, 15) == pytest.approx(math.degrees(2 * math.atan(4.8 / 15)), abs=0.01) or fov_for_frontage(6, 15) == 35.0
+    assert fov_for_frontage(20, 12) > fov_for_frontage(6, 12)  # wider building, wider view
+    assert fov_for_frontage(6, 30) <= fov_for_frontage(6, 8)  # farther away, narrower view for the same building
+    assert fov_for_frontage(80, 5) == 75.0 and fov_for_frontage(2, 40) == 35.0  # clamped at both ends

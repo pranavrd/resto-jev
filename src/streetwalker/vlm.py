@@ -37,7 +37,19 @@ CAPTION_PROMPT_V3 = (
     "Ignore street-name signs, traffic signs, parking signs and other buildings' signs."
 )
 
-CAPTION_PROMPTS = {"v1": CAPTION_PROMPT_V1, "v2": CAPTION_PROMPT_V2, "v3": CAPTION_PROMPT_V3}
+# v4: separates the target's own sign from neighbours' signs. v3 let the model attribute a neighbour's sign to the
+# target in 28% of non-commercial buildings; the picture is now aimed tightly at the target, so "centre" means it.
+CAPTION_PROMPT_V4 = (
+    "This photo is aimed at one building, which is at the very centre of the picture. Answer in exactly this format.\n"
+    "Street level: <one of: entrance door with steps, shop window or storefront, garage door, plain wall, "
+    "not visible>.\n"
+    "Sign on the centre building: <the exact text of a sign or awning attached to the building at the very centre "
+    "of the picture, or none>.\n"
+    "Signs on neighbouring buildings: <the text of shop signs on buildings to the left or right, or none>.\n"
+    "Ignore street-name signs, traffic signs and parking signs."
+)
+
+CAPTION_PROMPTS = {"v1": CAPTION_PROMPT_V1, "v2": CAPTION_PROMPT_V2, "v3": CAPTION_PROMPT_V3, "v4": CAPTION_PROMPT_V4}
 
 
 @dataclass(frozen=True)
@@ -71,6 +83,14 @@ def caption(vlm, image_path: str, prompt: str = CAPTION_PROMPT_V1, max_tokens: i
     )
 
 
+def _clean(value: str) -> str | None:
+    value = value.strip().strip("\"'").rstrip(".").strip()
+    low = value.lower()
+    if not value or low in ("none", "n/a", "no sign", "no signs", "not visible") or "exact text" in low or "text of shop signs" in low:
+        return None
+    return value
+
+
 @dataclass(frozen=True)
 class ParsedCaption:
     street_level: str  # entrance door with steps | shop window or storefront | garage door | plain wall | not visible | unknown
@@ -89,7 +109,26 @@ def parse_caption(text: str) -> ParsedCaption:
             value = low.split(":", 1)[1].strip().rstrip(".")
             level = next((lv for lv in _LEVELS if lv in value), "unknown")
         elif low.startswith("awning or sign"):
-            value = line.split(":", 1)[1].strip().strip("\"'").rstrip(".")
-            if value and value.lower() not in ("none", "n/a", "no sign") and "exact text" not in value.lower():
-                sign = value
+            sign = _clean(line.split(":", 1)[1])
     return ParsedCaption(level, sign)
+
+
+@dataclass(frozen=True)
+class ParsedCaptionV4:
+    street_level: str
+    center_sign: str | None  # sign on the target building
+    neighbour_signs: str | None  # signs the model attributes to other buildings
+
+
+def parse_caption_v4(text: str) -> ParsedCaptionV4:
+    level, centre, neigh = "unknown", None, None
+    for line in text.splitlines():
+        low = line.lower().strip()
+        if low.startswith("street level:"):
+            value = low.split(":", 1)[1].strip().rstrip(".")
+            level = next((lv for lv in _LEVELS if lv in value), "unknown")
+        elif low.startswith("sign on the centre building"):
+            centre = _clean(line.split(":", 1)[1])
+        elif low.startswith("signs on neighbouring"):
+            neigh = _clean(line.split(":", 1)[1])
+    return ParsedCaptionV4(level, centre, neigh)

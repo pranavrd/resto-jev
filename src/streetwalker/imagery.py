@@ -99,3 +99,14 @@ def pick_panorama(
         if best is None or (score, im.id) < (best.score, best.image.id):
             best = PanoPick(im, d, bearing_deg(im.lat, im.lng, frontage_lat, frontage_lng), score)
     return best
+
+
+MIN_FOV_DEG = 35.0
+MAX_FOV_DEG = 75.0
+FRAME_FILL = 1.6  # the view spans this many frontage widths, so the target fills about 60% of the frame
+
+
+def fov_for_frontage(frontage_width_m: float, dist_m: float) -> float:
+    """Horizontal field of view (degrees) that frames a building of this width at this distance, with some context."""
+    half = math.atan((frontage_width_m * FRAME_FILL / 2) / max(dist_m, 1.0))
+    return min(MAX_FOV_DEG, max(MIN_FOV_DEG, math.degrees(2 * half)))

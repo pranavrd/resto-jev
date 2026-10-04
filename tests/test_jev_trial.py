@@ -8,6 +8,7 @@ from streetwalker.jev_questions import (
     D2_TYPES,
     MODEL_VERSION,
     build_questions,
+    build_tier1_questions,
 )
 from streetwalker.jev_trial import STRATA, Cand, sample_trial
 
@@ -48,3 +49,10 @@ def test_parse_normalises_choice_and_yes_no_answers():
     d1, d3 = parse(resp)
     assert (d1.answer, d1.confidence) == ("commercial", 0.8) and d1.probs["residential"] == 0.2
     assert d3.answer == "false" and d3.confidence == 0.8 and d3.probs == {"yes": 0.2}
+
+
+def test_tier1_questions_add_d5_without_changing_d1_to_d3():
+    qs = build_tier1_questions()
+    assert set(qs) == {"d1", "d2", "d3", "d5"}
+    base = build_questions()
+    assert qs["d1"].instructions == base["d1"].instructions  # same wording, so tier-0 and tier-1 answers are comparable
