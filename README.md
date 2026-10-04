@@ -2,7 +2,7 @@
 
 A deterministic street survey of three Philadelphia areas. Each building is classified (residential, commercial, restaurant, cafe, and so on) with Jev decisions over OSM tags and geometry, escalating to street imagery and a local vision model only when confidence is low. Its restaurant universe feeds TableMap, a ranking and review-chat layer.
 
-Status: Week 3 complete. Tier 0 (Jev over all 3,795 buildings, $0.16) ties the best baselines on commercial-any F1 (0.63 held-out); escalation to imagery is the next lever (Week 4).
+Status: the survey, census, search API, map UI and escalation cascade are built (decisions 0002 to 0018). The Yelp half has not started. Tier 0 (Jev plus a calibrated stacker) labels 88% of buildings correctly, a confidence gate picks which to escalate, and a human queue handles the rest; the imagery and local-LLM tiers were measured and do not help (decision 0018).
 
 ## Data policy
 
@@ -30,6 +30,19 @@ Evidence signal (what OSM tells the walker) next to the City's land use (ground 
 ![Land use view](docs/img/replay-rittenhouse-landuse.jpg)
 
 See [web/README.md](web/README.md).
+
+## Escalation cascade
+
+Tier 0 answers every building; a gate escalates the ones it is unsure of; a human queue resolves them. At the threshold chosen on train for a 95% accurate kept set (tau 0.77), on the frozen test split: 18% of buildings escalated [12, 30], kept accuracy 94.3%, final D1 accuracy 0.953 (0.884 before), commercial-any F1 0.75 to 0.92. The two intermediate tiers made things worse on the buildings the gate escalates: street-image captions by -0.12 accuracy, a local LLM by -0.11. The cascade works in the rowhouse areas and not in the dense core (Rittenhouse: 75% escalated, Tier 0 not calibrated there). The human tier is an oracle until the review labels exist. See [decision 0018](docs/decisions/0018-escalation-cascade.md).
+
+![Escalation curve](docs/img/cascade-curve.png)
+
+```bash
+.venv/bin/python -m streetwalker.cascade --figure docs/img/cascade-curve.png   # gates, thresholds, tier tables (train + dev; --final adds the logged test read)
+.venv/bin/python -m streetwalker.review seed                                    # build the review queues, cache their photos
+STREETWALKER_REVIEW=1 .venv/bin/uvicorn streetwalker.api:app --port 8000        # then cd web && npm run dev, open #/review
+.venv/bin/python -m streetwalker.review report                                  # agreement with the parcel labels, seconds per label
+```
 
 ## Restaurant census
 

@@ -30,6 +30,7 @@ from streetwalker.metrics import binary
 
 COMM = frozenset({"commercial", "mixed-use"})
 RATES = (0.05, 0.10, 0.15, 0.20, 0.30, 0.40)
+INFORMATIVE_LEVELS = frozenset({"shop window or storefront", "entrance door with steps", "garage door", "plain wall"})
 ACCEPT_BARS = (0.80, 0.90, 0.95)  # Tier 1 answers on its own only above its own confidence
 TARGET_ACCURACIES = (0.90, 0.95, 0.97)  # accuracy wanted among the buildings Tier 0 keeps
 OPERATING_TAU = 0.77  # the 95%-accuracy threshold chosen on train, rounded; Tier 1 and Tier 2 ran on this band
@@ -56,6 +57,15 @@ class Row:
     t1_source: str | None = None
     t2: str | None = None  # Tier 2: the local LLM's D1 answer (only where Tier 2 ran, None when its reply named no class)
     t2_ran: bool = False
+    t1_level: str | None = None  # what the caption says is at street level
+    t1_sign: str | None = None  # the building's own sign text, when the caption read one
+    status: str = "agree"  # ground-truth label status: agree | land_use_only | disputed (decision 0007)
+
+    @property
+    def t1_informative(self) -> bool:
+        """The caption says something about the building: it read a sign, or saw a storefront, door, garage or wall.
+        'not visible' and unparseable captions say nothing (and absence of a sign is not evidence of no business)."""
+        return bool(self.t1_sign) or self.t1_level in INFORMATIVE_LEVELS
 
     @property
     def pred(self) -> str:
@@ -268,6 +278,19 @@ def print_tier1(rows: Sequence[Row], tau: float, title: str) -> None:
     for src in sorted(by_src):
         sub = [r for r in t1 if r.t1_source == src]
         print(f"  {src:18s} n={len(sub):3d}: Tier 0 {sum(r.correct for r in sub) / len(sub):.3f}, Tier 1 {sum(r.t1_pred == r.truth for r in sub) / len(sub):.3f}")
+    info = [r for r in t1 if r.t1_informative]
+    print(f"  Exploratory, defined after seeing the results above: only the {len(info)} buildings ({len(info) / len(t1):.0%}) whose caption says something "
+          f"(a sign was read, or a storefront, door, garage or wall seen); the other {len(t1) - len(info)} captions say 'not visible' or nothing")
+    if len(info) >= 10:
+        d, lo, hi = paired_gain(info, lambda r: r.t1_pred == r.truth, lambda r: r.correct)
+        print(f"    D1 accuracy: Tier 0 {sum(r.correct for r in info) / len(info):.3f}, Tier 1 {sum(r.t1_pred == r.truth for r in info) / len(info):.3f}; "
+              f"Tier 1 minus Tier 0 {d:+.3f} [{lo:+.3f}, {hi:+.3f}]")
+        comm0 = sum((r.pred in COMM) == (r.truth in COMM) for r in info) / len(info)
+        comm1 = sum((r.t1_pred in COMM) == (r.truth in COMM) for r in info) / len(info)
+        print(f"    commercial-any accuracy: Tier 0 {comm0:.3f}, Tier 1 {comm1:.3f}")
+    blank = [r for r in t1 if not r.t1_informative]
+    print(f"    on the {len(blank)} uninformative captions: Tier 0 {sum(r.correct for r in blank) / len(blank):.3f}, Tier 1 {sum(r.t1_pred == r.truth for r in blank) / len(blank):.3f}; "
+          f"Tier 1 answers residential {sum(r.t1_pred == 'residential' for r in blank) / len(blank):.0%} of the time, Tier 0 {sum(r.pred == 'residential' for r in blank) / len(blank):.0%}")
     print("  Tier 1 as a resolver: accept its answer when its own confidence is at least c (the rest go on to the human tier)")
     print(f"  {'c':>5s} {'accepted':>9s} {'share of band':>14s} {'Tier 1 acc':>11s} {'Tier 0 acc, same':>17s}")
     for c in ACCEPT_BARS:
@@ -299,6 +322,42 @@ def print_tier2(rows: Sequence[Row], tau: float, title: str) -> None:
     disagree = [r for r in t2 if r.t2 != r.pred]
     if disagree:
         print(f"  where they disagree ({len(disagree)}): Tier 0 right {sum(r.correct for r in disagree)}, Tier 2 right {sum(r.t2 == r.truth for r in disagree)}")
+
+
+def print_by_area(train: Sequence[Row], dev: Sequence[Row], rest: Sequence[Row]) -> None:
+    """The pooled threshold does not behave the same in every area, so show each. Rows: train + dev + test (if final)."""
+    pooled = [*train, *dev, *rest]
+    print(f"\nBy area at tau {OPERATING_TAU:.2f} (all splits pooled; train and dev predictions are out-of-fold)")
+    print(f"  {'area':14s} {'n':>5s} {'Tier 0 acc':>11s} {'escalated':>10s} {'kept acc':>9s} {'final acc':>10s}  | area-specific tau for 95% (train) -> dev escalated / kept acc")
+    for area in sorted({r.area for r in pooled}):
+        sub = [r for r in pooled if r.area == area]
+        o = at_threshold(sub, OPERATING_TAU)
+        tr, dv = [r for r in train if r.area == area], [r for r in dev if r.area == area]
+        tau = choose_tau(tr, 0.95, min_kept=30)
+        if tau is None:
+            local = "no threshold with at least 30 kept buildings reaches 95% on train"
+        else:
+            d = at_threshold(dv, tau)
+            local = f"{tau:.2f} -> {d.escalated / d.n:5.1%} / {d.kept_accuracy:.3f} (n={d.n})"
+        print(f"  {area:14s} {o.n:5d} {o.accuracy_tier0:11.3f} {o.escalated / o.n:10.1%} {o.kept_accuracy:9.3f} {o.accuracy_final:10.3f}  | {local}")
+    rit = [r for r in pooled if r.area == "rittenhouse" and r.split in ("train", "dev")]
+    print("  Rittenhouse, train + dev: accuracy by Tier 0 confidence (a calibrated model would match the second number to the first)")
+    for lo, hi in ((0.0, 0.5), (0.5, 0.7), (0.7, 0.9), (0.9, 1.01)):
+        sub = [r for r in rit if lo <= r.conf < hi]
+        if sub:
+            print(f"    confidence {lo:.1f} to {min(hi, 1.0):.1f}: n={len(sub):3d}  mean confidence {sum(r.conf for r in sub) / len(sub):.2f}  accuracy {sum(r.correct for r in sub) / len(sub):.2f}")
+
+
+def print_by_label_status(rows: Sequence[Row]) -> None:
+    """Some of Tier 0's errors are the ground truth's: where land use and OPA disagree, the label is the weak one."""
+    errs = [r for r in rows if not r.correct]
+    print(f"\nBy ground-truth label status (all splits pooled, {len(rows)} buildings, {len(errs)} Tier 0 errors)")
+    print(f"  {'status':14s} {'n':>5s} {'Tier 0 error rate':>18s} {'escalated':>10s} {'share of all errors':>20s}")
+    for st in ("agree", "land_use_only", "disputed"):
+        sub = [r for r in rows if r.status == st]
+        if sub:
+            print(f"  {st:14s} {len(sub):5d} {sum(not r.correct for r in sub) / len(sub):18.3f} {sum(r.conf < OPERATING_TAU for r in sub) / len(sub):10.1%} "
+                  f"{sum(not r.correct for r in sub) / len(errs):20.1%}")
 
 
 def print_full_cascade(rows: Sequence[Row], tau: float, title: str) -> None:
@@ -374,7 +433,8 @@ def load_rows(conn, splits: Sequence[str]) -> list[Row]:
     sql = """
         SELECT g.building_id, a.slug, g.split, g.group_key, g.d1_class, g.d3_food,
                s.probs, j.probs, j.confidence, l.confidence,
-               (ip.building_id IS NOT NULL), (pp.building_id IS NOT NULL), t1.d1, t1.source, t2.answer, (t2.building_id IS NOT NULL)
+               (ip.building_id IS NOT NULL), (pp.building_id IS NOT NULL), t1.d1, t1.source, t2.answer, (t2.building_id IS NOT NULL),
+               t1.street_level, t1.own_sign, g.label_status
         FROM ground_truth g
         JOIN building b ON b.id = g.building_id JOIN area a ON a.id = b.area_id
         JOIN baseline_prediction s ON s.building_id = g.building_id AND s.baseline = 'stack-gbm'
@@ -386,11 +446,11 @@ def load_rows(conn, splits: Sequence[str]) -> list[Row]:
         LEFT JOIN tier2_result t2 ON t2.building_id = g.building_id
         WHERE g.split = ANY(%s) ORDER BY g.building_id"""
     rows = []
-    for bid, area, split, group, truth, food, sp, jp, jc, lc, photo, pano, t1, t1_src, t2, t2_ran in conn.execute(sql, [list(splits)]).fetchall():
+    for bid, area, split, group, truth, food, sp, jp, jc, lc, photo, pano, t1, t1_src, t2, t2_ran, t1_level, t1_sign, status in conn.execute(sql, [list(splits)]).fetchall():
         rows.append(Row(
             bid, area, split, group, truth, bool(food), {c: sp[c] for c in D1_CLASSES}, sp["food"],
             {c: jp[c] for c in D1_CLASSES}, jc, lc, photo, pano,
-            {c: t1[c] for c in D1_CLASSES} if t1 else None, t1_src, t2, t2_ran,
+            {c: t1[c] for c in D1_CLASSES} if t1 else None, t1_src, t2, t2_ran, t1_level, t1_sign, status,
         ))
     return rows
 
@@ -472,6 +532,8 @@ def main() -> None:
             print_tier1(rows, OPERATING_TAU, title)
             print_tier2(rows, OPERATING_TAU, title)
             print_full_cascade(rows, OPERATING_TAU, title)
+        print_by_area(train, dev, test)
+        print_by_label_status(development + test)
         print_costs(conn, development + test, OPERATING_TAU)
     if args.figure:
         plot_curves(args.figure, development + test, taus)

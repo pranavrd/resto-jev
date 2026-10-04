@@ -29,3 +29,14 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [x] SEPTA GTFS stops and weekday service near the areas, City neighborhoods, per-place transit context (decision 0017); stop counts verified against raw GTFS
 - [x] Place search API (`/places`, `/places.geojson`, `/places/{id}`, `/meta`), no Yelp fields, 16 new tests (decision 0017)
 - [x] Map UI: places by kind, filters mapped one-to-one to API parameters, SEPTA stops and a 400 m ring for the selected place (web/README.md)
+
+## Escalation cascade (Week 4 items, done early; decision 0018)
+- [x] Gate analysis: stack-gbm confidence is the best gate (test AUROC 0.855); thresholds chosen on train, validated on dev, read once on test
+- [x] Tier 1 imagery run for real on the 400 escalated buildings that have an image: worse than Tier 0 (test -0.123 [-0.284, 0.000])
+- [x] Tier 2 local LLM run on all 754 escalated buildings: worse than Tier 0 (test -0.109 [-0.211, 0.000])
+- [x] Headline escalation curve with the measured cascade, per-area and label-status breakdowns
+- [x] Human review queue (blind labelling page, API, report), 145 ground-truth-check and 200 escalated buildings seeded
+- [ ] **Label the 145 ground-truth-check buildings** (about 150 per the roadmap); gives the human agreement with parcel labels and the seconds per label
+- [ ] Fill the human-time row of the cost table and re-state the curve with a real reviewer
+- [ ] Optional: a stronger VLM for Tier 1 (7B, 5.5 GB download, needs approval); a Rittenhouse-aware Tier 0
+
