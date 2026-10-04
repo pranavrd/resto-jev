@@ -54,3 +54,14 @@ def multiclass_log_loss(truth: list[str], probs: list[list[float]], classes: tup
     given (sklearn's log_loss silently assumes sorted order, which misaligns custom class orders)."""
     index = {c: i for i, c in enumerate(classes)}
     return -sum(math.log(max(row[index[t]], 1e-15)) for t, row in zip(truth, probs, strict=True)) / len(truth)
+
+
+def cohens_kappa(a: list[str], b: list[str]) -> float:
+    """Agreement between two labelings beyond what their label frequencies would give by chance."""
+    n = len(a)
+    if n == 0:
+        return 0.0
+    observed = sum(x == y for x, y in zip(a, b, strict=True)) / n
+    ca, cb = Counter(a), Counter(b)
+    expected = sum(ca[k] * cb[k] for k in ca) / (n * n)
+    return 1.0 if expected == 1 else (observed - expected) / (1 - expected)

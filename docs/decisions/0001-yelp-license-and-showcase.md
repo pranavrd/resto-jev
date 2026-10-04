@@ -1,6 +1,6 @@
 # 0001: Yelp dataset license and showcase scope
 
-- **Status:** Accepted with amendments (2026-10-02), see "Owner update" below
+- **Status:** Accepted with amendments (2026-10-02); the owner verified the agreement on 2026-10-04, see "Owner verification" below
 - **Date:** 2026-10-02
 - **Source read:** Yelp Dataset Terms of Use, last updated July 7, 2023 (`Dataset_User_Agreement.pdf`, linked from yelp.com/dataset)
 - **Not legal advice.** This is a plain-language reading by the project owner and an AI assistant. Re-read the agreement shown at download time, since Yelp can change it (§2).
@@ -15,6 +15,19 @@ The roadmap assumed the Yelp Open Dataset is "for academic/personal use" and lef
 - **No consent email for now.** Yelp use is deferred until the project reaches the Yelp join (see 0002). The assistant reminds the owner before the first Yelp download or query, and the email draft below is the starting point at that time.
 - Until then the project runs on non-Yelp sources only (OSM, Mapillary, OpenDataPhilly), which have no showcase restrictions beyond attribution.
 - The decisions below still hold, with the consent email moved from "this week" to "before touching Yelp data". The open item about UW affiliation is closed (no affiliation).
+
+## Owner verification of the agreement (2026-10-04)
+
+The owner downloaded the dataset (`Yelp-JSON.zip`, kept outside the repository) and read the agreement shown at download. Their conclusion, recorded as stated:
+
+- This project is **within the academic-use scope** of the agreement.
+- The agreement **allows derived scores and review text** to be used and shown.
+- **No pre-publication submission to Yelp is needed.**
+- **Hosted APIs, Jev included, may process review text.**
+
+This is the owner's reading of the agreement they accepted, and it is more permissive than the July 2023 reading in the table below (§1/§3 academic-use definition, §3 pre-publication review, §4A display, §4D third parties, §4E disclosure). The assistant did not see that agreement text and cannot reconcile the two, so the owner's reading governs and the earlier sections are kept as the historical analysis. The fallback plans in "Decision (proposed)" items 3 to 5 (no hosted demo, redacted video, local-only aspect scoring) are therefore not required; the gating items in "Open items" about eligibility, the consent email and the Jev question are closed by this verification.
+
+What stays regardless: `data/` and the dataset are never committed, the raw files are not redistributed, derived tables are treated as private until the owner decides otherwise, and there is no Yelp branding or implied endorsement. Open item: record the version and date of the agreement that was accepted, next to the download, so the reading can be checked later.
 
 ## Owner note on public hosting (2026-10-03)
 

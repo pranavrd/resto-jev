@@ -4,15 +4,14 @@ Serves the restaurant census (`place`) with neighborhood and SEPTA context. It r
 reviews and anything else derived from Yelp are deliberately absent until decision 0001 is resolved.
 """
 
-from collections.abc import Iterator
+import os
 from typing import Annotated, Literal
 
 import psycopg
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from psycopg.rows import dict_row
 
-from streetwalker import db
+from streetwalker.deps import Conn
 from streetwalker.search import BadQuery, PlaceQuery, build
 
 ATTRIBUTION = [
@@ -27,13 +26,10 @@ app = FastAPI(title="StreetWalker places", version="0.1.0", description="Restaur
 app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"], allow_methods=["GET"])
 
 
-def get_conn() -> Iterator[psycopg.Connection]:
-    with db.connect() as conn:
-        conn.row_factory = dict_row
-        yield conn
+if os.environ.get("STREETWALKER_REVIEW") == "1":  # the review page writes labels, so it is opt-in
+    from streetwalker.review_api import router as review_router
 
-
-Conn = Annotated[psycopg.Connection, Depends(get_conn)]
+    app.include_router(review_router)
 
 
 def to_place(row: dict) -> dict:

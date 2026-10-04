@@ -12,6 +12,21 @@ Search and filter the restaurant census and see each place's SEPTA access. Needs
 - Text search zooms to its results. Slow answers cannot overwrite newer ones (in-flight requests are aborted).
 - No Yelp data or fields (decision 0017).
 
+## Review queue (`#/review`)
+
+The human tier of the cascade (decision 0018): label what a building is used for, from a plan of its surroundings and a street photo. It writes labels to Postgres, so the endpoints are opt-in:
+
+```bash
+.venv/bin/python -m streetwalker.review seed                                   # once: builds the queues, caches the photos
+STREETWALKER_REVIEW=1 .venv/bin/uvicorn streetwalker.api:app --port 8000      # note the flag
+.venv/bin/python -m streetwalker.review report                                # agreement with the parcel data, seconds per label
+```
+
+- **Blind:** the page never shows the parcel label or a model answer, so agreement with the parcel data is a real check. The OSM evidence text is behind a click (key E); whether it was opened is recorded.
+- **Two queues:** *Ground-truth check* (145 random buildings that have a street photo, balanced across areas) and *Escalated by the cascade* (the 200 buildings the model was least sure about).
+- **Keys:** 1 to 7 choose a class, 0 is "can't tell" (never counted as wrong), Backspace undoes the last label. Time per label is recorded and feeds the cost table.
+- Photos are served from the local cache only (Mapillary, CC BY-SA 4.0, attributed on the page). Local use only: there is no login.
+
 ## Walk replay
 
 React + Vite + deck.gl viewer that replays the survey walk: the walker moves along each street, buildings light up as they are encountered, and clicking a building shows the evidence text Jev is given.
