@@ -69,3 +69,27 @@ def caption(vlm, image_path: str, prompt: str = CAPTION_PROMPT_V1, max_tokens: i
         text=r.text.strip(), seconds=time.perf_counter() - t0, prompt_tokens=r.prompt_tokens,
         generated_tokens=r.generation_tokens, peak_memory_gb=r.peak_memory,
     )
+
+
+@dataclass(frozen=True)
+class ParsedCaption:
+    street_level: str  # entrance door with steps | shop window or storefront | garage door | plain wall | not visible | unknown
+    sign: str | None  # the building's own sign text, or None
+
+
+_LEVELS = ("entrance door with steps", "shop window or storefront", "garage door", "plain wall", "not visible")
+
+
+def parse_caption(text: str) -> ParsedCaption:
+    """Read a structured v3 caption. Echoed prompt text or 'none' means no sign; an unlisted street-level answer is 'unknown'."""
+    level, sign = "unknown", None
+    for line in text.splitlines():
+        low = line.lower().strip()
+        if low.startswith("street level:"):
+            value = low.split(":", 1)[1].strip().rstrip(".")
+            level = next((lv for lv in _LEVELS if lv in value), "unknown")
+        elif low.startswith("awning or sign"):
+            value = line.split(":", 1)[1].strip().strip("\"'").rstrip(".")
+            if value and value.lower() not in ("none", "n/a", "no sign") and "exact text" not in value.lower():
+                sign = value
+    return ParsedCaption(level, sign)

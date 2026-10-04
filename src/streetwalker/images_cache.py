@@ -25,8 +25,8 @@ def _token() -> str:
     return token
 
 
-def fetch(image_id: str, size: int = 1024) -> str:
-    """Return the local path of the image, downloading it if needed. size is 256, 1024 or 2048."""
+def fetch(image_id: str, size: int | str = 1024) -> str:
+    """Return the local path of the image, downloading it if needed. size is 256, 1024, 2048 or "original"."""
     CACHE.mkdir(parents=True, exist_ok=True)
     path = CACHE / f"{image_id}_{size}.jpg"
     if path.exists():

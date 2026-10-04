@@ -1,6 +1,6 @@
 # 0012: Vision model, image selection and the tier-1 pilot
 
-- **Status:** Accepted (pilot findings, not a final measurement)
+- **Status:** Accepted (pilot findings, not a final measurement). **Coverage numbers below are superseded by 0013**, which switched ordinary photos from the raw to the computed heading and lowered them.
 - **Date:** 2026-10-04
 - **Code:** `imagery.py`, `imagery_area.py`, `images_cache.py`, `vlm.py`, `scripts/vlm_pilot.py`, `scripts/analyze_gates.py` (Part 3); table `image_pick`
 

@@ -27,7 +27,7 @@ def _token() -> str:
 def _fetch(bbox: tuple[float, float, float, float], token: str) -> list[dict]:
     x1, y1, x2, y2 = bbox
     params = {
-        "fields": "id,captured_at,compass_angle,is_pano,geometry",
+        "fields": "id,captured_at,compass_angle,computed_compass_angle,is_pano,geometry",
         "bbox": f"{x1},{y1},{x2},{y2}",
         "limit": LIMIT,
     }
@@ -53,15 +53,15 @@ def ingest_images(conn: psycopg.Connection, area: Area, area_id: int) -> int:
         (
             i["id"], area_id,
             datetime.fromtimestamp(i["captured_at"] / 1000, UTC) if i.get("captured_at") else None,
-            i.get("compass_angle"), i.get("is_pano"),
+            i.get("compass_angle"), i.get("computed_compass_angle"), i.get("is_pano"),
             i["geometry"]["coordinates"][0], i["geometry"]["coordinates"][1],
         )
         for i in images
     ]
     with conn.cursor() as cur:
         cur.executemany(
-            "INSERT INTO mapillary_image (id, area_id, captured_at, compass_angle, is_pano, geom) "
-            "VALUES (%s, %s, %s, %s, %s, ST_SetSRID(ST_MakePoint(%s, %s), 4326)) ON CONFLICT (id) DO NOTHING",
+            "INSERT INTO mapillary_image (id, area_id, captured_at, compass_angle, computed_compass, is_pano, geom) "
+            "VALUES (%s, %s, %s, %s, %s, %s, ST_SetSRID(ST_MakePoint(%s, %s), 4326)) ON CONFLICT (id) DO NOTHING",
             rows,
         )
     return len(rows)

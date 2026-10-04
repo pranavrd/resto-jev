@@ -17,4 +17,5 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 ## Stackers (started Week 4 early)
 - [x] stack-lr and stack-gbm over Jev's answers (decision 0011): calibrated (ECE 0.012 to 0.018), +0.13 commercial-any F1 over raw Jev held-out
 - [x] Tier 1 groundwork (decision 0012): local MLX Qwen2.5-VL-3B (6.8 s per image), image selection for every building (32% coverage), 20-building pilot
-- [ ] Tier 1 at scale: East Passyunk panorama crops, multiple photos per building, 7B comparison, D5 relevance, re-ask on all picked buildings
+- [x] East Passyunk panorama crops (decision 0013): Jev recall 0.29 to 0.67 on the 136 covered buildings; neighbour-sign false positives found
+- [ ] Tier 1 at scale: D5 relevance and tighter crops, caption the ordinary photos (about 2.3 h), measure on held-out data, 7B comparison

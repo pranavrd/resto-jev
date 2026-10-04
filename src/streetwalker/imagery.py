@@ -70,3 +70,32 @@ def pick_image(
         if best is None or (score, im.id) < (best.score, best.image.id):
             best = Pick(im, d, ang, score)
     return best
+
+
+MAX_PANO_DIST_M = 30.0  # a panorama covers 360 degrees, so only distance matters; farther than this signs are unreadable
+
+
+@dataclass(frozen=True)
+class PanoPick:
+    image: Image
+    dist_m: float
+    bearing_deg: float  # compass direction from the camera to the frontage: where to point the crop
+    score: float
+
+
+def pick_panorama(
+    frontage_lng: float, frontage_lat: float, images: list[Image], this_year: int = 2026
+) -> PanoPick | None:
+    """Closest-to-ideal-distance panorama (4 to 30 m), newest wins ties. Direction is free: the view is cut toward the frontage."""
+    best: PanoPick | None = None
+    for im in images:
+        if not im.is_pano:
+            continue
+        d = distance_m(im.lat, im.lng, frontage_lat, frontage_lng)
+        if not MIN_DIST_M <= d <= MAX_PANO_DIST_M:
+            continue
+        age = (this_year - im.year) if im.year else 10
+        score = abs(d - IDEAL_DIST_M) / MAX_PANO_DIST_M + AGE_PENALTY_PER_YEAR * age
+        if best is None or (score, im.id) < (best.score, best.image.id):
+            best = PanoPick(im, d, bearing_deg(im.lat, im.lng, frontage_lat, frontage_lng), score)
+    return best
