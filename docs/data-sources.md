@@ -29,6 +29,16 @@ Terms: City of Philadelphia license (as-is, user bears responsibility, City rese
 - **Code map:** c_dig1 1 Residential, 2 Commercial, 3 Industrial, 4 Civic/Institution, 5 Transportation, 6 Culture/Recreation, 7 Park/Open Space, 8 Water, 9 Vacant. Proposed D1 mapping: mixed-use = c_dig2 23; commercial = c_dig2 21 or 22. Finalize in the Week 3 crosswalk.
 - **Caveat:** 3-digit sub-classes are populated for only a small fraction of commercial parcels (212 Food Service: ~83), so it can't validate restaurant versus retail. Licenses carry that eval.
 
+## SEPTA GTFS (checked 2026-10-03)
+- Source: `github.com/septadev/GTFS/releases` (release `v202609270`, published 2026-09-25), asset `gtfs_public.zip`, 22 MB, holding `google_bus.zip` (bus, plus the subway and trolley lines, route types 0 to 3) and `google_rail.zip` (regional rail). No key.
+- Bus feed valid 2026-09-27 to 2027-02-20; rail feed only to 2026-10-17. A snapshot ages fast; bump `RELEASE` in `ingest/septa.py` and re-run.
+- **Terms:** SEPTA's developer terms apply to the feed; I did not read them in full on 2026-10-03, so check them before any public deployment and attribute SEPTA.
+- Stored: stops within about 3 km of the survey areas, with weekday stop-times per route and direction (`transit_stop`). See decision 0017.
+
+## Philadelphia Neighborhoods (checked 2026-10-03)
+- Source: OpenDataPhilly, `github.com/opendataphilly/odp-data-storage` (`philadelphia-neighborhoods.geojson`, 0.7 MB, 159 polygons). License CC BY 4.0: attribute Robert Cheetham (originally Azavea). Data last updated 2024-04-24.
+- Boundaries are drawn from a mix of public maps and user feedback, so edges are approximate.
+
 ## Not yet checked
 - **OSM:** pulled via OSMnx at ingest; attribution (ODbL) required.
 - **Building footprints:** OSM buildings are the plan. The City also publishes footprints; check at ingest whether they are cleaner and which has better address attributes.

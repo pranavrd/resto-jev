@@ -1,16 +1,16 @@
-"""Usage: python -m streetwalker.ingest [osm|streets|city|mapillary|all] [--area SLUG]"""
+"""Usage: python -m streetwalker.ingest [osm|streets|city|mapillary|septa|neighborhoods|all] [--area SLUG]"""
 
 import argparse
 from functools import partial
 
 from streetwalker import db
 from streetwalker.areas import AREAS
-from streetwalker.ingest import city, mapillary, osm
+from streetwalker.ingest import city, mapillary, neighborhoods, osm, septa
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("source", nargs="?", default="all", choices=["osm", "streets", "city", "mapillary", "all"])
+    ap.add_argument("source", nargs="?", default="all", choices=["osm", "streets", "city", "mapillary", "septa", "neighborhoods", "all"])
     ap.add_argument("--area", help="limit to one area slug")
     args = ap.parse_args()
 
@@ -49,6 +49,15 @@ def main() -> None:
                 n = step()
                 conn.commit()
                 print(f"{area.slug:14s} {label:18s} {n:>6d} rows")
+
+        for source, label, step in (
+            ("septa", "septa stops", partial(septa.ingest_septa, conn)),
+            ("neighborhoods", "neighborhoods", partial(neighborhoods.ingest_neighborhoods, conn)),
+        ):
+            if args.source in (source, "all"):  # citywide sources, loaded once
+                n = step()
+                conn.commit()
+                print(f"{'citywide':14s} {label:18s} {n:>6d} rows")
 
 
 if __name__ == "__main__":

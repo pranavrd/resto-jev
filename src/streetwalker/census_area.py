@@ -11,6 +11,7 @@ import psycopg
 
 from streetwalker import db
 from streetwalker.census import Licence, OsmPlace, chapman, match_places, name_variants, osm_kind
+from streetwalker.enrich import enrich_places
 
 FOOD_WHERE = (
     "(t.tags->>'amenity' IN ('restaurant','fast_food','food_court','cafe','bar','pub','biergarten','ice_cream') "
@@ -135,6 +136,9 @@ def main() -> None:
         u = totals["licences"] + totals["osm"] - totals["matched"]
         print(f"{'all areas':14s} {totals['licences']:8d} {totals['osm']:5d} {totals['matched']:8d} {u:6d} {totals['osm'] - totals['matched']:9d} "
               f"{totals['licences'] - totals['matched']:9d}   {totals['matched'] / totals['licences']:8.0%} {totals['matched'] / totals['osm']:12.0%}   {n:5.0f} [{max(lo, u):.0f}, {hi:.0f}]")
+        if conn.execute("SELECT EXISTS (SELECT 1 FROM transit_stop)").fetchone()[0]:
+            print("enrich:", enrich_places(conn))  # rebuilding place cleared the neighborhood and transit columns
+            conn.commit()
 
 
 if __name__ == "__main__":

@@ -16,6 +16,14 @@ The roadmap assumed the Yelp Open Dataset is "for academic/personal use" and lef
 - Until then the project runs on non-Yelp sources only (OSM, Mapillary, OpenDataPhilly), which have no showcase restrictions beyond attribution.
 - The decisions below still hold, with the consent email moved from "this week" to "before touching Yelp data". The open item about UW affiliation is closed (no affiliation).
 
+## Owner note on public hosting (2026-10-03)
+
+The owner read the Yelp Open Dataset terms and summarised them as: a personal project may be hosted publicly if it is (1) free, with no ads, subscription, lead generation or paywall, (2) does not redistribute the raw JSON or CSV, so users get the data from Yelp, and (3) carries a prominent notice that the data belongs to Yelp and came from the Yelp Open Dataset. The summary also says code, results and visualisations can be shown.
+
+**Status: unverified, and more permissive than the text recorded below.** The agreement PDF sits behind the download form and could not be fetched on 2026-10-03; Yelp's dataset page itself says only that the data is "intended for educational use". The July 2023 reading in this record differs on points that matter for a hosted demo: "academic use" is defined by who you are (§1, §3), no displaying Data to third parties (§4A) names reviews explicitly, aggregate disclosures are limited to academic purposes (§4E), and findings go to Yelp for review before any public presentation (§3). The three guardrails above are consistent with those clauses and are adopted as minimum constraints (free, no raw data in the repo or on the site, attribution), but they are not shown to be sufficient.
+
+So nothing changes in the plan yet: the hosted demo with real Yelp data stays no-go and Yelp use stays private. **At the first Yelp download, read the agreement shown there, and check specifically (a) the definition of academic use for someone with no institution, (b) whether §4A allows showing derived scores or review text publicly, and (c) the §3 review requirement.** The assistant raises this again before touching Yelp. The API built in decision 0017 exposes no Yelp fields, so a public non-Yelp demo of the census is not blocked by any of this.
+
 ## What the agreement says (paraphrased, with section numbers)
 
 | § | Clause | Effect on TableMap |
