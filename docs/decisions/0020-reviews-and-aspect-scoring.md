@@ -44,6 +44,8 @@ There are **no human labels**, so these are plausibility checks, not accuracy (f
 
 ## Next
 
+Decision 0021 builds the labelling batch, the page and the evaluation, and a provisional rating. The remaining plan in short:
+
 1. **Labelling guidelines and a labelled set** of about 500 reviews (stratified by stars and kind of place), scoring each aspect or marking it not mentioned. This is the owner's time; a labelling page like the building review page would make it quicker, and pre-filling from Jev would make it faster still but would bias the labels toward Jev, so it should be an option the labeller can turn off.
 2. A baseline model and the cascade comparison on that set.
 3. The place-level rating: Bayesian shrinkage with recency weighting over the aspect scores (the roadmap's Week 5), where a place with few reviews should not outrank one with many.

@@ -75,6 +75,8 @@ Census places are linked to Yelp Open Dataset businesses by name, address and bu
 
 Reviews of the linked places are loaded locally and scored on four aspects (food, atmosphere, service, value) with Jev ([decision 0020](docs/decisions/0020-reviews-and-aspect-scoring.md)). The scores are plausible but **not yet validated against human labels**, and they stay private like the rest.
 
+A labelling page (`#/label`) and a first batch of about 180 reviews exist to test those scores against a person, with a provisional rating built on top ([decision 0021](docs/decisions/0021-aspect-labels-and-provisional-rating.md)). **No ranking or aspect result is claimed until that batch has been labelled and read**; guidelines are in [docs/aspect-labeling-guidelines.md](docs/aspect-labeling-guidelines.md).
+
 ## Attribution
 
 Map data © OpenStreetMap contributors (ODbL). Business licenses and land use: City of Philadelphia via OpenDataPhilly. Transit: SEPTA GTFS. Neighborhood boundaries: OpenDataPhilly, CC BY 4.0, Robert Cheetham / Azavea. Street imagery: Mapillary, CC BY-SA 4.0.

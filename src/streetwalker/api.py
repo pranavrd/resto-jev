@@ -27,9 +27,11 @@ app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173", "http
 
 
 if os.environ.get("STREETWALKER_REVIEW") == "1":  # the review page writes labels, so it is opt-in
+    from streetwalker.label_api import router as label_router
     from streetwalker.review_api import router as review_router
 
     app.include_router(review_router)
+    app.include_router(label_router)
 
 
 def to_place(row: dict) -> dict:
