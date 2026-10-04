@@ -64,4 +64,4 @@ Design points:
 
 ## Next
 
-The API is the surface the Yelp layer will attach to (`place` is the unit that gets matched). The map UI (`web/src/places/`) is built on the API: see web/README.md. It uses `/places`, `/places/{id}`, `/meta` and `/transit/stops`, and is checked by 11 unit tests on its query and geometry logic plus a manual pass in the browser (areas, kind and transit filters, text search, empty state, selection, phone width). There are no automated browser tests.
+The API is the surface the Yelp layer will attach to (`place` is the unit that gets matched). The map UI (`web/src/places/`) is built on the API: see web/README.md. It uses `/places`, `/places/{id}`, `/meta` and `/transit/stops`, and is checked by 10 unit tests on its query and geometry logic plus a manual pass in the browser (areas, kind and transit filters, text search, empty state, selection, phone width). There are no automated browser tests.
