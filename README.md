@@ -30,3 +30,12 @@ Evidence signal (what OSM tells the walker) next to the City's land use (ground 
 ![Land use view](docs/img/replay-rittenhouse-landuse.jpg)
 
 See [web/README.md](web/README.md).
+
+## Restaurant census
+
+195 food and drink places in the three areas (184 public eating or drinking places), from OSM and City food licences matched into one list. OSM finds 42% of the licensed businesses; licences find 71% of OSM's places; capture-recapture suggests about 234 exist. See [decision 0016](docs/decisions/0016-restaurant-census.md).
+
+```bash
+.venv/bin/python -m streetwalker.census_area   # builds the place table, prints the census
+.venv/bin/python -m streetwalker.census_kind   # Jev kinds for licensed places
+```

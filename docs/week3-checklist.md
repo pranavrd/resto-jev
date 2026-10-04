@@ -20,3 +20,7 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [x] East Passyunk panorama crops (decision 0013): Jev recall 0.29 to 0.67 on the 136 covered buildings; neighbour-sign false positives found
 - [x] D5 check and tighter crops (decision 0014): strict own-sign attribution leaves imagery adding about 0.05 recall to Jev and almost nothing beyond the stacker; D5 on text alone does not work
 - [x] OCR experiment (decision 0015): Apple Vision reads centre text on 17% of commercial/mixed crops (VLM 20%); 6 of 6 reviewed failures had no legible sign. Imagery tier is data-limited; stopping model changes there
+
+## Restaurant census (Week 4 item, done early)
+- [x] `place` table from OSM x licences, 195 places (184 public eating or drinking), matching validated by hand, Jev place kinds (decision 0016)
+- [ ] Yelp comparison: blocked on the licence decision in 0001

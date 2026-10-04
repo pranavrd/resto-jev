@@ -90,3 +90,26 @@ def build_tier1_questions(version: str = PROMPT_VERSION) -> dict:
             },
         ),
     }
+
+
+PLACE_PROMPT_VERSION = "k1"
+PLACE_KINDS = ("restaurant", "fast food", "cafe", "bar", "ice cream", "bakery or deli", "hotel or institution", "other")
+
+
+def build_place_questions() -> dict:
+    """What kind of business is this, from its name and City food licence? (Used for licensed places OSM does not map.)"""
+    return {
+        "kind": Choice(
+            instructions="What kind of business is this, judging by its name and its City food licence?",
+            criteria={
+                "restaurant": "A sit-down restaurant or eatery serving meals.",
+                "fast food": "A quick-service or counter place: pizza by the slice, sandwiches, hoagies, takeout, chain fast food.",
+                "cafe": "A coffee shop, tea house or dessert cafe serving mainly coffee, tea or pastries.",
+                "bar": "A bar, pub, tavern, lounge or brewery whose main business is drinks.",
+                "ice cream": "An ice cream, gelato or frozen dessert shop.",
+                "bakery or deli": "A bakery, pastry shop, deli or specialty food shop.",
+                "hotel or institution": "A hotel, private club, school, hospital or other institution where food service is part of something larger.",
+                "other": "Not a public eating or drinking place, for example a store with a small prepared-food counter or a caterer.",
+            },
+        )
+    }
