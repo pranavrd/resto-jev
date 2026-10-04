@@ -16,4 +16,5 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 
 ## Stackers (started Week 4 early)
 - [x] stack-lr and stack-gbm over Jev's answers (decision 0011): calibrated (ECE 0.012 to 0.018), +0.13 commercial-any F1 over raw Jev held-out
-- [ ] Tier 1: imagery selection, vision-model caption, D5 relevance, re-ask (needs a VLM plan for an M2 16 GB: local MLX first, Kaggle as fallback)
+- [x] Tier 1 groundwork (decision 0012): local MLX Qwen2.5-VL-3B (6.8 s per image), image selection for every building (32% coverage), 20-building pilot
+- [ ] Tier 1 at scale: East Passyunk panorama crops, multiple photos per building, 7B comparison, D5 relevance, re-ask on all picked buildings

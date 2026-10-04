@@ -81,6 +81,29 @@ def main() -> None:
                 cells.append(f"{tp / total_pos:.2f}/{tp / pp:.2f}")
             print(f"  {label:40s} " + "   ".join(f"{c:>9s}" for c in cells))
     print()
+    print("Part 3: realistic imagery. Only buildings with a usable photo can be escalated, and imagery resolves only a")
+    print("fraction r of the commercial ones it is shown (pilot: about 0.45, captions found readable signage on 6 of 14).")
+    with db.connect() as conn:
+        has_img = {r[0] for r in conn.execute("SELECT building_id FROM image_pick")}
+    avail = [i in has_img for i in ids]
+    print(f"  buildings with an image: {sum(avail)} ({sum(avail) / n:.0%}); commercial-or-mixed with an image: "
+          f"{sum(t and a for t, a in zip(truth, avail, strict=True))} of {total_pos}")
+    print(f"  {'gate, resolution r':44s} " + " ".join(f"{int(r * 100):>3d}% esc" + " " * 6 for r in RATES))
+    for gate_name, g_score in (
+        ("Jev hidden risk", [0 if p else r for p, r in zip(jev_pos, jev_rk, strict=True)]),
+        ("mean(Jev, stack-gbm) hidden risk", [0 if p else (a + b) / 2 for p, a, b in zip(
+            jev_pos, jev_rk, [risk(preds["stack-gbm"][i][2]) for i in ids], strict=True)]),
+    ):
+        for r_res in (1.0, 0.45):
+            order = sorted((i for i in range(n) if avail[i]), key=lambda i: -g_score[i])
+            cells = []
+            for rate in RATES:
+                esc = set(order[: int(rate * n)])
+                tp = sum(truth[i] and jev_pos[i] for i in range(n)) + r_res * sum(truth[i] and not jev_pos[i] for i in esc)
+                pp = sum(jev_pos[i] for i in range(n)) + r_res * sum(truth[i] and not jev_pos[i] for i in esc)
+                cells.append(f"{tp / total_pos:.2f}/{tp / pp:.2f}")
+            print(f"  {gate_name + ', r=' + str(r_res):44s} " + "   ".join(f"{c:>9s}" for c in cells))
+    print()
     base_tp = {name: sum(t and preds[name][i][0] in COMM for t, i in zip(truth, ids, strict=True)) for name in PREDICTORS}
     base_pp = {name: sum(preds[name][i][0] in COMM for i in ids) for name in PREDICTORS}
     print("no escalation: " + "; ".join(f"{k} recall {base_tp[k] / total_pos:.2f} precision {base_tp[k] / base_pp[k]:.2f}" for k in PREDICTORS))
