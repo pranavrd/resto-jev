@@ -1,5 +1,7 @@
 # 0021: Aspect labels (batch 1) and a provisional rating
 
+> **Update 2026-10-04 (later): the owner labelled 10 items and decided not to label by hand any more.** Batch 1 will not be completed, so the report below that waits on it cannot be run on a real sample and its judging role is not met. What this project can claim, and how it checks the scores instead, is in [decision 0022](0022-validating-aspect-scoring-without-labels.md). The rules below still stand: the rating stays provisional, nothing is called validated against people, and the composite weights were never tuned on any label.
+
 - **Status:** Accepted. **Everything about ratings and aspect quality is provisional until batch 1 has been labelled and read.**
 - **Date:** 2026-10-04
 - **Code:** `aspect_labels.py` (sampler, 6 tests), `label_api.py` and `web/src/label/` (the page, 7 key-logic tests), `aspect_label_report.py` (the evaluation, 9 tests with a planted halo), `rating.py` (13 tests); migrations 020 (`aspect_label_item`, `aspect_label`) and 021 (`rating_run`, `restaurant_aspect`, `restaurant_rating`); guidelines in `docs/aspect-labeling-guidelines.md`

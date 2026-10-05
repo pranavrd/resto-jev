@@ -1,0 +1,6454 @@
+[
+ {
+  "id": "w:food:0:0:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! The burger was inedible, cold in the middle and tasted like cardboard.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 0,
+  "fragment": "food:0:0",
+  "expect": {
+   "food": 0,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.02,
+    "confidence": 0.99
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.04,
+    "confidence": 0.92
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.9
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.78,
+    "confidence": 0.81
+   }
+  }
+ },
+ {
+  "id": "w:food:0:0:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. The burger was inedible, cold in the middle and tasted like cardboard.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 0,
+  "fragment": "food:0:0",
+  "expect": {
+   "food": 0,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.96,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.91,
+    "confidence": 0.87
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.89,
+    "confidence": 0.9
+   }
+  }
+ },
+ {
+  "id": "w:food:0:1:pos",
+  "kind": "wrapped",
+  "text": "My pasta arrived burnt and bland, and the sauce was awful. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 0,
+  "fragment": "food:0:1",
+  "expect": {
+   "food": 0,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.06,
+    "confidence": 0.95
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.99,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.71,
+    "confidence": 0.71
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.89,
+    "confidence": 0.91
+   }
+  }
+ },
+ {
+  "id": "w:food:0:1:neg",
+  "kind": "wrapped",
+  "text": "My pasta arrived burnt and bland, and the sauce was awful. I will never be back.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 0,
+  "fragment": "food:0:1",
+  "expect": {
+   "food": 0,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.67,
+    "confidence": 0.69
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.93,
+    "confidence": 0.94
+   }
+  }
+ },
+ {
+  "id": "w:food:0:2:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. Everything we ordered was terrible; the fish smelled off and I couldn't eat it.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 0,
+  "fragment": "food:0:2",
+  "expect": {
+   "food": 0,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.02,
+    "confidence": 0.99
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.89
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.91
+   }
+  }
+ },
+ {
+  "id": "w:food:0:2:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. Everything we ordered was terrible; the fish smelled off and I couldn't eat it.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 0,
+  "fragment": "food:0:2",
+  "expect": {
+   "food": 0,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.86,
+    "confidence": 0.85
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.76,
+    "confidence": 0.77
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.91,
+    "confidence": 0.92
+   }
+  }
+ },
+ {
+  "id": "w:food:1:0:pos",
+  "kind": "wrapped",
+  "text": "The pizza was soggy and underseasoned, though the salad was passable. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 1,
+  "fragment": "food:1:0",
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.93,
+    "confidence": 0.82
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.06,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.92,
+    "confidence": 0.92
+   }
+  }
+ },
+ {
+  "id": "w:food:1:0:neg",
+  "kind": "wrapped",
+  "text": "The pizza was soggy and underseasoned, though the salad was passable. I will never be back.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 1,
+  "fragment": "food:1:0",
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.64,
+    "confidence": 0.69
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.87
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.92,
+    "confidence": 0.89
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "w:food:1:1:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. Most of the dishes were disappointing, a dry chicken and a bland soup, with only the bread worth eating.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 1,
+  "fragment": "food:1:1",
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.92,
+    "confidence": 0.93
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.07,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.06,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.92,
+    "confidence": 0.92
+   }
+  }
+ },
+ {
+  "id": "w:food:1:1:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. Most of the dishes were disappointing, a dry chicken and a bland soup, with only the bread worth eating.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 1,
+  "fragment": "food:1:1",
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.51,
+    "confidence": 0.59
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.91,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.87,
+    "confidence": 0.86
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.92,
+    "confidence": 0.93
+   }
+  }
+ },
+ {
+  "id": "w:food:1:2:pos",
+  "kind": "wrapped",
+  "text": "The tacos were greasy and forgettable, not much to like. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 1,
+  "fragment": "food:1:2",
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 0.37,
+    "confidence": 0.7
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.2,
+    "confidence": 0.82
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.17,
+    "confidence": 0.85
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.98,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:food:1:2:neg",
+  "kind": "wrapped",
+  "text": "The tacos were greasy and forgettable, not much to like. One star from me.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 1,
+  "fragment": "food:1:2",
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 0.03,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.93,
+    "confidence": 0.9
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:food:2:0:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. The pasta was great but the pizza was soggy.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 2,
+  "fragment": "food:2:0",
+  "expect": {
+   "food": 2,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 2.06,
+    "confidence": 0.95
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.11,
+    "confidence": 0.9
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.08,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:food:2:0:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. The pasta was great but the pizza was soggy.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 2,
+  "fragment": "food:2:0",
+  "expect": {
+   "food": 2,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 1.95,
+    "confidence": 0.96
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.86,
+    "confidence": 0.84
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.92
+   }
+  }
+ },
+ {
+  "id": "w:food:2:1:pos",
+  "kind": "wrapped",
+  "text": "The food was okay, nothing special and nothing bad. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 2,
+  "fragment": "food:2:1",
+  "expect": {
+   "food": 2,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.88,
+    "score": 2.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.16,
+    "confidence": 0.86
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.17,
+    "confidence": 0.86
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:food:2:1:neg",
+  "kind": "wrapped",
+  "text": "The food was okay, nothing special and nothing bad. One star from me.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 2,
+  "fragment": "food:2:1",
+  "expect": {
+   "food": 2,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.86,
+    "score": 1.71,
+    "confidence": 0.76
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.98
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.98,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.98,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:food:2:2:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! Some dishes were delicious and others were pretty bland.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 2,
+  "fragment": "food:2:2",
+  "expect": {
+   "food": 2,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 2.04,
+    "confidence": 0.96
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.07,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.96
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:food:2:2:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. Some dishes were delicious and others were pretty bland.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 2,
+  "fragment": "food:2:2",
+  "expect": {
+   "food": 2,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 1.97,
+    "confidence": 0.97
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.98,
+    "confidence": 0.97
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.97
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:food:3:0:pos",
+  "kind": "wrapped",
+  "text": "The food was good, tasty burgers and fresh fries, though the dessert was a bit dry. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 3,
+  "fragment": "food:3:0",
+  "expect": {
+   "food": 3,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.99,
+    "score": 3.01,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.14,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.12,
+    "confidence": 0.9
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:food:3:0:neg",
+  "kind": "wrapped",
+  "text": "The food was good, tasty burgers and fresh fries, though the dessert was a bit dry. One star from me.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 3,
+  "fragment": "food:3:0",
+  "expect": {
+   "food": 3,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.99,
+    "score": 2.92,
+    "confidence": 0.93
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.04,
+    "confidence": 0.94
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:food:3:1:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! Solid food overall, the pasta was well made; the soup was just average.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 3,
+  "fragment": "food:3:1",
+  "expect": {
+   "food": 3,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 2.71,
+    "confidence": 0.74
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.05,
+    "confidence": 0.96
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:food:3:1:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. Solid food overall, the pasta was well made; the soup was just average.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 3,
+  "fragment": "food:3:1",
+  "expect": {
+   "food": 3,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 2.1,
+    "confidence": 0.91
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.97
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 0.97
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.98,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:food:3:2:pos",
+  "kind": "wrapped",
+  "text": "I enjoyed the tacos and the guacamole; the rice was a little dry. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 3,
+  "fragment": "food:3:2",
+  "expect": {
+   "food": 3,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 3.0,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.12,
+    "confidence": 0.9
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.09,
+    "confidence": 0.92
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:food:3:2:neg",
+  "kind": "wrapped",
+  "text": "I enjoyed the tacos and the guacamole; the rice was a little dry. I will never be back.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 3,
+  "fragment": "food:3:2",
+  "expect": {
+   "food": 3,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 2.67,
+    "confidence": 0.73
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.89
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 0.92
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:food:4:0:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! The food was absolutely incredible, the best pasta I've ever had.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 4,
+  "fragment": "food:4:0",
+  "expect": {
+   "food": 4,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.09,
+    "confidence": 0.92
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.08,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:food:4:0:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. The food was absolutely incredible, the best pasta I've ever had.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 4,
+  "fragment": "food:4:0",
+  "expect": {
+   "food": 4,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.94
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.98,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "w:food:4:1:pos",
+  "kind": "wrapped",
+  "text": "Every dish was delicious, the burger was perfect and the fries were amazing. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 4,
+  "fragment": "food:4:1",
+  "expect": {
+   "food": 4,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.06,
+    "confidence": 0.94
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.96
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:food:4:1:neg",
+  "kind": "wrapped",
+  "text": "Every dish was delicious, the burger was perfect and the fries were amazing. I will never be back.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 4,
+  "fragment": "food:4:1",
+  "expect": {
+   "food": 4,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.92
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.98,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:food:4:2:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. Outstanding food, fresh, flavourful and beautifully cooked.",
+  "tone": "pos",
+  "aspect": "food",
+  "level": 4,
+  "fragment": "food:4:2",
+  "expect": {
+   "food": 4,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.09,
+    "confidence": 0.92
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.07,
+    "confidence": 0.94
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:food:4:2:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. Outstanding food, fresh, flavourful and beautifully cooked.",
+  "tone": "neg",
+  "aspect": "food",
+  "level": 4,
+  "fragment": "food:4:2",
+  "expect": {
+   "food": 4,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.86,
+    "confidence": 0.85
+   },
+   "service": {
+    "mentioned": 0.04,
+    "score": 1.49,
+    "confidence": 0.56
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.94,
+    "confidence": 0.93
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:0:0:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! The room was filthy and unbearably loud, I couldn't hear anyone at my table.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 0,
+  "fragment": "atmosphere:0:0",
+  "expect": {
+   "food": null,
+   "atmosphere": 0,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 0.94
+   },
+   "atmosphere": {
+    "mentioned": 0.99,
+    "score": 0.09,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.77,
+    "confidence": 0.71
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.82,
+    "confidence": 0.84
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:0:0:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. The room was filthy and unbearably loud, I couldn't hear anyone at my table.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 0,
+  "fragment": "atmosphere:0:0",
+  "expect": {
+   "food": null,
+   "atmosphere": 0,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.91
+   },
+   "atmosphere": {
+    "mentioned": 0.99,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.81,
+    "confidence": 0.82
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.97,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:0:1:pos",
+  "kind": "wrapped",
+  "text": "Dingy, cramped and stuffy; the decor looked like it hadn't been touched in decades. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 0,
+  "fragment": "atmosphere:0:1",
+  "expect": {
+   "food": null,
+   "atmosphere": 0,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.9
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 0.05,
+    "confidence": 0.96
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.89
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.93,
+    "confidence": 0.94
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:0:1:neg",
+  "kind": "wrapped",
+  "text": "Dingy, cramped and stuffy; the decor looked like it hadn't been touched in decades. I will never be back.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 0,
+  "fragment": "atmosphere:0:1",
+  "expect": {
+   "food": null,
+   "atmosphere": 0,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.86,
+    "confidence": 0.88
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.94,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.98,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:0:2:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. The music was deafening and the dining room smelled of mildew.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 0,
+  "fragment": "atmosphere:0:2",
+  "expect": {
+   "food": null,
+   "atmosphere": 0,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.02,
+    "confidence": 0.94
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 0.32,
+    "confidence": 0.73
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.02,
+    "confidence": 0.94
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:0:2:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. The music was deafening and the dining room smelled of mildew.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 0,
+  "fragment": "atmosphere:0:2",
+  "expect": {
+   "food": null,
+   "atmosphere": 0,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.83,
+    "confidence": 0.85
+   },
+   "atmosphere": {
+    "mentioned": 0.99,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.79,
+    "confidence": 0.8
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:1:0:pos",
+  "kind": "wrapped",
+  "text": "It was quite noisy and the tables were jammed together, though the decor was nice. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 1,
+  "fragment": "atmosphere:1:0",
+  "expect": {
+   "food": null,
+   "atmosphere": 1,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.97
+   },
+   "atmosphere": {
+    "mentioned": 0.99,
+    "score": 1.88,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.04,
+    "score": 2.05,
+    "confidence": 0.94
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:1:0:neg",
+  "kind": "wrapped",
+  "text": "It was quite noisy and the tables were jammed together, though the decor was nice. I will never be back.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 1,
+  "fragment": "atmosphere:1:0",
+  "expect": {
+   "food": null,
+   "atmosphere": 1,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.98,
+    "confidence": 0.97
+   },
+   "atmosphere": {
+    "mentioned": 0.99,
+    "score": 0.81,
+    "confidence": 0.52
+   },
+   "service": {
+    "mentioned": 0.04,
+    "score": 1.88,
+    "confidence": 0.89
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:1:1:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. A cramped dark room with uncomfortable chairs, not much charm.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 1,
+  "fragment": "atmosphere:1:1",
+  "expect": {
+   "food": null,
+   "atmosphere": 1,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.07,
+    "confidence": 0.93
+   },
+   "atmosphere": {
+    "mentioned": 0.97,
+    "score": 0.42,
+    "confidence": 0.65
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.99,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:1:1:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. A cramped dark room with uncomfortable chairs, not much charm.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 1,
+  "fragment": "atmosphere:1:1",
+  "expect": {
+   "food": null,
+   "atmosphere": 1,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.89,
+    "confidence": 0.9
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 0.01,
+    "confidence": 0.99
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.89,
+    "confidence": 0.89
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:1:2:pos",
+  "kind": "wrapped",
+  "text": "The dining room felt tired and a bit gloomy. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 1,
+  "fragment": "atmosphere:1:2",
+  "expect": {
+   "food": null,
+   "atmosphere": 1,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.17,
+    "confidence": 0.85
+   },
+   "atmosphere": {
+    "mentioned": 0.96,
+    "score": 1.37,
+    "confidence": 0.68
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.22,
+    "confidence": 0.82
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:1:2:neg",
+  "kind": "wrapped",
+  "text": "The dining room felt tired and a bit gloomy. One star from me.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 1,
+  "fragment": "atmosphere:1:2",
+  "expect": {
+   "food": null,
+   "atmosphere": 1,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.89,
+    "confidence": 0.91
+   },
+   "atmosphere": {
+    "mentioned": 0.96,
+    "score": 0.84,
+    "confidence": 0.87
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.93,
+    "confidence": 0.91
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:2:0:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. The decor was lovely but it was very loud.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 2,
+  "fragment": "atmosphere:2:0",
+  "expect": {
+   "food": null,
+   "atmosphere": 2,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.97
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.29,
+    "confidence": 0.75
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:2:0:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. The decor was lovely but it was very loud.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 2,
+  "fragment": "atmosphere:2:0",
+  "expect": {
+   "food": null,
+   "atmosphere": 2,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.86,
+    "confidence": 0.88
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 1.5,
+    "confidence": 0.57
+   },
+   "service": {
+    "mentioned": 0.04,
+    "score": 1.83,
+    "confidence": 0.84
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:2:1:pos",
+  "kind": "wrapped",
+  "text": "A fairly ordinary dining room, nothing remarkable. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 2,
+  "fragment": "atmosphere:2:1",
+  "expect": {
+   "food": null,
+   "atmosphere": 2,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.22,
+    "confidence": 0.81
+   },
+   "atmosphere": {
+    "mentioned": 0.86,
+    "score": 2.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.17,
+    "confidence": 0.86
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.02,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:2:1:neg",
+  "kind": "wrapped",
+  "text": "A fairly ordinary dining room, nothing remarkable. One star from me.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 2,
+  "fragment": "atmosphere:2:1",
+  "expect": {
+   "food": null,
+   "atmosphere": 2,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.72,
+    "confidence": 0.76
+   },
+   "atmosphere": {
+    "mentioned": 0.86,
+    "score": 1.99,
+    "confidence": 0.99
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.92,
+    "confidence": 0.92
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.93,
+    "confidence": 0.94
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:2:2:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! Cozy upstairs, but the downstairs was cramped and noisy.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 2,
+  "fragment": "atmosphere:2:2",
+  "expect": {
+   "food": null,
+   "atmosphere": 2,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.06,
+    "confidence": 0.94
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.06,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.08,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:2:2:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. Cozy upstairs, but the downstairs was cramped and noisy.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 2,
+  "fragment": "atmosphere:2:2",
+  "expect": {
+   "food": null,
+   "atmosphere": 2,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.94,
+    "confidence": 0.94
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 1.82,
+    "confidence": 0.85
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:3:0:pos",
+  "kind": "wrapped",
+  "text": "Pleasant dining room with nice lighting, a little crowded on a Friday. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 3,
+  "fragment": "atmosphere:3:0",
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.07,
+    "confidence": 0.94
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 3.01,
+    "confidence": 0.98
+   },
+   "service": {
+    "mentioned": 0.06,
+    "score": 2.2,
+    "confidence": 0.83
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:3:0:neg",
+  "kind": "wrapped",
+  "text": "Pleasant dining room with nice lighting, a little crowded on a Friday. One star from me.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 3,
+  "fragment": "atmosphere:3:0",
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.63,
+    "confidence": 0.68
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.87,
+    "confidence": 0.89
+   },
+   "service": {
+    "mentioned": 0.07,
+    "score": 1.8,
+    "confidence": 0.79
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.85,
+    "confidence": 0.87
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:3:1:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! The place has a relaxed, comfortable vibe, though the music was slightly too loud.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 3,
+  "fragment": "atmosphere:3:1",
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.07,
+    "confidence": 0.93
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 3.01,
+    "confidence": 0.98
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.08,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:3:1:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. The place has a relaxed, comfortable vibe, though the music was slightly too loud.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 3,
+  "fragment": "atmosphere:3:1",
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.87,
+    "confidence": 0.88
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.88,
+    "confidence": 0.9
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:3:2:pos",
+  "kind": "wrapped",
+  "text": "Nice decor and comfortable seating, a bit tight between tables. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 3,
+  "fragment": "atmosphere:3:2",
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 3.0,
+    "confidence": 0.96
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.08,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:3:2:neg",
+  "kind": "wrapped",
+  "text": "Nice decor and comfortable seating, a bit tight between tables. I will never be back.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 3,
+  "fragment": "atmosphere:3:2",
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.92,
+    "confidence": 0.93
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.45,
+    "confidence": 0.61
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.91,
+    "confidence": 0.9
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.98,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:4:0:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! The restaurant is gorgeous, candlelit, cozy and full of charm.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 4,
+  "fragment": "atmosphere:4:0",
+  "expect": {
+   "food": null,
+   "atmosphere": 4,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.02,
+    "confidence": 0.96
+   },
+   "atmosphere": {
+    "mentioned": 0.97,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.07,
+    "confidence": 0.94
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:4:0:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. The restaurant is gorgeous, candlelit, cozy and full of charm.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 4,
+  "fragment": "atmosphere:4:0",
+  "expect": {
+   "food": null,
+   "atmosphere": 4,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.57,
+    "confidence": 0.63
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.93,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:4:1:pos",
+  "kind": "wrapped",
+  "text": "Beautiful room, wonderful decor and the perfect romantic setting. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 4,
+  "fragment": "atmosphere:4:1",
+  "expect": {
+   "food": null,
+   "atmosphere": 4,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.06,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:4:1:neg",
+  "kind": "wrapped",
+  "text": "Beautiful room, wonderful decor and the perfect romantic setting. I will never be back.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 4,
+  "fragment": "atmosphere:4:1",
+  "expect": {
+   "food": null,
+   "atmosphere": 4,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.83,
+    "confidence": 0.85
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 3.91,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:4:2:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. I loved the atmosphere, relaxed and stylish with great music at just the right volume.",
+  "tone": "pos",
+  "aspect": "atmosphere",
+  "level": 4,
+  "fragment": "atmosphere:4:2",
+  "expect": {
+   "food": null,
+   "atmosphere": 4,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.99,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.04,
+    "confidence": 0.97
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:atmosphere:4:2:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. I loved the atmosphere, relaxed and stylish with great music at just the right volume.",
+  "tone": "neg",
+  "aspect": "atmosphere",
+  "level": 4,
+  "fragment": "atmosphere:4:2",
+  "expect": {
+   "food": null,
+   "atmosphere": 4,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.5,
+    "confidence": 0.57
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 3.94,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.04,
+    "score": 1.54,
+    "confidence": 0.6
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.95
+   }
+  }
+ },
+ {
+  "id": "w:service:0:0:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! Our server was rude, ignored us for half an hour and got our order wrong.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 0,
+  "fragment": "service:0:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 0,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 2.04,
+    "confidence": 0.92
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 0.04,
+    "confidence": 0.97
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.91
+   }
+  }
+ },
+ {
+  "id": "w:service:0:0:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. Our server was rude, ignored us for half an hour and got our order wrong.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 0,
+  "fragment": "service:0:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 0,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.87,
+    "confidence": 0.88
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.92
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:service:0:1:pos",
+  "kind": "wrapped",
+  "text": "The staff were dismissive and we waited over an hour for the check. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 0,
+  "fragment": "service:0:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 0,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.96
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.91,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 0.07,
+    "confidence": 0.94
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.85,
+    "confidence": 0.87
+   }
+  }
+ },
+ {
+  "id": "w:service:0:1:neg",
+  "kind": "wrapped",
+  "text": "The staff were dismissive and we waited over an hour for the check. I will never be back.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 0,
+  "fragment": "service:0:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 0,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.92,
+    "confidence": 0.92
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.91,
+    "confidence": 0.89
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:service:0:2:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. Terrible service, the waiter forgot our drinks twice and never apologized.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 0,
+  "fragment": "service:0:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 0,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 2.02,
+    "confidence": 0.95
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.07,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 0.1,
+    "confidence": 0.91
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:service:0:2:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. Terrible service, the waiter forgot our drinks twice and never apologized.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 0,
+  "fragment": "service:0:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 0,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.05,
+    "score": 1.88,
+    "confidence": 0.89
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.89,
+    "confidence": 0.87
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 0.01,
+    "confidence": 0.99
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:service:1:0:pos",
+  "kind": "wrapped",
+  "text": "Service was slow and inattentive, although the host was polite. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 1,
+  "fragment": "service:1:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 1,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.96
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 1.04,
+    "confidence": 0.92
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.95
+   }
+  }
+ },
+ {
+  "id": "w:service:1:0:neg",
+  "kind": "wrapped",
+  "text": "Service was slow and inattentive, although the host was polite. I will never be back.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 1,
+  "fragment": "service:1:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 1,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.96,
+    "confidence": 0.96
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.92
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 0.94,
+    "confidence": 0.92
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:service:1:1:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. Our waiter seemed annoyed and it took ages to get water, with little effort to make up for it.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 1,
+  "fragment": "service:1:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 1,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.05,
+    "score": 2.07,
+    "confidence": 0.92
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.11,
+    "confidence": 0.9
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 0.77,
+    "confidence": 0.75
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.95
+   }
+  }
+ },
+ {
+  "id": "w:service:1:1:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. Our waiter seemed annoyed and it took ages to get water, with little effort to make up for it.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 1,
+  "fragment": "service:1:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 1,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.05,
+    "score": 1.82,
+    "confidence": 0.84
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.87,
+    "confidence": 0.86
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 0.12,
+    "confidence": 0.9
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.93,
+    "confidence": 0.94
+   }
+  }
+ },
+ {
+  "id": "w:service:1:2:pos",
+  "kind": "wrapped",
+  "text": "The staff were disorganized and mostly absent. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 1,
+  "fragment": "service:1:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 1,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.94
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.13,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.95,
+    "score": 0.59,
+    "confidence": 0.51
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.97,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "w:service:1:2:neg",
+  "kind": "wrapped",
+  "text": "The staff were disorganized and mostly absent. One star from me.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 1,
+  "fragment": "service:1:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 1,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.91,
+    "confidence": 0.92
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.89
+   },
+   "service": {
+    "mentioned": 0.94,
+    "score": 0.04,
+    "confidence": 0.97
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.91,
+    "confidence": 0.92
+   }
+  }
+ },
+ {
+  "id": "w:service:2:0:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. The server was friendly but very slow.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 2,
+  "fragment": "service:2:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 2,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.13,
+    "confidence": 0.89
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.12,
+    "confidence": 0.9
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 1.96,
+    "confidence": 0.87
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:service:2:0:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. The server was friendly but very slow.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 2,
+  "fragment": "service:2:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 2,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.91
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.92,
+    "confidence": 0.9
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 1.36,
+    "confidence": 0.55
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.94,
+    "confidence": 0.95
+   }
+  }
+ },
+ {
+  "id": "w:service:2:1:pos",
+  "kind": "wrapped",
+  "text": "Service was fine, nothing to complain about and nothing special. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 2,
+  "fragment": "service:2:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 2,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 2.11,
+    "confidence": 0.9
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.12,
+    "confidence": 0.9
+   },
+   "service": {
+    "mentioned": 0.67,
+    "score": 2.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:service:2:1:neg",
+  "kind": "wrapped",
+  "text": "Service was fine, nothing to complain about and nothing special. One star from me.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 2,
+  "fragment": "service:2:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 2,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.86,
+    "confidence": 0.87
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.98
+   },
+   "service": {
+    "mentioned": 0.68,
+    "score": 2.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "w:service:2:2:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! Our waiter was great, but the host was rude when we arrived.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 2,
+  "fragment": "service:2:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 2,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.94
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.13,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.97,
+    "score": 2.31,
+    "confidence": 0.73
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:service:2:2:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. Our waiter was great, but the host was rude when we arrived.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 2,
+  "fragment": "service:2:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 2,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.93,
+    "confidence": 0.93
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.97,
+    "score": 1.89,
+    "confidence": 0.88
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:service:3:0:pos",
+  "kind": "wrapped",
+  "text": "The staff were friendly and helpful, though we waited a little for the check. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 3,
+  "fragment": "service:3:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 3,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.04,
+    "confidence": 0.95
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.13,
+    "confidence": 0.89
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 3.0,
+    "confidence": 0.99
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:service:3:0:neg",
+  "kind": "wrapped",
+  "text": "The staff were friendly and helpful, though we waited a little for the check. One star from me.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 3,
+  "fragment": "service:3:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 3,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.91,
+    "confidence": 0.92
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 2.66,
+    "confidence": 0.71
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.92,
+    "confidence": 0.92
+   }
+  }
+ },
+ {
+  "id": "w:service:3:1:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! Good service overall, an attentive waiter and only a short wait to be seated.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 3,
+  "fragment": "service:3:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 3,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.02,
+    "confidence": 0.97
+   },
+   "atmosphere": {
+    "mentioned": 0.32,
+    "score": 2.1,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 3.86,
+    "confidence": 0.89
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:service:3:1:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. Good service overall, an attentive waiter and only a short wait to be seated.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 3,
+  "fragment": "service:3:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 3,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.55,
+    "confidence": 0.62
+   },
+   "atmosphere": {
+    "mentioned": 0.36,
+    "score": 1.99,
+    "confidence": 0.94
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 3.38,
+    "confidence": 0.68
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:service:3:2:pos",
+  "kind": "wrapped",
+  "text": "Our server was kind and efficient, with one small mix-up on a drink order. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 3,
+  "fragment": "service:3:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 3,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.07,
+    "score": 2.03,
+    "confidence": 0.96
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.11,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 3.08,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:service:3:2:neg",
+  "kind": "wrapped",
+  "text": "Our server was kind and efficient, with one small mix-up on a drink order. I will never be back.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 3,
+  "fragment": "service:3:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 3,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.08,
+    "score": 1.97,
+    "confidence": 0.94
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 2.84,
+    "confidence": 0.87
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:service:4:0:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! The service was outstanding, our waiter was warm, attentive and went out of his way for us.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 4,
+  "fragment": "service:4:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 4,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.1,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:service:4:0:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. The service was outstanding, our waiter was warm, attentive and went out of his way for us.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 4,
+  "fragment": "service:4:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 4,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.7,
+    "confidence": 0.74
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.94,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:service:4:1:pos",
+  "kind": "wrapped",
+  "text": "Staff were wonderful, so friendly and quick, and they remembered our names. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 4,
+  "fragment": "service:4:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 4,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.1,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:service:4:1:neg",
+  "kind": "wrapped",
+  "text": "Staff were wonderful, so friendly and quick, and they remembered our names. I will never be back.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 4,
+  "fragment": "service:4:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 4,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.83,
+    "confidence": 0.84
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.89
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 3.88,
+    "confidence": 0.9
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:service:4:2:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. Impeccable service from start to finish, everyone was helpful and kind.",
+  "tone": "pos",
+  "aspect": "service",
+  "level": 4,
+  "fragment": "service:4:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 4,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.04,
+    "confidence": 0.96
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.09,
+    "confidence": 0.92
+   },
+   "service": {
+    "mentioned": 0.97,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:service:4:2:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. Impeccable service from start to finish, everyone was helpful and kind.",
+  "tone": "neg",
+  "aspect": "service",
+  "level": 4,
+  "fragment": "service:4:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 4,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.72,
+    "confidence": 0.75
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.93,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.97,
+    "score": 3.39,
+    "confidence": 0.49
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.92,
+    "confidence": 0.92
+   }
+  }
+ },
+ {
+  "id": "w:value:0:0:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! Way overpriced, it was a complete rip-off for what you get.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 0,
+  "fragment": "value:0:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.25,
+    "score": 1.11,
+    "confidence": 0.08
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.99,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.02,
+    "confidence": 0.92
+   },
+   "value": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:0:0:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. Way overpriced, it was a complete rip-off for what you get.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 0,
+  "fragment": "value:0:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.14,
+    "score": 1.12,
+    "confidence": 0.26
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.91,
+    "confidence": 0.89
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.93,
+    "confidence": 0.92
+   },
+   "value": {
+    "mentioned": 0.97,
+    "score": 0.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:0:1:pos",
+  "kind": "wrapped",
+  "text": "Absurd prices, we paid a fortune for a basic evening out. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 0,
+  "fragment": "value:0:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.06,
+    "score": 1.7,
+    "confidence": 0.74
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.9,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.93,
+    "confidence": 0.92
+   },
+   "value": {
+    "mentioned": 0.91,
+    "score": 0.03,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:value:0:1:neg",
+  "kind": "wrapped",
+  "text": "Absurd prices, we paid a fortune for a basic evening out. I will never be back.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 0,
+  "fragment": "value:0:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.06,
+    "score": 1.75,
+    "confidence": 0.79
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.93,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.9,
+    "score": 0.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:0:2:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. A total waste of money, far too expensive.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 0,
+  "fragment": "value:0:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.05,
+    "score": 1.77,
+    "confidence": 0.52
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.03,
+    "confidence": 0.92
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.87,
+    "score": 0.02,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:value:0:2:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. A total waste of money, far too expensive.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 0,
+  "fragment": "value:0:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.5,
+    "confidence": 0.58
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.82,
+    "confidence": 0.83
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.63,
+    "confidence": 0.68
+   },
+   "value": {
+    "mentioned": 0.84,
+    "score": 0.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:1:0:pos",
+  "kind": "wrapped",
+  "text": "A bit overpriced, I expected more for the money. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 1,
+  "fragment": "value:1:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.13,
+    "score": 2.04,
+    "confidence": 0.57
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.07,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.07,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.97,
+    "score": 1.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:1:0:neg",
+  "kind": "wrapped",
+  "text": "A bit overpriced, I expected more for the money. I will never be back.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 1,
+  "fragment": "value:1:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.12,
+    "score": 1.44,
+    "confidence": 0.53
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.97,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.97,
+    "confidence": 0.94
+   },
+   "value": {
+    "mentioned": 0.97,
+    "score": 0.94,
+    "confidence": 0.95
+   }
+  }
+ },
+ {
+  "id": "w:value:1:1:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. Prices are on the high side, not great value for what you get.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 1,
+  "fragment": "value:1:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.16,
+    "score": 2.44,
+    "confidence": 0.6
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.11,
+    "confidence": 0.9
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.08,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.95,
+    "score": 1.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:1:1:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. Prices are on the high side, not great value for what you get.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 1,
+  "fragment": "value:1:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.09,
+    "score": 1.52,
+    "confidence": 0.59
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.86,
+    "confidence": 0.86
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.74,
+    "confidence": 0.76
+   },
+   "value": {
+    "mentioned": 0.94,
+    "score": 0.9,
+    "confidence": 0.92
+   }
+  }
+ },
+ {
+  "id": "w:value:1:2:pos",
+  "kind": "wrapped",
+  "text": "Somewhat expensive, I felt I paid too much for what it was. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 1,
+  "fragment": "value:1:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.09,
+    "score": 2.42,
+    "confidence": 0.59
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.18,
+    "confidence": 0.85
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.26,
+    "confidence": 0.78
+   },
+   "value": {
+    "mentioned": 0.96,
+    "score": 1.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:1:2:neg",
+  "kind": "wrapped",
+  "text": "Somewhat expensive, I felt I paid too much for what it was. One star from me.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 1,
+  "fragment": "value:1:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.11,
+    "score": 1.51,
+    "confidence": 0.58
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.98,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 1.99,
+    "confidence": 0.96
+   },
+   "value": {
+    "mentioned": 0.97,
+    "score": 0.8,
+    "confidence": 0.84
+   }
+  }
+ },
+ {
+  "id": "w:value:2:0:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. Prices were what you would expect, neither cheap nor expensive.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 2,
+  "fragment": "value:2:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 2
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 2.18,
+    "confidence": 0.85
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.06,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.06,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.17,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:2:0:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. Prices were what you would expect, neither cheap nor expensive.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 2,
+  "fragment": "value:2:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 2
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.47,
+    "confidence": 0.55
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.82,
+    "confidence": 0.85
+   },
+   "service": {
+    "mentioned": 0.04,
+    "score": 1.38,
+    "confidence": 0.47
+   },
+   "value": {
+    "mentioned": 0.12,
+    "score": 1.94,
+    "confidence": 0.95
+   }
+  }
+ },
+ {
+  "id": "w:value:2:1:pos",
+  "kind": "wrapped",
+  "text": "Some things were worth the price and others weren't. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 2,
+  "fragment": "value:2:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 2
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.17,
+    "score": 2.14,
+    "confidence": 0.88
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.1,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.13,
+    "confidence": 0.89
+   },
+   "value": {
+    "mentioned": 0.69,
+    "score": 2.16,
+    "confidence": 0.82
+   }
+  }
+ },
+ {
+  "id": "w:value:2:1:neg",
+  "kind": "wrapped",
+  "text": "Some things were worth the price and others weren't. One star from me.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 2,
+  "fragment": "value:2:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 2
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.16,
+    "score": 1.52,
+    "confidence": 0.6
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.95,
+    "confidence": 0.94
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.84,
+    "confidence": 0.86
+   },
+   "value": {
+    "mentioned": 0.74,
+    "score": 1.15,
+    "confidence": 0.79
+   }
+  }
+ },
+ {
+  "id": "w:value:2:2:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! The prices were about average for the area.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 2,
+  "fragment": "value:2:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 2
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 2.5,
+    "confidence": 0.58
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.07,
+    "confidence": 0.94
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.1,
+    "confidence": 0.91
+   },
+   "value": {
+    "mentioned": 0.11,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "w:value:2:2:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. The prices were about average for the area.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 2,
+  "fragment": "value:2:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 2
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.67,
+    "confidence": 0.72
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.83,
+    "confidence": 0.85
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.91
+   },
+   "value": {
+    "mentioned": 0.09,
+    "score": 1.98,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:value:3:0:pos",
+  "kind": "wrapped",
+  "text": "Reasonable prices, I felt I got what I paid for. Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 3,
+  "fragment": "value:3:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.07,
+    "score": 2.23,
+    "confidence": 0.8
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.1,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.28,
+    "confidence": 0.77
+   },
+   "value": {
+    "mentioned": 0.95,
+    "score": 2.99,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "w:value:3:0:neg",
+  "kind": "wrapped",
+  "text": "Reasonable prices, I felt I got what I paid for. One star from me.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 3,
+  "fragment": "value:3:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.14,
+    "score": 1.6,
+    "confidence": 0.62
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.93,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.88,
+    "confidence": 0.89
+   },
+   "value": {
+    "mentioned": 0.94,
+    "score": 2.93,
+    "confidence": 0.94
+   }
+  }
+ },
+ {
+  "id": "w:value:3:1:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! Good value for the money, fair prices all round.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 3,
+  "fragment": "value:3:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 2.06,
+    "confidence": 0.93
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.03,
+    "confidence": 0.97
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.06,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.87,
+    "score": 2.96,
+    "confidence": 0.89
+   }
+  }
+ },
+ {
+  "id": "w:value:3:1:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. Good value for the money, fair prices all round.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 3,
+  "fragment": "value:3:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.08,
+    "score": 1.49,
+    "confidence": 0.56
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.85,
+    "confidence": 0.86
+   },
+   "service": {
+    "mentioned": 0.04,
+    "score": 1.86,
+    "confidence": 0.87
+   },
+   "value": {
+    "mentioned": 0.9,
+    "score": 2.98,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "w:value:3:2:pos",
+  "kind": "wrapped",
+  "text": "Fairly priced, a decent deal for what it is. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 3,
+  "fragment": "value:3:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.06,
+    "score": 2.06,
+    "confidence": 0.94
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.03,
+    "confidence": 0.97
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.97
+   },
+   "value": {
+    "mentioned": 0.95,
+    "score": 2.61,
+    "confidence": 0.66
+   }
+  }
+ },
+ {
+  "id": "w:value:3:2:neg",
+  "kind": "wrapped",
+  "text": "Fairly priced, a decent deal for what it is. I will never be back.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 3,
+  "fragment": "value:3:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.07,
+    "score": 1.71,
+    "confidence": 0.75
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.92,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.96,
+    "score": 2.52,
+    "confidence": 0.6
+   }
+  }
+ },
+ {
+  "id": "w:value:4:0:pos",
+  "kind": "wrapped",
+  "text": "Five stars from me! An absolute bargain, so cheap for what you get.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 4,
+  "fragment": "value:4:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 4
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.16,
+    "score": 2.43,
+    "confidence": 0.63
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.07,
+    "confidence": 0.94
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.05,
+    "confidence": 0.96
+   },
+   "value": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:4:0:neg",
+  "kind": "wrapped",
+  "text": "I would not recommend this to anyone. An absolute bargain, so cheap for what you get.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 4,
+  "fragment": "value:4:0",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 4
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.19,
+    "score": 0.84,
+    "confidence": 0.3
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.79,
+    "confidence": 0.8
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.82,
+    "confidence": 0.83
+   },
+   "value": {
+    "mentioned": 0.93,
+    "score": 3.58,
+    "confidence": 0.65
+   }
+  }
+ },
+ {
+  "id": "w:value:4:1:pos",
+  "kind": "wrapped",
+  "text": "Incredible value, you pay so little and get so much. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 4,
+  "fragment": "value:4:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 4
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.33,
+    "score": 2.39,
+    "confidence": 0.66
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.05,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.06,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:4:1:neg",
+  "kind": "wrapped",
+  "text": "Incredible value, you pay so little and get so much. I will never be back.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 4,
+  "fragment": "value:4:1",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 4
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.42,
+    "score": 1.67,
+    "confidence": 0.36
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.82,
+    "confidence": 0.82
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.83,
+    "confidence": 0.83
+   },
+   "value": {
+    "mentioned": 0.97,
+    "score": 3.83,
+    "confidence": 0.85
+   }
+  }
+ },
+ {
+  "id": "w:value:4:2:pos",
+  "kind": "wrapped",
+  "text": "I can't wait to come back. So affordable, honestly the best deal in town.",
+  "tone": "pos",
+  "aspect": "value",
+  "level": 4,
+  "fragment": "value:4:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 4
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 2.13,
+    "confidence": 0.88
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.08,
+    "confidence": 0.93
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.04,
+    "confidence": 0.96
+   },
+   "value": {
+    "mentioned": 0.67,
+    "score": 4.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "w:value:4:2:neg",
+  "kind": "wrapped",
+  "text": "Overall a terrible experience, avoid. So affordable, honestly the best deal in town.",
+  "tone": "neg",
+  "aspect": "value",
+  "level": 4,
+  "fragment": "value:4:2",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": 4
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.06,
+    "score": 1.01,
+    "confidence": 0.16
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.64,
+    "confidence": 0.69
+   },
+   "service": {
+    "mentioned": 0.04,
+    "score": 1.18,
+    "confidence": 0.3
+   },
+   "value": {
+    "mentioned": 0.7,
+    "score": 3.81,
+    "confidence": 0.84
+   }
+  }
+ },
+ {
+  "id": "c:pos:0",
+  "kind": "control",
+  "text": "Overall a really great experience, highly recommended. Five stars from me!",
+  "tone": "pos",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.29,
+    "confidence": 0.75
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.14,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.36,
+    "confidence": 0.7
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "c:pos:1",
+  "kind": "control",
+  "text": "I can't wait to come back. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.67,
+    "confidence": 0.44
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.2,
+    "confidence": 0.83
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.3,
+    "confidence": 0.74
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "c:pos:2",
+  "kind": "control",
+  "text": "Would absolutely recommend to everyone. I can't wait to come back.",
+  "tone": "pos",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.53,
+    "confidence": 0.55
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.2,
+    "confidence": 0.83
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.24,
+    "confidence": 0.8
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "c:pos:3",
+  "kind": "control",
+  "text": "Would absolutely recommend to everyone. I can't wait to come back.",
+  "tone": "pos",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.51,
+    "confidence": 0.57
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.19,
+    "confidence": 0.84
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.23,
+    "confidence": 0.81
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "c:pos:4",
+  "kind": "control",
+  "text": "Five stars from me! Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.23,
+    "confidence": 0.8
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.13,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.21,
+    "confidence": 0.82
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "c:pos:5",
+  "kind": "control",
+  "text": "Five stars from me! Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.02,
+    "score": 2.21,
+    "confidence": 0.82
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.13,
+    "confidence": 0.89
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.25,
+    "confidence": 0.79
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "c:pos:6",
+  "kind": "control",
+  "text": "Five stars from me! Overall a really great experience, highly recommended.",
+  "tone": "pos",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 2.2,
+    "confidence": 0.83
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.14,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.2,
+    "confidence": 0.83
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "c:pos:7",
+  "kind": "control",
+  "text": "I can't wait to come back. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.02,
+    "score": 2.53,
+    "confidence": 0.55
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.17,
+    "confidence": 0.85
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.25,
+    "confidence": 0.79
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "c:pos:8",
+  "kind": "control",
+  "text": "Overall a really great experience, highly recommended. Would absolutely recommend to everyone.",
+  "tone": "pos",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.02,
+    "score": 2.19,
+    "confidence": 0.83
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.13,
+    "confidence": 0.88
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.23,
+    "confidence": 0.8
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "c:pos:9",
+  "kind": "control",
+  "text": "Would absolutely recommend to everyone. Five stars from me!",
+  "tone": "pos",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.02,
+    "score": 2.84,
+    "confidence": 0.29
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.16,
+    "confidence": 0.86
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 2.3,
+    "confidence": 0.74
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "c:neg:0",
+  "kind": "control",
+  "text": "One star from me. Overall a terrible experience, avoid.",
+  "tone": "neg",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.41,
+    "confidence": 0.5
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.72,
+    "confidence": 0.76
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.16,
+    "confidence": 0.29
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.92,
+    "confidence": 0.93
+   }
+  }
+ },
+ {
+  "id": "c:neg:1",
+  "kind": "control",
+  "text": "Overall a terrible experience, avoid. One star from me.",
+  "tone": "neg",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.3,
+    "confidence": 0.41
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.69,
+    "confidence": 0.73
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.12,
+    "confidence": 0.26
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.92
+   }
+  }
+ },
+ {
+  "id": "c:neg:2",
+  "kind": "control",
+  "text": "I would not recommend this to anyone. One star from me.",
+  "tone": "neg",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.02,
+    "confidence": 0.18
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.73,
+    "confidence": 0.76
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 1.55,
+    "confidence": 0.62
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.94,
+    "confidence": 0.95
+   }
+  }
+ },
+ {
+  "id": "c:neg:3",
+  "kind": "control",
+  "text": "I would not recommend this to anyone. I will never be back.",
+  "tone": "neg",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.37,
+    "confidence": 0.47
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.77,
+    "confidence": 0.79
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 1.51,
+    "confidence": 0.58
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.98,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "c:neg:4",
+  "kind": "control",
+  "text": "Overall a terrible experience, avoid. One star from me.",
+  "tone": "neg",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.36,
+    "confidence": 0.46
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.69,
+    "confidence": 0.73
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.1,
+    "confidence": 0.24
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.93,
+    "confidence": 0.94
+   }
+  }
+ },
+ {
+  "id": "c:neg:5",
+  "kind": "control",
+  "text": "One star from me. I will never be back.",
+  "tone": "neg",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.33,
+    "confidence": 0.44
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.75,
+    "confidence": 0.77
+   },
+   "service": {
+    "mentioned": 0.02,
+    "score": 1.24,
+    "confidence": 0.35
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.97,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "c:neg:6",
+  "kind": "control",
+  "text": "One star from me. I will never be back.",
+  "tone": "neg",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.31,
+    "confidence": 0.42
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.78,
+    "confidence": 0.79
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.33,
+    "confidence": 0.42
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.96,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "c:neg:7",
+  "kind": "control",
+  "text": "Overall a terrible experience, avoid. One star from me.",
+  "tone": "neg",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.34,
+    "confidence": 0.44
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.68,
+    "confidence": 0.72
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.09,
+    "confidence": 0.23
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.91,
+    "confidence": 0.92
+   }
+  }
+ },
+ {
+  "id": "c:neg:8",
+  "kind": "control",
+  "text": "I would not recommend this to anyone. Overall a terrible experience, avoid.",
+  "tone": "neg",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.37,
+    "confidence": 0.47
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 1.74,
+    "confidence": 0.77
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.4,
+    "confidence": 0.49
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "c:neg:9",
+  "kind": "control",
+  "text": "One star from me. I would not recommend this to anyone.",
+  "tone": "neg",
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.34,
+    "confidence": 0.45
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 1.74,
+    "confidence": 0.77
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.46,
+    "confidence": 0.54
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.95,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "x:0",
+  "kind": "cross",
+  "text": "Way overpriced, it was a complete rip-off for what you get. The food was absolutely incredible, the best pasta I've ever had.",
+  "levels": {
+   "value": 0,
+   "food": 4
+  },
+  "expect": {
+   "food": 4,
+   "atmosphere": null,
+   "service": null,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 3.99,
+    "confidence": 0.99
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.96
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.02,
+    "confidence": 0.96
+   },
+   "value": {
+    "mentioned": 0.97,
+    "score": 0.01,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:1",
+  "kind": "cross",
+  "text": "Reasonable prices, I felt I got what I paid for. The burger was inedible, cold in the middle and tasted like cardboard.",
+  "levels": {
+   "value": 3,
+   "food": 0
+  },
+  "expect": {
+   "food": 0,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.02,
+    "confidence": 0.97
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.97
+   },
+   "value": {
+    "mentioned": 0.91,
+    "score": 2.55,
+    "confidence": 0.63
+   }
+  }
+ },
+ {
+  "id": "x:2",
+  "kind": "cross",
+  "text": "The place has a relaxed, comfortable vibe, though the music was slightly too loud. The pizza was soggy and underseasoned, though the salad was passable.",
+  "levels": {
+   "food": 1,
+   "atmosphere": 3
+  },
+  "expect": {
+   "food": 1,
+   "atmosphere": 3,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 1.05,
+    "confidence": 0.93
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.9,
+    "confidence": 0.92
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.97
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "x:3",
+  "kind": "cross",
+  "text": "Way overpriced, it was a complete rip-off for what you get. Impeccable service from start to finish, everyone was helpful and kind.",
+  "levels": {
+   "service": 4,
+   "value": 0
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 4,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.18,
+    "score": 0.82,
+    "confidence": 0.32
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.96
+   },
+   "service": {
+    "mentioned": 0.97,
+    "score": 3.99,
+    "confidence": 0.99
+   },
+   "value": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:4",
+  "kind": "cross",
+  "text": "The staff were disorganized and mostly absent. The place has a relaxed, comfortable vibe, though the music was slightly too loud.",
+  "levels": {
+   "service": 1,
+   "atmosphere": 3
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": 1,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.99
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.91,
+    "confidence": 0.92
+   },
+   "service": {
+    "mentioned": 0.94,
+    "score": 0.57,
+    "confidence": 0.64
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "x:5",
+  "kind": "cross",
+  "text": "Pleasant dining room with nice lighting, a little crowded on a Friday. The staff were dismissive and we waited over an hour for the check.",
+  "levels": {
+   "atmosphere": 3,
+   "service": 0
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": 0,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.99
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.87,
+    "confidence": 0.9
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 0.09,
+    "confidence": 0.93
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.95,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "x:6",
+  "kind": "cross",
+  "text": "The service was outstanding, our waiter was warm, attentive and went out of his way for us. Everything we ordered was terrible; the fish smelled off and I couldn't eat it.",
+  "levels": {
+   "food": 0,
+   "service": 4
+  },
+  "expect": {
+   "food": 0,
+   "atmosphere": null,
+   "service": 4,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.87,
+    "confidence": 0.89
+   }
+  }
+ },
+ {
+  "id": "x:7",
+  "kind": "cross",
+  "text": "The room was filthy and unbearably loud, I couldn't hear anyone at my table. Reasonable prices, I felt I got what I paid for.",
+  "levels": {
+   "value": 3,
+   "atmosphere": 0
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": 0,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.99,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.99,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.92,
+    "score": 2.93,
+    "confidence": 0.94
+   }
+  }
+ },
+ {
+  "id": "x:8",
+  "kind": "cross",
+  "text": "Way overpriced, it was a complete rip-off for what you get. The service was outstanding, our waiter was warm, attentive and went out of his way for us.",
+  "levels": {
+   "value": 0,
+   "service": 4
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 4,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.17,
+    "score": 0.85,
+    "confidence": 0.29
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:9",
+  "kind": "cross",
+  "text": "Impeccable service from start to finish, everyone was helpful and kind. The burger was inedible, cold in the middle and tasted like cardboard.",
+  "levels": {
+   "service": 4,
+   "food": 0
+  },
+  "expect": {
+   "food": 0,
+   "atmosphere": null,
+   "service": 4,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.97,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.86,
+    "confidence": 0.88
+   }
+  }
+ },
+ {
+  "id": "x:10",
+  "kind": "cross",
+  "text": "Beautiful room, wonderful decor and the perfect romantic setting. The burger was inedible, cold in the middle and tasted like cardboard.",
+  "levels": {
+   "food": 0,
+   "atmosphere": 4
+  },
+  "expect": {
+   "food": 0,
+   "atmosphere": 4,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.94
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.9,
+    "confidence": 0.91
+   }
+  }
+ },
+ {
+  "id": "x:11",
+  "kind": "cross",
+  "text": "Dingy, cramped and stuffy; the decor looked like it hadn't been touched in decades. The food was absolutely incredible, the best pasta I've ever had.",
+  "levels": {
+   "food": 4,
+   "atmosphere": 0
+  },
+  "expect": {
+   "food": 4,
+   "atmosphere": 0,
+   "service": null,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "x:12",
+  "kind": "cross",
+  "text": "Absurd prices, we paid a fortune for a basic evening out. Outstanding food, fresh, flavourful and beautifully cooked.",
+  "levels": {
+   "value": 0,
+   "food": 4
+  },
+  "expect": {
+   "food": 4,
+   "atmosphere": null,
+   "service": null,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.04,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.02,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.87,
+    "score": 0.48,
+    "confidence": 0.6
+   }
+  }
+ },
+ {
+  "id": "x:13",
+  "kind": "cross",
+  "text": "Good value for the money, fair prices all round. Our waiter seemed annoyed and it took ages to get water, with little effort to make up for it.",
+  "levels": {
+   "value": 3,
+   "service": 1
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 1,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.06,
+    "score": 2.02,
+    "confidence": 0.97
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.02,
+    "confidence": 0.97
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 0.69,
+    "confidence": 0.74
+   },
+   "value": {
+    "mentioned": 0.92,
+    "score": 2.98,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "x:14",
+  "kind": "cross",
+  "text": "Fairly priced, a decent deal for what it is. The tacos were greasy and forgettable, not much to like.",
+  "levels": {
+   "food": 1,
+   "value": 3
+  },
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 0.69,
+    "confidence": 0.74
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.97
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.95,
+    "score": 2.44,
+    "confidence": 0.63
+   }
+  }
+ },
+ {
+  "id": "x:15",
+  "kind": "cross",
+  "text": "Our waiter seemed annoyed and it took ages to get water, with little effort to make up for it. Outstanding food, fresh, flavourful and beautifully cooked.",
+  "levels": {
+   "food": 4,
+   "service": 1
+  },
+  "expect": {
+   "food": 4,
+   "atmosphere": null,
+   "service": 1,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 3.99,
+    "confidence": 0.99
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.05,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 0.53,
+    "confidence": 0.61
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "x:16",
+  "kind": "cross",
+  "text": "Prices are on the high side, not great value for what you get. The food was good, tasty burgers and fresh fries, though the dessert was a bit dry.",
+  "levels": {
+   "value": 1,
+   "food": 3
+  },
+  "expect": {
+   "food": 3,
+   "atmosphere": null,
+   "service": null,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 2.97,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.97
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.04,
+    "confidence": 0.97
+   },
+   "value": {
+    "mentioned": 0.96,
+    "score": 1.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:17",
+  "kind": "cross",
+  "text": "Fairly priced, a decent deal for what it is. Most of the dishes were disappointing, a dry chicken and a bland soup, with only the bread worth eating.",
+  "levels": {
+   "value": 3,
+   "food": 1
+  },
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.93,
+    "confidence": 0.94
+   },
+   "atmosphere": {
+    "mentioned": 0.02,
+    "score": 2.02,
+    "confidence": 0.97
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.95,
+    "score": 2.42,
+    "confidence": 0.64
+   }
+  }
+ },
+ {
+  "id": "x:18",
+  "kind": "cross",
+  "text": "Pleasant dining room with nice lighting, a little crowded on a Friday. Absurd prices, we paid a fortune for a basic evening out.",
+  "levels": {
+   "value": 0,
+   "atmosphere": 3
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": null,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.05,
+    "score": 1.89,
+    "confidence": 0.9
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.9,
+    "confidence": 0.92
+   },
+   "service": {
+    "mentioned": 0.06,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.93,
+    "score": 0.06,
+    "confidence": 0.95
+   }
+  }
+ },
+ {
+  "id": "x:19",
+  "kind": "cross",
+  "text": "Most of the dishes were disappointing, a dry chicken and a bland soup, with only the bread worth eating. Good value for the money, fair prices all round.",
+  "levels": {
+   "value": 3,
+   "food": 1
+  },
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.94,
+    "confidence": 0.95
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.91,
+    "score": 2.98,
+    "confidence": 0.98
+   }
+  }
+ },
+ {
+  "id": "x:20",
+  "kind": "cross",
+  "text": "A total waste of money, far too expensive. The staff were friendly and helpful, though we waited a little for the check.",
+  "levels": {
+   "value": 0,
+   "service": 3
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 3,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.04,
+    "score": 1.75,
+    "confidence": 0.78
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.96
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 2.8,
+    "confidence": 0.83
+   },
+   "value": {
+    "mentioned": 0.83,
+    "score": 0.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:21",
+  "kind": "cross",
+  "text": "Fairly priced, a decent deal for what it is. The staff were dismissive and we waited over an hour for the check.",
+  "levels": {
+   "value": 3,
+   "service": 0
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 0,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.07,
+    "score": 2.0,
+    "confidence": 0.97
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 0.11,
+    "confidence": 0.91
+   },
+   "value": {
+    "mentioned": 0.95,
+    "score": 2.53,
+    "confidence": 0.61
+   }
+  }
+ },
+ {
+  "id": "x:22",
+  "kind": "cross",
+  "text": "Every dish was delicious, the burger was perfect and the fries were amazing. Service was slow and inattentive, although the host was polite.",
+  "levels": {
+   "service": 1,
+   "food": 4
+  },
+  "expect": {
+   "food": 4,
+   "atmosphere": null,
+   "service": 1,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 4.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.04,
+    "confidence": 0.96
+   },
+   "service": {
+    "mentioned": 0.98,
+    "score": 1.16,
+    "confidence": 0.86
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 2.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:23",
+  "kind": "cross",
+  "text": "Service was slow and inattentive, although the host was polite. Solid food overall, the pasta was well made; the soup was just average.",
+  "levels": {
+   "food": 3,
+   "service": 1
+  },
+  "expect": {
+   "food": 3,
+   "atmosphere": null,
+   "service": 1,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 2.18,
+    "confidence": 0.85
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.02,
+    "confidence": 0.98
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 1.06,
+    "confidence": 0.95
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "x:24",
+  "kind": "cross",
+  "text": "A bit overpriced, I expected more for the money. Good service overall, an attentive waiter and only a short wait to be seated.",
+  "levels": {
+   "value": 1,
+   "service": 3
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 3,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.12,
+    "score": 1.66,
+    "confidence": 0.69
+   },
+   "atmosphere": {
+    "mentioned": 0.35,
+    "score": 2.05,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 3.19,
+    "confidence": 0.84
+   },
+   "value": {
+    "mentioned": 0.97,
+    "score": 1.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:25",
+  "kind": "cross",
+  "text": "Incredible value, you pay so little and get so much. The pizza was soggy and underseasoned, though the salad was passable.",
+  "levels": {
+   "value": 4,
+   "food": 1
+  },
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": 4
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 1.19,
+    "confidence": 0.78
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.04,
+    "confidence": 0.96
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.02,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.97,
+    "score": 3.97,
+    "confidence": 0.97
+   }
+  }
+ },
+ {
+  "id": "x:26",
+  "kind": "cross",
+  "text": "Nice decor and comfortable seating, a bit tight between tables. Somewhat expensive, I felt I paid too much for what it was.",
+  "levels": {
+   "value": 1,
+   "atmosphere": 3
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": null,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.07,
+    "score": 1.85,
+    "confidence": 0.87
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.76,
+    "confidence": 0.8
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.96,
+    "score": 1.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:27",
+  "kind": "cross",
+  "text": "A total waste of money, far too expensive. Pleasant dining room with nice lighting, a little crowded on a Friday.",
+  "levels": {
+   "atmosphere": 3,
+   "value": 0
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": null,
+   "value": 0
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.05,
+    "score": 1.3,
+    "confidence": 0.41
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.89,
+    "confidence": 0.91
+   },
+   "service": {
+    "mentioned": 0.06,
+    "score": 1.99,
+    "confidence": 0.97
+   },
+   "value": {
+    "mentioned": 0.85,
+    "score": 0.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:28",
+  "kind": "cross",
+  "text": "A cramped dark room with uncomfortable chairs, not much charm. Reasonable prices, I felt I got what I paid for.",
+  "levels": {
+   "atmosphere": 1,
+   "value": 3
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": 1,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.06,
+    "score": 2.0,
+    "confidence": 0.99
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 0.34,
+    "confidence": 0.72
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.99
+   },
+   "value": {
+    "mentioned": 0.93,
+    "score": 2.96,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "x:29",
+  "kind": "cross",
+  "text": "Pleasant dining room with nice lighting, a little crowded on a Friday. Prices are on the high side, not great value for what you get.",
+  "levels": {
+   "atmosphere": 3,
+   "value": 1
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": 3,
+   "service": null,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.13,
+    "score": 1.82,
+    "confidence": 0.84
+   },
+   "atmosphere": {
+    "mentioned": 0.98,
+    "score": 2.92,
+    "confidence": 0.94
+   },
+   "service": {
+    "mentioned": 0.06,
+    "score": 2.02,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.95,
+    "score": 1.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:30",
+  "kind": "cross",
+  "text": "The staff were friendly and helpful, though we waited a little for the check. The tacos were greasy and forgettable, not much to like.",
+  "levels": {
+   "food": 1,
+   "service": 3
+  },
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": 3,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 0.42,
+    "confidence": 0.65
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.04,
+    "confidence": 0.96
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 2.84,
+    "confidence": 0.87
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.96,
+    "confidence": 0.96
+   }
+  }
+ },
+ {
+  "id": "x:31",
+  "kind": "cross",
+  "text": "A bit overpriced, I expected more for the money. The staff were friendly and helpful, though we waited a little for the check.",
+  "levels": {
+   "service": 3,
+   "value": 1
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": null,
+   "service": 3,
+   "value": 1
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.1,
+    "score": 1.76,
+    "confidence": 0.78
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.03,
+    "confidence": 0.97
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 2.78,
+    "confidence": 0.82
+   },
+   "value": {
+    "mentioned": 0.97,
+    "score": 1.0,
+    "confidence": 1.0
+   }
+  }
+ },
+ {
+  "id": "x:32",
+  "kind": "cross",
+  "text": "The music was deafening and the dining room smelled of mildew. The staff were friendly and helpful, though we waited a little for the check.",
+  "levels": {
+   "atmosphere": 0,
+   "service": 3
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": 0,
+   "service": 3,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.99,
+    "score": 0.06,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 2.87,
+    "confidence": 0.89
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "x:33",
+  "kind": "cross",
+  "text": "Good service overall, an attentive waiter and only a short wait to be seated. The room was filthy and unbearably loud, I couldn't hear anyone at my table.",
+  "levels": {
+   "service": 3,
+   "atmosphere": 0
+  },
+  "expect": {
+   "food": null,
+   "atmosphere": 0,
+   "service": 3,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.03,
+    "score": 1.99,
+    "confidence": 0.98
+   },
+   "atmosphere": {
+    "mentioned": 0.99,
+    "score": 0.02,
+    "confidence": 0.98
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 3.25,
+    "confidence": 0.77
+   },
+   "value": {
+    "mentioned": 0.02,
+    "score": 1.99,
+    "confidence": 0.99
+   }
+  }
+ },
+ {
+  "id": "x:34",
+  "kind": "cross",
+  "text": "The staff were friendly and helpful, though we waited a little for the check. The burger was inedible, cold in the middle and tasted like cardboard.",
+  "levels": {
+   "food": 0,
+   "service": 3
+  },
+  "expect": {
+   "food": 0,
+   "atmosphere": null,
+   "service": 3,
+   "value": null
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.98,
+    "score": 0.0,
+    "confidence": 1.0
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.04,
+    "confidence": 0.95
+   },
+   "service": {
+    "mentioned": 0.99,
+    "score": 2.88,
+    "confidence": 0.9
+   },
+   "value": {
+    "mentioned": 0.03,
+    "score": 1.75,
+    "confidence": 0.79
+   }
+  }
+ },
+ {
+  "id": "x:35",
+  "kind": "cross",
+  "text": "The tacos were greasy and forgettable, not much to like. Reasonable prices, I felt I got what I paid for.",
+  "levels": {
+   "value": 3,
+   "food": 1
+  },
+  "expect": {
+   "food": 1,
+   "atmosphere": null,
+   "service": null,
+   "value": 3
+  },
+  "jev": {
+   "food": {
+    "mentioned": 0.97,
+    "score": 0.66,
+    "confidence": 0.71
+   },
+   "atmosphere": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "service": {
+    "mentioned": 0.03,
+    "score": 2.01,
+    "confidence": 0.98
+   },
+   "value": {
+    "mentioned": 0.94,
+    "score": 2.96,
+    "confidence": 0.96
+   }
+  }
+ }
+]

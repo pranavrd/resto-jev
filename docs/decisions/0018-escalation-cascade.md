@@ -130,7 +130,7 @@ Built because the cascade ends there, and because the parcel labels need checkin
 - **Escalated by the cascade:** the 200 buildings the model was least sure about.
 - `python -m streetwalker.review report` prints agreement with the parcel label overall, by class, by area and by label status, Cohen's kappa, "can't tell" rate, and seconds per label.
 
-**No labels exist yet.** The agreement numbers, the human time per label and the check on the oracle assumption all wait for someone to label the 145 buildings (the roadmap's "about 150 human labels"). The labels write to Postgres only when the API runs with `STREETWALKER_REVIEW=1`.
+**Update 2026-10-04 (later): the owner has decided not to label by hand, so these labels will not be collected.** The human tier stays an oracle and the "ground truth check" will not happen; every final-accuracy figure in this record is an upper bound for that reason, and the review page is kept for anyone who wants to use it. **Original text:** no labels exist yet. The agreement numbers, the human time per label and the check on the oracle assumption all wait for someone to label the 145 buildings (the roadmap's "about 150 human labels"). The labels write to Postgres only when the API runs with `STREETWALKER_REVIEW=1`.
 
 ## Decisions
 

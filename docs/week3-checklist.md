@@ -49,7 +49,9 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [x] Aspect labelling guidelines, a blind labelling page (`#/label`) and batch 1 (about 180 items, stratified, with repeats) (decision 0021)
 - [x] Evaluation of Jev against labels, with a halo test (built and tested on planted data; not yet run on real labels)
 - [x] Provisional place-level rating (Bayesian shrinkage, recency, frozen composite weights w1, credible intervals and rank intervals), status enforced `provisional`
-- [ ] **Label batch 1** (the owner's time, about 2 to 2.5 hours), run `aspect_label_report`, read each part with its sample size
-- [ ] Only after that: extend toward 500 (batches 2 and up), baseline model vs Jev, lift 'provisional' with a migration that says why
+- [x] **Owner decision 2026-10-04: no more manual labelling** (10 of 180 aspect items done; the 145 building labels were never started). Replaced by a constructed test set and hard cases (decision 0022); the rating stays provisional
+- [x] Constructed probe set (176 invented reviews) and 20 hard cases run: mention and level handling good, no leakage, small halo (+0.23 of a level), implicit value and atmosphere mentions missed
+- [ ] Optional, no labels needed: prompt-stability check, a lexicon baseline, a second AI annotator stored apart from human labels
+- [ ] Dropped for lack of labels: baseline model vs Jev on human labels; the building ground-truth check and human review time
 - [ ] Confirm which agreement version Yelp showed at the 2026-10-03 download (0001); the Data's term ends 2027-10-03
 

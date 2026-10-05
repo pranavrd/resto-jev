@@ -1,5 +1,7 @@
 # Aspect labelling guidelines (batch 1)
 
+> **Optional.** The owner labelled 10 reviews and decided not to label any more (decision 0022). These guidelines and the page at `#/label` stay for anyone who wants to label, and anything labelled should follow them.
+
 You will label about 180 restaurant reviews at `#/label`. For each review you answer four questions, one per aspect: is it
 mentioned, and if so how does the reviewer feel about it. These labels are the yardstick for Jev's aspect scoring (decision 0021),
 so the aim is to record **what the text says**, not what you think of the place.

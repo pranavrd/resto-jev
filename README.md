@@ -75,7 +75,7 @@ Census places are linked to Yelp Open Dataset businesses by name, address and bu
 
 Reviews of the linked places are loaded locally and scored on four aspects (food, atmosphere, service, value) with Jev ([decision 0020](docs/decisions/0020-reviews-and-aspect-scoring.md)). The scores are plausible but **not yet validated against human labels**, and they stay private like the rest.
 
-A labelling page (`#/label`) and a first batch of about 180 reviews exist to test those scores against a person, with a provisional rating built on top ([decision 0021](docs/decisions/0021-aspect-labels-and-provisional-rating.md)). **No ranking or aspect result is claimed until that batch has been labelled and read**; guidelines are in [docs/aspect-labeling-guidelines.md](docs/aspect-labeling-guidelines.md).
+A labelling page (`#/label`) exists, but **no human labels will be collected** (10 of a planned 180 were done and the owner decided to stop), so the aspect scores are **not validated against people**. They were instead tested on invented reviews with the truth known by construction ([decision 0022](docs/decisions/0022-validating-aspect-scoring-without-labels.md); the test set and its results are in `docs/probe/` and can be shared): clear cases, mentions and levels are handled well, aspects do not leak into each other, there is a small halo from the reviewer's overall verdict, and implicit mentions of value and atmosphere are under-detected. The rating built on the scores is **provisional** and is not presented as a ranking result ([decision 0021](docs/decisions/0021-aspect-labels-and-provisional-rating.md)).
 
 ## Attribution
 
