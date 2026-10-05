@@ -61,5 +61,6 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [x] Retrieval eval on invented data, known synonym misses recorded as tests (15 new tests)
 - [x] Dense review embeddings (`nomic-embed-text` via local Ollama, 35,925 reviews) fused with the lexical rank (decision 0024); no cosine floor (it does not separate relevant from irrelevant), place score favours places with many reviews (open)
 - [ ] A fresh, larger invented evaluation set to choose the place score (sum, max or share) and to test the three modes unseen
-- [ ] Chat over the provisional aspect data (open: which language model and key; review text to a hosted model rests on the owner's reading, decision 0001)
+- [x] Chat over the provisional aspect data with a local model, qwen2.5:7b via Ollama (decision 0025): plan, search, write with verbatim-quote checks; planner 16/24 fully correct on held-out invented questions; summary faithfulness NOT measured
+- [ ] Writer-faithfulness evaluation and a planner v2 on a fresh invented set; ascending sorts, multi-turn, a UI
 - [ ] Evals in CI (no CI exists yet; the retrieval eval is self-contained)

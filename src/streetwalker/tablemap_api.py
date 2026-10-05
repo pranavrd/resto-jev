@@ -8,10 +8,13 @@ PROVISIONAL. The ratings are the provisional ones of decision 0021 (aspect score
 not validated against people). Every response says so, and every rated place repeats it.
 """
 
+from dataclasses import asdict
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
+from pydantic import BaseModel, Field
 
+from streetwalker import chat as chat_mod
 from streetwalker.api_common import ATTRIBUTION, Filters, to_place
 from streetwalker.deps import Conn
 from streetwalker.embeddings import EmbeddingUnavailable, dense_text, embed, model_id
@@ -138,3 +141,25 @@ def place_detail(
             raise HTTPException(422, str(e)) from e
         env["retrieval"] = envelope(conn, None, tq)["retrieval"]
     return {**env, **out, "attribution": [*ATTRIBUTION, YELP_NOTICE]}
+
+
+class Ask(BaseModel):
+    question: str = Field(min_length=1, max_length=chat_mod.MAX_QUESTION)
+
+
+def get_chat_backend() -> chat_mod.ChatBackend:
+    """The local chat model. Tests override this dependency."""
+    return chat_mod.OllamaChat()
+
+
+@router.post("/chat")
+def chat(body: Ask, conn: Conn, backend: Annotated[chat_mod.ChatBackend, Depends(get_chat_backend)]) -> dict:
+    """Ask a question about the places and their reviews. One question, one answer: there is no conversation memory. The answer says
+    what search it ran, shows verbatim quotes, and always carries the provisional caveat. Review text goes only to the local model."""
+    try:
+        out = chat_mod.answer(conn, backend, body.question, run)
+    except chat_mod.ChatUnavailable as e:
+        raise HTTPException(503, f"{e}. Start Ollama and pull the model, or use /tablemap/search.") from e
+    except chat_mod.ChatBadOutput as e:
+        raise HTTPException(502, f"{e}; try rephrasing the question") from e
+    return {**asdict(out), "attribution": [*ATTRIBUTION, YELP_NOTICE]}
