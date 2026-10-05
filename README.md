@@ -79,10 +79,11 @@ A labelling page (`#/label`) exists, but **no human labels will be collected** (
 
 ## TableMap search (private, provisional)
 
-A local-only router searches the census together with the provisional aspect ratings and the review text: the `/places` filters, a minimum per aspect (on the mean or the 95% lower bound), and full-text review search with matching passages ([decision 0023](docs/decisions/0023-tablemap-retrieval.md)). It is mounted only when `STREETWALKER_TABLEMAP=1`, so the default API and the map UI stay Yelp-free. Everything it returns says `provisional`, and a sort by a rating is opt-in. Retrieval is lexical (no embeddings yet), and its tests run on invented data.
+A local-only router searches the census together with the provisional aspect ratings and the review text: the `/places` filters, a minimum per aspect (on the mean or the 95% lower bound), and review search with matching passages, lexical (full-text), dense (local `nomic-embed-text` embeddings through Ollama) or both fused ([decisions 0023](docs/decisions/0023-tablemap-retrieval.md) and [0024](docs/decisions/0024-dense-retrieval.md)). It is mounted only when `STREETWALKER_TABLEMAP=1`, so the default API and the map UI stay Yelp-free. Everything it returns says `provisional`, and a sort by a rating is opt-in. Dense matching returns nearest neighbours, not a relevance verdict, and the tests run on invented data.
 
 ```bash
-STREETWALKER_TABLEMAP=1 .venv/bin/uvicorn streetwalker.api:app --port 8000   # then /docs, section "tablemap"
+ollama pull nomic-embed-text && .venv/bin/python -m streetwalker.embed_reviews   # once, about 17 minutes; hybrid search needs Ollama running (mode=lexical does not)
+STREETWALKER_TABLEMAP=1 .venv/bin/uvicorn streetwalker.api:app --port 8000          # then /docs, section "tablemap"
 ```
 
 ## Attribution

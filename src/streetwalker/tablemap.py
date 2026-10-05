@@ -7,13 +7,16 @@ PROVISIONAL: every rating and aspect number here comes from the provisional rati
 are not validated against people. Results carry that status; a sort by a rating is opt-in (`rank_by`) and the rank
 interval is returned beside it.
 
-What "hybrid" means today: structured place filters (kind, area, transit, distance), constraints on the aspect posteriors,
-and lexical review retrieval (Postgres full-text search) are combined in one query. Dense review embeddings are not here
-yet; `load_excerpts` is the one place a vector ranker would be fused in.
+What "hybrid" means: structured place filters (kind, area, transit, distance), constraints on the aspect posteriors, and review
+retrieval are combined in one query. Retrieval has two rankers over the reviews of the places that pass the filters: lexical
+(Postgres full-text search) and dense (exact cosine distance to the question's embedding, decision 0024). `mode` picks one or
+both; hybrid fuses the two ranks by reciprocal-rank fusion (a review scores the sum of 1 / (60 + rank) over the lists that
+hold it), and a place's text score is the sum over its reviews.
 
 Like search.py, every user value is a bound parameter. The only text spliced into the SQL is built from fixed names.
 """
 
+import re
 from dataclasses import dataclass, field, replace
 
 from streetwalker.aspects import ASPECTS
@@ -22,6 +25,9 @@ from streetwalker.search import SELECT, SORTS, BadQuery, PlaceQuery, parts
 TEXT_CONFIG = "english"
 RANK_BY = ("text", "composite", *ASPECTS)
 MIN_BY = ("mean", "lower")  # compare the aspect posterior mean, or its 95% lower bound ("confidently at least this good")
+MODES = ("lexical", "dense", "hybrid")
+RRF_K = 60  # the usual constant of reciprocal-rank fusion: it damps the weight of the very top ranks
+DENSE_K = 100  # reviews the dense ranker contributes
 MAX_EXCERPTS = 5
 MAX_TEXT = 200
 HEADLINE = 'MaxWords=45, MinWords=20, ShortWord=2, MaxFragments=2, FragmentDelimiter=" ... ", StartSel="«", StopSel="»"'  # no HTML in snippets
@@ -38,6 +44,11 @@ class TableQuery:
     reviewed_only: bool = False  # drop places with no linked Yelp reviews
     rank_by: str | None = None  # opt-in sort by a provisional score; otherwise the place sort applies
     excerpts: int = 0  # matching review passages to return per place, when text is given
+    mode: str = "lexical"  # lexical | dense | hybrid (the router defaults to hybrid)
+    query_vec: list[float] | None = None  # the embedded question, for dense and hybrid
+    embed_model: str | None = None  # model id the vectors must come from (embeddings.model_id())
+    min_similarity: float | None = None  # cosine floor on dense candidates; None keeps the top DENSE_K whatever their similarity
+    dense_k: int = DENSE_K
 
 
 def _check(tq: TableQuery) -> None:
@@ -60,6 +71,14 @@ def _check(tq: TableQuery) -> None:
         raise BadQuery(f"excerpts must be 0 to {MAX_EXCERPTS}")
     if tq.excerpts and not tq.text:
         raise BadQuery("excerpts needs text")
+    if tq.mode not in MODES:
+        raise BadQuery(f"mode must be one of {', '.join(MODES)}")
+    if tq.text and tq.mode != "lexical" and (tq.query_vec is None or tq.embed_model is None):
+        raise BadQuery(f"mode={tq.mode} needs the embedded question")
+    if tq.min_similarity is not None and not -1.0 <= tq.min_similarity <= 1.0:
+        raise BadQuery("min_similarity is a cosine, between -1 and 1")
+    if not 1 <= tq.dense_k <= 500:
+        raise BadQuery("dense_k is 1 to 500")
 
 
 # The latest provisional rating run and its aspect posteriors, pivoted to one row per place.
@@ -70,15 +89,66 @@ CTES = """
 {pivot}
         FROM restaurant_aspect WHERE run_id = (SELECT id FROM latest) GROUP BY place_id
     )"""
-TEXT_CTES = """,
-    tq AS (SELECT websearch_to_tsquery('{cfg}', %(text)s) AS q),
-    hits AS (
+
+def exclusions(text: str) -> str | None:
+    """The -excluded words of a web-search style query, as an OR query, or None. Dense candidates are not found by words, so
+    this is how an exclusion still holds for them."""
+    words = re.findall(r"(?:^|\s)-([^\s\-][^\s]*)", text)
+    return " or ".join(words) if words else None
+
+
+def retrieval_ctes(mode: str, scope_sql: str) -> str:
+    """CTEs ending in `fused` (place_id, review_id, score) and `place_text` (n_hits, text_score) over the reviews of the places
+    in `scope_sql`. `tq` is always defined, because passages are highlighted with the lexical query."""
+    cfg = TEXT_CONFIG
+    ctes = [f"scope AS ({scope_sql})", f"tq AS (SELECT websearch_to_tsquery('{cfg}', %(text)s) AS q)"]
+    ranked = []
+    if mode in ("lexical", "hybrid"):
+        ctes += [
+            f"""fts AS (
         SELECT DISTINCT ON (r.review_id) pr.place_id, r.review_id, ts_rank_cd(to_tsvector('{cfg}', r.text), tq.q) AS rank
         FROM place_review pr JOIN yelp_review r USING (review_id), tq
-        WHERE to_tsvector('{cfg}', r.text) @@ tq.q
+        WHERE pr.place_id IN (SELECT place_id FROM scope) AND to_tsvector('{cfg}', r.text) @@ tq.q
         ORDER BY r.review_id, pr.place_id
-    ),
-    place_text AS (SELECT place_id, count(*) AS n_hits, sum(rank) AS text_score FROM hits GROUP BY place_id)"""
+    )""",
+            "fts_ranked AS (SELECT place_id, review_id, row_number() OVER (ORDER BY rank DESC, review_id) AS r FROM fts)",
+        ]
+        ranked.append("fts_ranked")
+    if mode in ("dense", "hybrid"):
+        ctes += [
+            f"""dense AS (
+        SELECT DISTINCT ON (e.review_id) pr.place_id, e.review_id, 1 - (e.embedding <=> %(qvec)s::vector) AS sim
+        FROM place_review pr JOIN review_embedding e ON e.review_id = pr.review_id AND e.model = %(emodel)s
+        JOIN yelp_review r ON r.review_id = e.review_id
+        WHERE pr.place_id IN (SELECT place_id FROM scope)
+          AND (%(min_sim)s::float IS NULL OR 1 - (e.embedding <=> %(qvec)s::vector) >= %(min_sim)s)
+          AND (%(excl)s::text IS NULL OR NOT to_tsvector('{cfg}', r.text) @@ websearch_to_tsquery('{cfg}', %(excl)s))
+        ORDER BY e.review_id, pr.place_id
+    )""",
+            (
+                "dense_ranked AS (SELECT place_id, review_id, row_number() OVER (ORDER BY sim DESC, review_id) AS r "
+                "FROM (SELECT * FROM dense ORDER BY sim DESC, review_id LIMIT %(dense_k)s) d)"
+            ),
+        ]
+        ranked.append("dense_ranked")
+    union = " UNION ALL ".join(f"SELECT place_id, review_id, r FROM {n}" for n in ranked)
+    ctes += [
+        f"fused AS (SELECT place_id, review_id, sum(1.0 / ({RRF_K} + r))::float AS score FROM ({union}) u GROUP BY place_id, review_id)",
+        "place_text AS (SELECT place_id, count(*) AS n_hits, sum(score) AS text_score FROM fused GROUP BY place_id)",
+    ]
+    return ",\n    ".join(ctes)
+
+
+def retrieval_params(tq: TableQuery) -> dict:
+    out = {"text": tq.text.strip(), "min_sim": tq.min_similarity, "dense_k": tq.dense_k, "excl": exclusions(tq.text)}
+    if tq.mode != "lexical":
+        from streetwalker.embeddings import (
+            vec_literal,  # imported here: the lexical path needs no embedding module
+        )
+
+        out.update(qvec=vec_literal(tq.query_vec), emodel=tq.embed_model)
+    return out
+
 
 EXTRA_COLS = (
     ["l.id AS rating_run", "l.aspect_run_id", "l.weights_version",
@@ -100,18 +170,6 @@ def build(tq: TableQuery) -> tuple[str, dict]:
     pt = parts(place)
     where, params = list(pt.where), dict(pt.params)
 
-    pivot = ",\n".join(f"            max({col}) FILTER (WHERE aspect = '{a}') AS {a}_{k}" for a in ASPECTS for k, col in ASPECT_FIELDS)
-    ctes = CTES.format(pivot=pivot)
-    extra = ", " + ", ".join(EXTRA_COLS)
-    joins = " LEFT JOIN latest l ON true LEFT JOIN restaurant_rating rr ON rr.run_id = l.id AND rr.place_id = p.id LEFT JOIN asp ON asp.place_id = p.id"
-    if tq.text:
-        ctes += TEXT_CTES.format(cfg=TEXT_CONFIG)
-        joins += " JOIN place_text pt ON pt.place_id = p.id"
-        extra += ", pt.n_hits, pt.text_score"
-        params["text"] = tq.text.strip()
-    else:
-        extra += ", NULL::bigint AS n_hits, NULL::float AS text_score"
-
     bound = "mean" if tq.min_by == "mean" else "lo"
     for a, v in tq.min_aspect.items():  # `a` is checked against ASPECTS, so the f-string only ever holds a fixed name
         where.append(f"asp.{a}_{bound} >= %(min_{a})s")
@@ -121,6 +179,22 @@ def build(tq: TableQuery) -> tuple[str, dict]:
         params["min_reviews"] = tq.min_reviews
     if tq.reviewed_only:
         where.append("rr.place_id IS NOT NULL")
+    where_sql = "    WHERE " + "\n      AND ".join(where) + "\n" if where else ""
+
+    pivot = ",\n".join(f"            max({col}) FILTER (WHERE aspect = '{a}') AS {a}_{k}" for a in ASPECTS for k, col in ASPECT_FIELDS)
+    ctes = CTES.format(pivot=pivot)
+    extra = ", " + ", ".join(EXTRA_COLS)
+    joins = " LEFT JOIN latest l ON true LEFT JOIN restaurant_rating rr ON rr.run_id = l.id AND rr.place_id = p.id LEFT JOIN asp ON asp.place_id = p.id"
+    if tq.text:
+        # Review retrieval runs over the reviews of the places that pass every other filter (so "bar" + "patio" cannot lose
+        # its answer to a better-matching restaurant), then the places are joined back.
+        base = f"SELECT p.id AS place_id FROM place p JOIN area a ON a.id = p.area_id{joins}\n{where_sql}"
+        ctes += ",\n    base AS (" + base + "    ),\n    " + retrieval_ctes(tq.mode, "SELECT place_id FROM base")
+        joins += " JOIN place_text pt ON pt.place_id = p.id"
+        extra += ", pt.n_hits, pt.text_score"
+        params.update(retrieval_params(tq))
+    else:
+        extra += ", NULL::bigint AS n_hits, NULL::float AS text_score"
 
     if tq.rank_by:
         order = RANK_SQL[tq.rank_by]
@@ -128,38 +202,35 @@ def build(tq: TableQuery) -> tuple[str, dict]:
         order = RANK_SQL["text"]
     else:
         order = SORTS[pt.sort]
-    sql = "WITH" + ctes + SELECT.format(distance=pt.distance, score=pt.score, extra=extra, joins=joins)
-    if where:
-        sql += "    WHERE " + "\n      AND ".join(where) + "\n"
+    sql = "WITH" + ctes + SELECT.format(distance=pt.distance, score=pt.score, extra=extra, joins=joins) + where_sql
     sql += f"    ORDER BY {order}\n    LIMIT %(limit)s OFFSET %(offset)s"
     return sql, params
 
 
-def excerpts_sql() -> str:
-    """Top review passages per place for a text query. The headline is computed only for the rows that survive the cut."""
+def excerpts_sql(mode: str) -> str:
+    """Top review passages per place, ranked like the search ranks reviews. The headline is computed only for the rows that survive the cut."""
     return f"""
-    WITH tq AS (SELECT websearch_to_tsquery('{TEXT_CONFIG}', %(text)s) AS q),
-    ranked AS (
-        SELECT DISTINCT ON (r.review_id) pr.place_id, r.review_id, ts_rank_cd(to_tsvector('{TEXT_CONFIG}', r.text), tq.q) AS rank
-        FROM place_review pr JOIN yelp_review r USING (review_id), tq
-        WHERE pr.place_id = ANY(%(place_ids)s) AND to_tsvector('{TEXT_CONFIG}', r.text) @@ tq.q
-        ORDER BY r.review_id, pr.place_id
-    ),
+    WITH {retrieval_ctes(mode, "SELECT unnest(%(place_ids)s::int[]) AS place_id")},
     top AS (
-        SELECT *, row_number() OVER (PARTITION BY place_id ORDER BY rank DESC, review_id) AS rn FROM ranked
+        SELECT *, row_number() OVER (PARTITION BY place_id ORDER BY score DESC, review_id) AS rn FROM fused
     )
-    SELECT t.place_id, t.review_id, t.rank, r.date, r.stars, r.useful,
-           ts_headline('{TEXT_CONFIG}', r.text, tq.q, '{HEADLINE}') AS snippet
-    FROM top t JOIN yelp_review r USING (review_id), tq
+    SELECT t.place_id, t.review_id, t.score, r.date, r.stars, r.useful,
+           ts_headline('{TEXT_CONFIG}', r.text, tq.q, '{HEADLINE}') AS snippet,
+           {"1 - (e.embedding <=> %(qvec)s::vector)" if mode != "lexical" else "NULL::float"} AS similarity
+    FROM top t JOIN yelp_review r USING (review_id)
+    {"LEFT JOIN review_embedding e ON e.review_id = t.review_id AND e.model = %(emodel)s" if mode != "lexical" else ""}, tq
     WHERE t.rn <= %(k)s
     ORDER BY t.place_id, t.rn"""
 
 
-def load_excerpts(conn, place_ids: list[int], text: str, k: int, aspect_run_id: int | None) -> dict[int, list[dict]]:
-    """Matching review passages per place, each with the aspect scores Jev gave that review (a level only where it was mentioned)."""
-    if not place_ids or not text or k <= 0:
+def load_excerpts(conn, place_ids: list[int], tq: TableQuery, aspect_run_id: int | None) -> dict[int, list[dict]]:
+    """Matching review passages per place (tq.text, tq.mode, tq.excerpts), each with the aspect scores Jev gave that review
+    (a level only where it was mentioned). Passages are ranked by the same fusion as the search, over these places only."""
+    k = tq.excerpts
+    if not place_ids or not tq.text or k <= 0:
         return {}
-    rows = conn.execute(excerpts_sql(), {"text": text.strip(), "place_ids": place_ids, "k": k}).fetchall()
+    _check(tq)
+    rows = conn.execute(excerpts_sql(tq.mode), {**retrieval_params(tq), "place_ids": place_ids, "k": k}).fetchall()
     scores: dict[str, dict[str, dict]] = {}
     if aspect_run_id is not None and rows:
         for s in conn.execute(
@@ -173,7 +244,8 @@ def load_excerpts(conn, place_ids: list[int], text: str, k: int, aspect_run_id: 
     for r in rows:
         out.setdefault(r["place_id"], []).append({
             "review_id": r["review_id"], "date": r["date"].isoformat(), "stars": r["stars"], "useful": r["useful"],
-            "snippet": r["snippet"], "match": round(r["rank"], 4), "aspects": scores.get(r["review_id"], {}),
+            "snippet": r["snippet"], "match": round(r["score"], 4), "similarity": None if r["similarity"] is None else round(r["similarity"], 3),
+            "aspects": scores.get(r["review_id"], {}),
         })
     return out
 

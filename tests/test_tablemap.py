@@ -210,7 +210,7 @@ LEXICAL = [
 LEXICAL_MISSES = [
     ("al fresco", {"Quokka Table", "Heron Bar"}),
     ("inexpensive", {"Newt Noodles"}),
-]
+]  # lexical mode only: the dense and hybrid modes below are the answer to these
 
 
 @needs_db
@@ -226,7 +226,7 @@ def test_lexical_retrieval_eval(world):
 
 
 @needs_db
-def test_known_lexical_misses_are_recorded_not_hidden(world):
+def test_known_lexical_misses_are_recorded_not_hidden(world):  # the lexical ranker alone; see the dense tests for the fix
     conn, _ = world
     for q, relevant in LEXICAL_MISSES:
         assert set(names(conn, TableQuery(text=q))) & relevant == set(), f"{q!r} now finds results: update the eval and the decision record"
@@ -276,7 +276,7 @@ def http(world):
 @needs_db
 def test_every_response_and_every_rated_place_says_provisional(http):
     client, ids = http
-    r = client.get("/tablemap/search", params={**NEAR, "excerpts": 0}).json()
+    r = client.get("/tablemap/search", params={**NEAR, "excerpts": 0, "mode": "lexical"}).json()
     assert r["status"] == "provisional" and "PROVISIONAL" in r["banner"] and r["basis"]["weights_version"] == "w1"
     assert r["basis"]["reviews_through"] and "Yelp Open Dataset" in " ".join(r["attribution"])
     rated = [i for i in r["items"] if i["reviews"]]
@@ -296,7 +296,7 @@ def test_every_response_and_every_rated_place_says_provisional(http):
 @needs_db
 def test_excerpts_carry_the_matching_passage_and_per_review_aspect_scores(http):
     client, _ = http
-    r = client.get("/tablemap/search", params={**NEAR, "text": "patio", "excerpts": 2}).json()
+    r = client.get("/tablemap/search", params={**NEAR, "text": "patio", "excerpts": 2, "mode": "lexical"}).json()
     assert [i["name"] for i in r["items"]] == ["Quokka Table"]
     ex = r["items"][0]["excerpts"]
     assert len(ex) == 2 and r["items"][0]["text_match"]["n_reviews"] == 2
@@ -310,7 +310,7 @@ def test_excerpts_carry_the_matching_passage_and_per_review_aspect_scores(http):
 @needs_db
 def test_detail_endpoint_with_text_and_404(http):
     client, ids = http
-    d = client.get(f"/tablemap/places/{ids['Marmot Kitchen']}", params={"text": "overpriced", "excerpts": 3}).json()
+    d = client.get(f"/tablemap/places/{ids['Marmot Kitchen']}", params={"text": "overpriced", "excerpts": 3, "mode": "lexical"}).json()
     assert [e["review_id"] for e in d["excerpts"]] == ["zz-rev-1-1"] and d["excerpts"][0]["aspects"]["value"]["level"] == 0.0
     assert client.get("/tablemap/places/999999999").status_code == 404
     assert client.get(f"/tablemap/places/{ids['Walrus Diner']}").json()["reviews"] is None
@@ -322,5 +322,197 @@ def test_http_rejects_bad_requests_without_a_server_error(http):
     for params in ({"rank_by": "text"}, {"excerpts": 2}, {"min_food": 1.5}, {"rank_by": "stars"}, {"excerpts": 9, "text": "x"}, {"text": "a" * 300},
                    {"min_by": "median"}, {"sort": "distance"}):
         assert client.get("/tablemap/search", params=params).status_code == 422, params
-    assert client.get("/tablemap/search", params={"text": "x'); DROP TABLE yelp_review; --", **NEAR}).status_code == 200
-    assert client.get("/tablemap/search", params={"text": "the and of", **NEAR}).json()["items"] == []  # all stopwords match nothing
+    assert client.get("/tablemap/search", params={"text": "x'); DROP TABLE yelp_review; --", "mode": "lexical", **NEAR}).status_code == 200
+    assert client.get("/tablemap/search", params={"text": "the and of", "mode": "lexical", **NEAR}).json()["items"] == []  # all stopwords match nothing
+
+
+# ---- dense and hybrid retrieval ------------------------------------------------------------------------------------------
+from streetwalker import embeddings
+
+CONCEPTS = {  # a hand-made "embedding": words of one concept share a dimension, so synonyms are close and unrelated words are not
+    "outdoor": {"patio", "terrace", "rooftop", "alfresco", "outdoors", "outside"},
+    "cheap": {"cheap", "inexpensive", "bargain", "filling", "affordable"},
+    "noodles": {"ramen", "noodles", "broth"},
+    "baked": {"sourdough", "croissants", "pastries", "bakery"},
+    "service": {"staff", "bartender", "service", "check", "waited"},
+}
+
+
+def fake_vec(text: str) -> list[float]:
+    import re
+
+    words = re.findall(r"[a-z]+", text.lower().replace("al fresco", "alfresco"))
+    v = [0.0] * embeddings.DIM
+    for i, (_, ws) in enumerate(CONCEPTS.items()):
+        v[i] = float(sum(w in ws for w in words))
+    for w in words:  # a faint signature of every other word, so unrelated texts are not identical
+        v[10 + sum(map(ord, w)) % 700] += 0.05
+    norm = sum(x * x for x in v) ** 0.5 or 1.0
+    return [x / norm for x in v]
+
+
+def embed_world(conn, embed_fn, model: str) -> None:
+    for i, (_, (_, linked, reviews, _)) in enumerate(WORLD.items()):
+        if linked:
+            for j, (_, text, _) in enumerate(reviews):
+                conn.execute("INSERT INTO review_embedding (review_id, model, embedding) VALUES (%s, %s, %s::vector)",
+                             (f"zz-rev-{i}-{j}", model, embeddings.vec_literal(embed_fn([text], "document")[0])))
+
+
+@pytest.fixture
+def fake_world(world, monkeypatch):
+    conn, ids = world
+    embed_world(conn, lambda texts, kind: [fake_vec(t) for t in texts], "fake@test")
+    monkeypatch.setattr(tablemap_api, "model_id", lambda: "fake@test")
+    monkeypatch.setattr(tablemap_api, "embed", lambda texts, kind: [fake_vec(t) for t in texts])
+    return conn, ids
+
+
+def get_http(conn):
+    from streetwalker import deps
+
+    app = FastAPI()
+    app.include_router(tablemap_api.router)
+    app.dependency_overrides[deps.get_conn] = lambda: conn
+    return TestClient(app)
+
+
+def search_names(client, **params) -> list[str]:
+    r = client.get("/tablemap/search", params={**NEAR, **params})
+    assert r.status_code == 200, r.text
+    return [i["name"] for i in r.json()["items"]]
+
+
+@needs_db
+def test_dense_mode_finds_a_synonym_that_lexical_misses(fake_world):
+    client = get_http(fake_world[0])
+    assert search_names(client, text="al fresco", mode="lexical") == []
+    assert set(search_names(client, text="al fresco", mode="dense", min_similarity=0.5)) == {"Quokka Table", "Heron Bar"}
+    assert search_names(client, text="inexpensive", mode="dense", min_similarity=0.5) == ["Newt Noodles"]
+
+
+@needs_db
+def test_hybrid_ranks_a_place_both_rankers_agree_on_first(fake_world):
+    client = get_http(fake_world[0])
+    got = search_names(client, text="patio", mode="hybrid", min_similarity=0.5)
+    assert got[0] == "Quokka Table" and "Heron Bar" in got  # Quokka says "patio" and means it; Heron only means it
+    lex = search_names(client, text="patio", mode="lexical")
+    assert lex == ["Quokka Table"]
+
+
+@needs_db
+def test_dense_search_stays_inside_the_filters_and_a_floor_removes_weak_matches(fake_world):
+    client = get_http(fake_world[0])
+    assert search_names(client, text="patio", mode="dense", min_similarity=0.5, kind="bar") == ["Heron Bar"]
+    assert search_names(client, text="patio", mode="dense", min_similarity=0.5, kind="restaurant") == []  # no outdoor review among them
+    # with no floor the closest reviews are returned whatever their similarity, so every place with a review turns up
+    assert len(search_names(client, text="patio", mode="dense")) == 5
+
+
+@needs_db
+def test_exclusions_hold_for_dense_candidates_too(fake_world):
+    client = get_http(fake_world[0])
+    assert "Quokka Table" in search_names(client, text="patio", mode="dense", min_similarity=0.5)
+    assert search_names(client, text="outdoors -patio", mode="dense", min_similarity=0.5) == ["Heron Bar"]  # Quokka's reviews say patio
+
+
+@needs_db
+def test_dense_excerpts_carry_similarity_and_the_fused_score(fake_world):
+    client = get_http(fake_world[0])
+    r = client.get("/tablemap/search", params={**NEAR, "text": "al fresco", "mode": "dense", "min_similarity": 0.5, "excerpts": 2}).json()
+    assert r["retrieval"]["mode"] == "dense" and r["retrieval"]["embedding_model"] == "fake@test" and r["retrieval"]["embedded_reviews"] == 11
+    ex = [e for i in r["items"] for e in i["excerpts"]]
+    assert ex and all(e["similarity"] is not None and e["similarity"] >= 0.5 and e["match"] > 0 for e in ex)
+    lex = client.get("/tablemap/search", params={**NEAR, "text": "patio", "mode": "lexical", "excerpts": 1}).json()
+    assert lex["items"][0]["excerpts"][0]["similarity"] is None
+
+
+@needs_db
+def test_the_detail_endpoint_takes_a_mode_too(fake_world):
+    conn, ids = fake_world
+    client = get_http(conn)
+    d = client.get(f"/tablemap/places/{ids['Heron Bar']}", params={"text": "al fresco", "mode": "dense", "min_similarity": 0.5, "excerpts": 3}).json()
+    assert [e["review_id"] for e in d["excerpts"]] == ["zz-rev-2-0"] and d["retrieval"]["mode"] == "dense"
+
+
+@needs_db
+def test_dense_modes_say_503_when_the_embedding_server_is_down_and_422_for_operator_only_text(fake_world, monkeypatch):
+    client = get_http(fake_world[0])
+
+    def down(*a, **k):
+        raise embeddings.EmbeddingUnavailable("no server")
+
+    monkeypatch.setattr(tablemap_api, "model_id", down)
+    r = client.get("/tablemap/search", params={**NEAR, "text": "patio", "mode": "hybrid"})
+    assert r.status_code == 503 and "mode=lexical" in r.json()["detail"]
+    assert client.get("/tablemap/search", params={**NEAR, "text": "patio", "mode": "lexical"}).status_code == 200  # lexical needs no server
+    monkeypatch.undo()
+    assert client.get("/tablemap/search", params={**NEAR, "text": "-patio", "mode": "dense"}).status_code == 422
+
+
+def test_embedding_helpers():
+    assert embeddings.dense_text('"cold brew" -patio or terrace') == "cold brew terrace"
+    assert embeddings.dense_text("-patio") == ""
+    from streetwalker.tablemap import exclusions
+
+    assert exclusions("brunch -patio -loud") == "patio or loud" and exclusions("brunch") is None and exclusions("well-known place") is None
+    assert embeddings.vec_literal([0.5, -1.0]) == "[0.5,-1]"
+    for bad in (TableQuery(text="x", mode="dense"), TableQuery(text="x", mode="telepathy"), TableQuery(min_similarity=3.0), TableQuery(dense_k=0)):
+        with pytest.raises(BadQuery):
+            build(bad)
+
+
+# ---- the real embedding model, on the invented reviews -------------------------------------------------------------------
+
+def _ollama_ready() -> bool:
+    try:
+        embeddings.model_id()
+        return True
+    except embeddings.EmbeddingUnavailable:
+        return False
+
+
+needs_ollama = pytest.mark.skipif(not _ollama_ready(), reason="needs Ollama with nomic-embed-text")
+
+
+# Queries with the places a person would call relevant, from the invented reviews. Several were looked at while the dense mode was
+# being built, so this is a regression guard with a measured floor, not an unbiased estimate of quality.
+EVAL = {
+    "patio": {"Quokka Table"}, "terrace": {"Heron Bar"}, "ramen noodles": {"Newt Noodles"}, "gluten free": {"Newt Noodles"},
+    "al fresco": {"Quokka Table", "Heron Bar"}, "outdoor seating": {"Quokka Table", "Heron Bar"}, "inexpensive": {"Newt Noodles"},
+    "cheap eats": {"Newt Noodles"}, "allergy friendly": {"Newt Noodles"}, "slow service": {"Quokka Table"},
+    "good pastries": {"Quokka Table", "Ibex Bakery"}, "lamb dinner": {"Marmot Kitchen"}, "great cocktails": {"Heron Bar"},
+}
+
+
+def _scores(conn, mode: str, model: str) -> tuple[float, float]:
+    recall, mrr = [], []
+    for q, relevant in EVAL.items():
+        tq = TableQuery(PlaceQuery(lat=HERE[0], lng=HERE[1], radius_m=500, limit=50), text=q, mode=mode)
+        if mode != "lexical":
+            tq.query_vec, tq.embed_model = embeddings.embed([embeddings.dense_text(q)], "query")[0], model
+        sql, params = build(tq)
+        got = [r["name"] for r in conn.execute(sql, params).fetchall()]
+        recall.append(len(set(got[:3]) & relevant) / len(relevant))
+        mrr.append(next((1 / (i + 1) for i, n in enumerate(got) if n in relevant), 0.0))
+    return sum(recall) / len(recall), sum(mrr) / len(mrr)
+
+
+@needs_db
+@needs_ollama
+def test_real_embedding_model_retrieval_eval_on_invented_reviews(world):
+    conn, _ = world
+    model = embeddings.model_id()
+    embed_world(conn, embeddings.embed, model)
+    lex_recall, _ = _scores(conn, "lexical", model)
+    dense_recall, dense_mrr = _scores(conn, "dense", model)
+    hyb_recall, hyb_mrr = _scores(conn, "hybrid", model)
+    # measured when written: lexical recall@3 0.38, dense 0.85 (MRR 0.64), hybrid 0.85 (MRR 0.81); floors leave a margin for model drift
+    assert lex_recall < 0.5 and dense_recall >= 0.75 and hyb_recall >= 0.75
+    assert hyb_mrr >= 0.7 and hyb_mrr >= dense_mrr  # fusing the lexical rank does not make the ranking worse than dense alone
+    # the synonym queries lexical missed now put the right places on top
+    for q in ("al fresco", "outdoor seating"):
+        tq = TableQuery(PlaceQuery(lat=HERE[0], lng=HERE[1], radius_m=500), text=q, mode="hybrid",
+                        query_vec=embeddings.embed([q], "query")[0], embed_model=model)
+        sql, params = build(tq)
+        assert {r["name"] for r in conn.execute(sql, params).fetchall()[:2]} == EVAL[q]
