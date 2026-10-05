@@ -47,8 +47,8 @@ SELECT = """
            p.nearest_stop_name, p.nearest_stop_m, p.nearest_rail_name, p.nearest_rail_m, p.stops_400m, p.routes_400m,
            p.modes_400m, p.weekday_trips_400m, p.licence_name, p.licence_type, p.match_basis, p.match_score, p.kind_jev,
            p.kind_jev_conf,
-           {distance} AS distance_m, {score} AS score, count(*) OVER () AS total
-    FROM place p JOIN area a ON a.id = p.area_id
+           {distance} AS distance_m, {score} AS score{extra}, count(*) OVER () AS total
+    FROM place p JOIN area a ON a.id = p.area_id{joins}
 """
 
 
@@ -56,8 +56,19 @@ def _like(text: str) -> str:
     return "%" + text.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
 
 
-def build(q: PlaceQuery) -> tuple[str, dict]:
-    """Return (sql, params). Raises BadQuery for combinations that cannot be answered."""
+@dataclass
+class Parts:
+    """The pieces of a place query, so another query (the TableMap search, decision 0023) can add joins and columns around them."""
+
+    where: list[str]
+    params: dict
+    distance: str  # SQL expression, NULL when there is no point
+    score: str  # SQL expression, NULL when there is no text
+    sort: str
+
+
+def parts(q: PlaceQuery) -> Parts:
+    """Validate the filters and return their SQL pieces. Raises BadQuery for combinations that cannot be answered."""
     if (q.lat is None) != (q.lng is None):
         raise BadQuery("lat and lng go together")
     if q.radius_m is not None and q.lat is None:
@@ -129,8 +140,14 @@ def build(q: PlaceQuery) -> tuple[str, dict]:
     else:
         distance = "NULL::float"
 
-    sql = SELECT.format(distance=distance, score=score)
-    if where:
-        sql += "    WHERE " + "\n      AND ".join(where) + "\n"
-    sql += f"    ORDER BY {SORTS[sort]}\n    LIMIT %(limit)s OFFSET %(offset)s"
-    return sql, params
+    return Parts(where, params, distance, score, sort)
+
+
+def build(q: PlaceQuery) -> tuple[str, dict]:
+    """Return (sql, params). Raises BadQuery for combinations that cannot be answered."""
+    pt = parts(q)
+    sql = SELECT.format(distance=pt.distance, score=pt.score, extra="", joins="")
+    if pt.where:
+        sql += "    WHERE " + "\n      AND ".join(pt.where) + "\n"
+    sql += f"    ORDER BY {SORTS[pt.sort]}\n    LIMIT %(limit)s OFFSET %(offset)s"
+    return sql, pt.params

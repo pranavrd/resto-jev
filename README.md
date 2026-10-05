@@ -2,7 +2,7 @@
 
 A deterministic street survey of three Philadelphia areas. Each building is classified (residential, commercial, restaurant, cafe, and so on) with Jev decisions over OSM tags and geometry, escalating to street imagery and a local vision model only when confidence is low. Its restaurant universe feeds TableMap, a ranking and review-chat layer.
 
-Status: the survey, census, search API, map UI and escalation cascade are built (decisions 0002 to 0018). The Yelp half has not started. Tier 0 (Jev plus a calibrated stacker) labels 88% of buildings correctly, a confidence gate picks which to escalate, and a human queue handles the rest; the imagery and local-LLM tiers were measured and do not help (decision 0018).
+Status: the survey, census, search API, map UI and escalation cascade are built (decisions 0002 to 0018), and the Yelp half is built privately (decisions 0019 to 0023: place links, reviews, provisional aspect ratings, a local search layer; no chat yet). Tier 0 (Jev plus a calibrated stacker) labels 88% of buildings correctly, a confidence gate picks which to escalate, and a human queue handles the rest; the imagery and local-LLM tiers were measured and do not help (decision 0018).
 
 ## Data policy
 
@@ -76,6 +76,14 @@ Census places are linked to Yelp Open Dataset businesses by name, address and bu
 Reviews of the linked places are loaded locally and scored on four aspects (food, atmosphere, service, value) with Jev ([decision 0020](docs/decisions/0020-reviews-and-aspect-scoring.md)). The scores are plausible but **not yet validated against human labels**, and they stay private like the rest.
 
 A labelling page (`#/label`) exists, but **no human labels will be collected** (10 of a planned 180 were done and the owner decided to stop), so the aspect scores are **not validated against people**. They were instead tested on invented reviews with the truth known by construction ([decision 0022](docs/decisions/0022-validating-aspect-scoring-without-labels.md); the test set and its results are in `docs/probe/` and can be shared): clear cases, mentions and levels are handled well, aspects do not leak into each other, there is a small halo from the reviewer's overall verdict, and implicit mentions of value and atmosphere are under-detected. The rating built on the scores is **provisional** and is not presented as a ranking result ([decision 0021](docs/decisions/0021-aspect-labels-and-provisional-rating.md)).
+
+## TableMap search (private, provisional)
+
+A local-only router searches the census together with the provisional aspect ratings and the review text: the `/places` filters, a minimum per aspect (on the mean or the 95% lower bound), and full-text review search with matching passages ([decision 0023](docs/decisions/0023-tablemap-retrieval.md)). It is mounted only when `STREETWALKER_TABLEMAP=1`, so the default API and the map UI stay Yelp-free. Everything it returns says `provisional`, and a sort by a rating is opt-in. Retrieval is lexical (no embeddings yet), and its tests run on invented data.
+
+```bash
+STREETWALKER_TABLEMAP=1 .venv/bin/uvicorn streetwalker.api:app --port 8000   # then /docs, section "tablemap"
+```
 
 ## Attribution
 

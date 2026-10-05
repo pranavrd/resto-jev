@@ -55,3 +55,10 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [ ] Dropped for lack of labels: baseline model vs Jev on human labels; the building ground-truth check and human review time
 - [ ] Confirm which agreement version Yelp showed at the 2026-10-03 download (0001); the Data's term ends 2027-10-03
 
+
+## TableMap search and chat (decision 0023)
+- [x] Hybrid retrieval over `place`: census filters + aspect thresholds + full-text review search with passages, in one query (`tablemap.py`, router behind `STREETWALKER_TABLEMAP=1`, default app stays Yelp-free)
+- [x] Retrieval eval on invented data, known synonym misses recorded as tests (15 new tests)
+- [ ] Dense review embeddings (needs the owner's approval for an embedding-model download) and fusion with the lexical rank
+- [ ] Chat over the provisional aspect data (open: which language model and key; review text to a hosted model rests on the owner's reading, decision 0001)
+- [ ] Evals in CI (no CI exists yet; the retrieval eval is self-contained)

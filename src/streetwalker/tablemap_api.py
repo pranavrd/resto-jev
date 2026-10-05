@@ -1,0 +1,107 @@
+"""TableMap endpoints: search over places, aspect ratings and review text (decision 0023).
+
+PRIVATE and LOCAL. These endpoints return Yelp-derived content (review passages, aspect scores, a rating), so api.py mounts
+them only when STREETWALKER_TABLEMAP=1 and the default app stays Yelp-free. They are read-only and have no login: do not
+expose this port.
+
+PROVISIONAL. The ratings are the provisional ones of decision 0021 (aspect scores from an LLM, tested on constructed cases,
+not validated against people). Every response says so, and every rated place repeats it.
+"""
+
+from typing import Annotated, Literal
+
+from fastapi import APIRouter, HTTPException, Query
+
+from streetwalker.api_common import ATTRIBUTION, Filters, to_place
+from streetwalker.deps import Conn
+from streetwalker.rating import BANNER
+from streetwalker.search import BadQuery, PlaceQuery
+from streetwalker.tablemap import (
+    MAX_EXCERPTS,
+    MAX_TEXT,
+    TableQuery,
+    build,
+    load_excerpts,
+    shape_rating,
+)
+
+router = APIRouter(prefix="/tablemap", tags=["tablemap (private, provisional)"])
+
+YELP_NOTICE = (
+    "Review text and the scores derived from it come from the Yelp Open Dataset (Philadelphia, snapshot to January 2022). "
+    "Private, local use only; not for display or redistribution (decision 0001)."
+)
+
+
+def envelope(conn, first_row: dict | None) -> dict:
+    """What every response states up front: the status, how the numbers were made, and how old the reviews are."""
+    through = conn.execute("SELECT max(date) AS d FROM yelp_review").fetchone()["d"]
+    return {
+        "status": "provisional",
+        "banner": BANNER,
+        "basis": {
+            "rating_run": first_row and first_row["rating_run"], "aspect_run": first_row and first_row["aspect_run_id"],
+            "weights_version": first_row and first_row["weights_version"], "reviews_through": through and through.isoformat(),
+            "aspect_scale": "0 to 1 posterior mean; 0.5 is the middle level (mixed or flat), 0.75 is mostly good",
+        },
+    }
+
+
+def item(row: dict, excerpts: dict[int, list[dict]]) -> dict:
+    return {**to_place(row), "reviews": shape_rating(row), "text_match": None if row["n_hits"] is None else {"n_reviews": row["n_hits"], "score": round(row["text_score"], 3)},
+            "excerpts": excerpts.get(row["id"], [])}
+
+
+def run(conn, tq: TableQuery) -> tuple[list[dict], int, dict]:
+    try:
+        sql, params = build(tq)
+    except BadQuery as e:
+        raise HTTPException(422, str(e)) from e
+    rows = conn.execute(sql, params).fetchall()
+    first = rows[0] if rows else None
+    if first is None:  # an empty page still reports the basis
+        first = conn.execute("SELECT id AS rating_run, aspect_run_id, weights_version FROM rating_run ORDER BY id DESC LIMIT 1").fetchone()
+    ex = load_excerpts(conn, [r["id"] for r in rows], tq.text, tq.excerpts, first and first["aspect_run_id"]) if tq.excerpts else {}
+    return [item(r, ex) for r in rows], (rows[0]["total"] if rows else 0), envelope(conn, first)
+
+
+@router.get("/search")
+def search(
+    conn: Conn,
+    pq: Filters,
+    text: Annotated[str | None, Query(max_length=MAX_TEXT, description='Only places with a review matching this: words, "a phrase", -excluded, or')] = None,
+    min_food: Annotated[float | None, Query(ge=0, le=1)] = None,
+    min_atmosphere: Annotated[float | None, Query(ge=0, le=1)] = None,
+    min_service: Annotated[float | None, Query(ge=0, le=1)] = None,
+    min_value: Annotated[float | None, Query(ge=0, le=1)] = None,
+    min_by: Annotated[Literal["mean", "lower"], Query(description="Compare the posterior mean, or its 95% lower bound (confidently at least this good)")] = "mean",
+    min_reviews: Annotated[int | None, Query(ge=1)] = None,
+    reviewed_only: Annotated[bool, Query(description="Drop places with no linked reviews")] = False,
+    rank_by: Annotated[Literal["text", "composite", "food", "atmosphere", "service", "value"] | None, Query(description="Opt-in sort by a PROVISIONAL score; replaces `sort`")] = None,
+    excerpts: Annotated[int, Query(ge=0, le=MAX_EXCERPTS, description="Matching review passages per place (needs text)")] = 0,
+) -> dict:
+    """Places, filtered by the census filters of /places plus aspect thresholds and review text. Aspect and text results are provisional."""
+    mins = {a: v for a, v in {"food": min_food, "atmosphere": min_atmosphere, "service": min_service, "value": min_value}.items() if v is not None}
+    tq = TableQuery(pq, text, mins, min_by, min_reviews, reviewed_only, rank_by, excerpts)
+    items, total, env = run(conn, tq)
+    return {**env, "total": total, "limit": pq.limit, "offset": pq.offset, "items": items, "attribution": [*ATTRIBUTION, YELP_NOTICE]}
+
+
+@router.get("/places/{place_id}")
+def place_detail(
+    place_id: int,
+    conn: Conn,
+    text: Annotated[str | None, Query(max_length=MAX_TEXT, description="Show review passages matching this")] = None,
+    excerpts: Annotated[int, Query(ge=0, le=MAX_EXCERPTS)] = 3,
+) -> dict:
+    """One place with its aspect posteriors and, when text is given, the review passages that match it."""
+    items, _, env = run(conn, TableQuery(PlaceQuery(place_id=place_id)))
+    if not items:
+        raise HTTPException(404, "no such place")
+    out = items[0]
+    if text and excerpts:
+        if not text.strip():
+            raise HTTPException(422, "text must not be empty")
+        aspect_run = env["basis"]["aspect_run"]
+        out["excerpts"] = load_excerpts(conn, [place_id], text, excerpts, aspect_run).get(place_id, [])
+    return {**env, **out, "attribution": [*ATTRIBUTION, YELP_NOTICE]}
