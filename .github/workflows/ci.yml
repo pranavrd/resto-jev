@@ -1,0 +1,68 @@
+# CI for StreetWalker / TableMap (decision 0030). Runs on invented fixtures and committed run files only: no Yelp data, no secrets, no model server.
+# What cannot run here (anything that needs Ollama or the real database) is listed in docs/ci.md, with the commands to run it locally.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Nothing that must stay local is tracked
+        run: |
+          bad=$(git ls-files | grep -E '^(data/|docs/private/|\.env$)' | grep -v '^data/\.gitkeep$' || true)
+          if [ -n "$bad" ]; then echo "tracked files that must stay local:"; echo "$bad"; exit 1; fi
+
+      - name: Start Postgres (PostGIS, pgvector, pg_trgm) from db/Dockerfile
+        run: |
+          cp .env.example .env
+          docker compose up -d --build --wait db
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install
+        run: pip install -e . pytest ruff httpx matplotlib
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Apply every migration to the empty database
+        run: python -c "from streetwalker import db; c = db.connect(); db.migrate(c); print('migrated')"
+
+      - name: Tests and evals (invented data, scripted models, saved runs)
+        run: pytest -q -rs
+
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npx vitest run
+      - run: npm run build

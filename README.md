@@ -88,6 +88,10 @@ ollama pull nomic-embed-text && ollama pull qwen2.5:7b && .venv/bin/python -m st
 STREETWALKER_TABLEMAP=1 .venv/bin/uvicorn streetwalker.api:app --port 8000          # then /docs, section "tablemap"
 ```
 
+## Continuous integration
+
+`.github/workflows/ci.yml` runs lint, the web checks and the Python suite (about 340 tests, including the retrieval evals and a test that recomputes every published figure from the committed run files) on invented data only. What needs a model or the real database stays local: see [docs/ci.md](docs/ci.md) and [decision 0030](docs/decisions/0030-ci.md). It has not run on GitHub yet (no remote).
+
 ## Attribution
 
 Map data © OpenStreetMap contributors (ODbL). Business licenses and land use: City of Philadelphia via OpenDataPhilly. Transit: SEPTA GTFS. Neighborhood boundaries: OpenDataPhilly, CC BY 4.0, Robert Cheetham / Azavea. Street imagery: Mapillary, CC BY-SA 4.0.

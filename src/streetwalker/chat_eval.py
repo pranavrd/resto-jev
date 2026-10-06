@@ -43,6 +43,19 @@ def score(plan, exp: dict, question: str) -> dict[str, bool]:
     return ok
 
 
+def rescore_run(run: dict) -> tuple[int, int]:
+    """(fully correct, total) for a saved run, recomputed with the current scorer from the plans it stored. No model is called."""
+    from streetwalker.chat import Plan
+
+    questions = {q["q"]: q for q in json.loads(SETS[run["set"]].read_text())["questions"]}
+    good = 0
+    for r in run["rows"]:
+        p = r["plan"]
+        plan = Plan(in_scope=p["in_scope"], topic=p["topic"], kinds=p["kinds"], area=p["area"], levels={a: p[a] for a in ASPECTS}, near_rail=p["near_rail"], sort=p["sort"])
+        good += all(score(plan, questions[r["q"]], r["q"]).values())
+    return good, len(run["rows"])
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model")
@@ -50,8 +63,13 @@ def main() -> None:
     ap.add_argument("--set", choices=list(SETS), default="v1", dest="qset", help="v1 is the first question set; v2 is the fresh one (decision 0029)")
     ap.add_argument("--planner", choices=list(PLANNERS), default=PLAN_VERSION)
     ap.add_argument("--save", type=Path)
+    ap.add_argument("--rescore", type=Path, help="recompute a saved run's fully-correct count with the current scorer, without a model")
     ap.add_argument("--show-misses", action="store_true")
     args = ap.parse_args()
+    if args.rescore:
+        good, n = rescore_run(json.loads(args.rescore.read_text()))
+        print(f"{good}/{n} fully correct (recomputed)")
+        return
     qs = [q for q in json.loads(SETS[args.qset].read_text())["questions"] if q["split"] == args.split]
     backend = OllamaChat(args.model)
     per_field: dict[str, list[bool]] = {}

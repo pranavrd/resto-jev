@@ -19,7 +19,7 @@ Fresh set v2 (`plan_questions_v2.json`, 32 dev + 32 test, written before any pla
 | Run | Fully correct |
 |---|---|
 | p1 on v2 dev | 18/32 |
-| p2, first draft (new prompt and examples, three guards on aspects and topic) on v2 dev | 23/32 |
+| p2, first draft (new prompt and examples, three guards on aspects and topic) on v2 dev | 23/32 (24/32 under scorer v2; the run predates the scorer fix) |
 | p2, second version (the model decides scope and topic; kinds, area, rail, aspect levels and sort are read off the question by rule) on v2 dev | 32/32 |
 
 **The 32/32 is not an estimate**: the rules were written from the dev misses. A second caution: the word lists (quality words, kinds, rail words) were written with the whole v2 set in view, test half included ("friendliest", "outstanding", "outstanding" among them), so the v2 test half is **not fully blind for the vocabulary**.
