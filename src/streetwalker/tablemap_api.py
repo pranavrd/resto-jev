@@ -143,8 +143,17 @@ def place_detail(
     return {**env, **out, "attribution": [*ATTRIBUTION, YELP_NOTICE]}
 
 
+class TurnIn(BaseModel):
+    """One earlier turn, as the previous response's `turn` field gave it. The client keeps the conversation; the server keeps nothing."""
+
+    question: str = Field(default="", max_length=chat_mod.MAX_QUESTION * 2)
+    searched_for: str = Field(default="", max_length=400)
+    places: list[Annotated[str, Field(max_length=120)]] = Field(default_factory=list, max_length=8)
+
+
 class Ask(BaseModel):
     question: str = Field(min_length=1, max_length=chat_mod.MAX_QUESTION)
+    history: list[TurnIn] = Field(default_factory=list, max_length=10, description="Earlier turns, oldest first, each as returned in `turn`; the last three are used")
     style: Literal["summary", "quotes"] = Field(
         default="summary", description="summary: a model-written sentence per place plus quotes (writer w3). quotes: verbatim quotes only, no model-written text, about three times faster (w4)")
 
@@ -156,10 +165,12 @@ def get_chat_backend() -> chat_mod.ChatBackend:
 
 @router.post("/chat")
 def chat(body: Ask, conn: Conn, backend: Annotated[chat_mod.ChatBackend, Depends(get_chat_backend)]) -> dict:
-    """Ask a question about the places and their reviews. One question, one answer: there is no conversation memory. The answer says
+    """Ask a question about the places and their reviews. The server keeps no conversation: for a follow-up the client sends the earlier turns in
+    `history` (each the `turn` of an earlier response), and the message is rewritten into a standalone question first (decision 0031). The answer says
     what search it ran, shows verbatim quotes, and always carries the provisional caveat. Review text goes only to the local model."""
     try:
-        out = chat_mod.answer(conn, backend, body.question, run, "w4" if body.style == "quotes" else None)
+        history = [chat_mod.Turn(t.question, t.searched_for, list(t.places)) for t in body.history]
+        out = chat_mod.answer(conn, backend, body.question, run, "w4" if body.style == "quotes" else None, history=history)
     except chat_mod.ChatUnavailable as e:
         raise HTTPException(503, f"{e}. Start Ollama and pull the model, or use /tablemap/search.") from e
     except chat_mod.ChatBadOutput as e:

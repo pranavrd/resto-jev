@@ -12,6 +12,18 @@ Search and filter the restaurant census and see each place's SEPTA access. Needs
 - Text search zooms to its results. Slow answers cannot overwrite newer ones (in-flight requests are aborted).
 - No Yelp data or fields (decision 0017).
 
+## Chat (`#/chat`)
+
+Ask questions about the places and what reviewers said, and follow up ("what about in Roxborough?", "only the cheap ones"). Private and local: it needs the TableMap router and a local model (decisions 0023 to 0031).
+
+```bash
+STREETWALKER_TABLEMAP=1 .venv/bin/uvicorn streetwalker.api:app --port 8000     # note the flag; Ollama must be running with qwen2.5:7b and nomic-embed-text
+```
+
+- A provisional banner is always on top. Each answer shows how a follow-up was understood, what was searched, place cards (model-written summaries labelled unchecked, verbatim quotes, provisional rating words), what the search returned but the check did not accept, and the caveat.
+- **Summaries** or **Quotes only** (faster, no model-written text), Cancel while waiting, Try again after an error, New chat. Answers take 10 to 60 seconds.
+- All server text is rendered as text, never HTML. The conversation lives in the page only.
+
 ## Review queue (`#/review`)
 
 The human tier of the cascade (decision 0018): label what a building is used for, from a plan of its surroundings and a street photo. It writes labels to Postgres, so the endpoints are opt-in:

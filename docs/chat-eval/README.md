@@ -28,3 +28,7 @@ Tune the planner prompt on `dev` only. `test` is run once, at the end, and logge
 ## Set v3 (written after planner p2 was frozen)
 
 `plan_questions_v3.json`: 32 questions, all held out (split "test"), written **after** planner p2 was frozen (the hash is in `log.md`), in natural wording and without consulting p2's word lists; a number of them are deliberately outside them ("terrific staff", "Broad Street Line", "cheapest", "doesn't cost a fortune"). Same fields, rules and scorer v2 as set v2. Read once for p1 and once for p2.
+
+## Follow-ups (multi-turn), `followups_v1.json`
+
+32 invented one-turn histories with a follow-up message (16 dev, 16 test), written **before the follow-up rewrite was built or run** (decision 0031). Each has the earlier question, what was searched, and the places shown (invented names), then the new message, which of `followup` true or false is acceptable, and the plan expected for the question the message means (same fields and scorer as the planner sets). Types: a change of area, kind or topic ("what about in Roxborough?", "and bakeries?"), a narrowing ("only the cheap ones", "with great service too"), a reference to the results ("which one is best?", "which of those take reservations?", "tell me about Aroma Corner"), a bare place name, and controls that are NOT follow-ups (a new complete question, thanks, an off-topic question, a prompt-injection) and must pass through unchanged. The baseline is the same planner on the bare message with no history.

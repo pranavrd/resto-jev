@@ -42,3 +42,33 @@ Planner p2 is frozen (sha256 of the planner code and prompts, `chat.py` from `PL
 **Criterion as written before the reads, on v3:** (a) p2 exceeds p1 by at least 5 of 32: +10, met; (b) p2's in-scope errors are not more than p1's: 0 against 2, met. **p2 is adopted as the default planner (decision 0029).**
 
 p2's three misses on v3, left as they are: "Terrific staff and a fun vibe" (a quality word outside the lists, so the service level is dropped), "a coffee shop near the Broad Street Line" (no rail word, so near-rail is false and the topic becomes the line's name), and "the three best bars" (the topic becomes "three"). Median time per plan: 7.2 s for p2 against 4.3 s for p1 (a longer prompt).
+
+
+## Multi-turn follow-ups (decision 0031), 2026-10-05
+
+Set `followups_v1.json` (16 dev + 16 test conversations, written before the rewrite existed). The rewrite turns a follow-up message into a standalone question with the earlier turns as context (qwen2.5:7b), a guard discards a rewrite that drops a word the user wrote, and planner p2 plans the result.
+
+| Run (dev) | Rewrite + plan, plan and flag right | Plan right with history | Plan right without history (baseline) | Controls unchanged |
+|---|---|---|---|---|
+| first draft | 12/16 | 13/16 | 9/16 | 4/4 |
+| rules added to the prompt (a reference to a set keeps the earlier search, "and X" replaces, one named place is asked about alone, an added condition is a follow-up) and four worked examples | 14/16 | 15/16 | 9/16 | 4/4 |
+
+Two dev misses remain ("and bakeries?" is rewritten as "Cafes and bakeries", and "not too loud though" is not seen as a follow-up) even though the prompt now carries a near-identical example for each; tuning stops here. **Dev is spent; the 14/16 is not an estimate.**
+
+### Frozen, and what will judge it
+
+The rewrite code and prompt are frozen (sha256 of `chat.py` from `MAX_HISTORY` to the `Answer` class: `ccf7e04760cfd8b8`). The test half (16 conversations) is read **once**, for the rewrite and for the no-history baseline together. **Criterion, written before the read:** (a) the plan is right with history on at least 5 more of 16 than without; (b) the follow-up flag is acceptable on at least 14 of 16; (c) all four controls come back unchanged. If any fails the multi-turn rewrite ships as an option that the record says is not validated, or does not ship.
+
+### Held-out read (2026-10-05, qwen2.5:7b, planner p2), once
+
+| 16 test conversations | Rewrite + plan |
+|---|---|
+| Plan right **with history** | **14/16** |
+| Plan right **without history** (the bare message) | **7/16** |
+| Follow-up flag acceptable | 15/16 |
+| Controls (not follow-ups) returned unchanged | 4/4 |
+| Plan and flag both right | 14/16 |
+
+**Criterion as written before the read:** (a) at least +5 of 16 over the baseline: **+7, met**; (b) flag acceptable on at least 14 of 16: **15, met**; (c) all four controls unchanged: **4/4, met.** The rewrite ships.
+
+The two test misses: "and good service as well" was not recognised as a follow-up (the same weakness as the dev miss "not too loud though": a message that only adds a condition with "and", "also" or "though"), and in "any with outdoor seating?" the rewrite kept the earlier topic ("craft beer bars with outdoor seating") so the topic the planner chose was not the one expected. Both are left as limits.

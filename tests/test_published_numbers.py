@@ -12,6 +12,7 @@ import pytest
 from streetwalker.chat_eval import rescore_run
 from streetwalker.chat_faithfulness import rescore as rescore_faithfulness
 from streetwalker.chat_faithfulness import summarise as summarise_faithfulness
+from streetwalker.chat_followup_eval import summarise as summarise_followups
 from streetwalker.chat_verifier_eval import summarise as summarise_verifier
 
 EVAL = Path(__file__).resolve().parents[1] / "docs" / "chat-eval"
@@ -84,3 +85,20 @@ def test_the_candidate_failed_its_preregistered_criterion_on_the_saved_test_runs
     recall = lambda s: s["tp"] / (s["tp"] + s["fn"])
     assert not cand["place_fp"] < base["place_fp"]  # (a) not lower
     assert recall(cand) < recall(base) - 0.05  # (b) more than 5 points below
+
+
+# ---- multi-turn follow-ups (decision 0031) ---------------------------------------------------------------------------------------------
+
+@pytest.mark.parametrize(("run", "fully", "plan", "baseline", "flag", "controls"), [
+    ("followup-dev-iter1", 12, 13, 9, 15, 4),
+    ("followup-dev-iter2", 14, 15, 9, 15, 4),
+    ("followup-test", 14, 14, 7, 15, 4),
+])
+def test_followup_counts_recompute_from_the_saved_rows(run, fully, plan, baseline, flag, controls):
+    s = summarise_followups(load("runs", f"2026-10-05-{run}.json")["rows"])
+    assert (s["with_history_fully_correct"], s["plan_correct"], s["baseline_plan_correct"], s["followup_flag_ok"], s["controls_unchanged"]) == (fully, plan, baseline, flag, controls)
+
+
+def test_the_followup_criterion_written_before_the_test_read_is_met_on_the_saved_run():
+    s = summarise_followups(load("runs", "2026-10-05-followup-test.json")["rows"])
+    assert s["plan_correct"] - s["baseline_plan_correct"] >= 5 and s["followup_flag_ok"] >= 14 and s["controls_unchanged"] == s["controls"] == 4

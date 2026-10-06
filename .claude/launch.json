@@ -4,8 +4,31 @@
     {
       "name": "replay-viewer",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "web", "run", "dev"],
+      "runtimeArgs": [
+        "--prefix",
+        "web",
+        "run",
+        "dev"
+      ],
       "port": 5173
+    },
+    {
+      "name": "api-tablemap",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "STREETWALKER_TABLEMAP=1 .venv/bin/uvicorn streetwalker.api:app --port 8001"
+      ],
+      "port": 8001
+    },
+    {
+      "name": "chat-web",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "API_URL=http://127.0.0.1:8001 npm --prefix web run dev -- --port 5174"
+      ],
+      "port": 5174
     }
   ]
 }

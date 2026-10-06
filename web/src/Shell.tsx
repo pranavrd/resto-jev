@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { App } from './App'
 import { PlacesApp } from './places/PlacesApp'
+import { ChatApp } from './chat/ChatApp'
 import { LabelApp } from './label/LabelApp'
 import { ReviewApp } from './review/ReviewApp'
 
-type View = 'places' | 'replay' | 'review' | 'label'
+type View = 'places' | 'replay' | 'review' | 'label' | 'chat'
 
 const fromHash = (): View => {
   const h = window.location.hash
-  return h === '#/replay' ? 'replay' : h === '#/review' ? 'review' : h === '#/label' ? 'label' : 'places'
+  return h === '#/replay' ? 'replay' : h === '#/review' ? 'review' : h === '#/label' ? 'label' : h === '#/chat' ? 'chat' : 'places'
 }
 
 /** Switches between the places map and the walk replay. The hash keeps the view across reloads and in links. */
@@ -34,6 +35,9 @@ export function Shell() {
         <button className={view === 'replay' ? 'on' : ''} aria-pressed={view === 'replay'} onClick={() => go('replay')}>
           Walk replay
         </button>
+        <button className={view === 'chat' ? 'on' : ''} aria-pressed={view === 'chat'} onClick={() => go('chat')}>
+          Chat
+        </button>
         <button className={view === 'review' ? 'on' : ''} aria-pressed={view === 'review'} onClick={() => go('review')}>
           Review
         </button>
@@ -41,7 +45,7 @@ export function Shell() {
           Label
         </button>
       </nav>
-      {view === 'places' ? <PlacesApp /> : view === 'review' ? <ReviewApp /> : view === 'label' ? <LabelApp /> : <App />}
+      {view === 'places' ? <PlacesApp /> : view === 'review' ? <ReviewApp /> : view === 'label' ? <LabelApp /> : view === 'chat' ? <ChatApp /> : <App />}
     </>
   )
 }

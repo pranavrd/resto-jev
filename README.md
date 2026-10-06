@@ -88,6 +88,10 @@ ollama pull nomic-embed-text && ollama pull qwen2.5:7b && .venv/bin/python -m st
 STREETWALKER_TABLEMAP=1 .venv/bin/uvicorn streetwalker.api:app --port 8000          # then /docs, section "tablemap"
 ```
 
+## Chat view
+
+`#/chat` in the web app is a chat over the above with follow-ups ([decision 0031](docs/decisions/0031-chat-view-and-multi-turn.md)): a follow-up is rewritten into a standalone question with the earlier turns as context (14/16 plans right on held-out invented conversations against 7/16 without history). See [web/README.md](web/README.md).
+
 ## Continuous integration
 
 `.github/workflows/ci.yml` runs lint, the web checks and the Python suite (about 340 tests, including the retrieval evals and a test that recomputes every published figure from the committed run files) on invented data only. What needs a model or the real database stays local: see [docs/ci.md](docs/ci.md) and [decision 0030](docs/decisions/0030-ci.md). It has not run on GitHub yet (no remote).
