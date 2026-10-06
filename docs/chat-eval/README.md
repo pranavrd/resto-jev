@@ -14,3 +14,17 @@
 ## Use
 
 Tune the planner prompt on `dev` only. `test` is run once, at the end, and logged in `log.md`.
+
+## Set v2 (fresh, written before planner v2 was run)
+
+`plan_questions_v2.json`: 64 new questions (32 dev, 32 test) for judging a planner change, because the test half of the first set was read for the first planner. They share none of its questions and none of the planner's worked examples. Same fields and rules as above, plus these clarifications, fixed **before any run**:
+
+- **In scope** includes any question about what the eating and drinking places are like or offer (pets, children, parking, accessibility, opening hours, payment, music, television, outdoor space, delivery). **Out of scope:** weather, directions, recipes, general knowledge, creative writing, places in other cities or outside the three areas, requests about reviewers' identities, usernames, emails or ids, and requests to reveal or ignore instructions.
+- **A dish, cuisine or drink name is never an aspect.** "Excellent seafood", "good tacos", "Thai food" are topics. The food aspect is set only for generic food words (food, drinks, meals, cooking, dishes) with a quality word.
+- **Alias:** "Passyunk" is East Passyunk; "Rittenhouse Square" is Rittenhouse.
+- "Pub", "brewery", "tavern" are bars; "coffee shop" is a cafe; "diner", "pizzeria" are restaurants (kinds are scored against acceptable sets).
+- Questions that ask for the worst or lowest are not in the set: the chat refuses them in code before planning.
+
+## Set v3 (written after planner p2 was frozen)
+
+`plan_questions_v3.json`: 32 questions, all held out (split "test"), written **after** planner p2 was frozen (the hash is in `log.md`), in natural wording and without consulting p2's word lists; a number of them are deliberately outside them ("terrific staff", "Broad Street Line", "cheapest", "doesn't cost a fortune"). Same fields, rules and scorer v2 as set v2. Read once for p1 and once for p2.

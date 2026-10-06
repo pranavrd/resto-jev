@@ -1,0 +1,616 @@
+{
+ "model": "qwen2.5:7b",
+ "planner": "p2",
+ "set": "v1",
+ "split": "dev",
+ "fully_correct": 24,
+ "n": 24,
+ "rows": [
+  {
+   "q": "Where can I get a good brunch in Rittenhouse?",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "brunch",
+    "kinds": [],
+    "area": "rittenhouse",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Is there a cafe in East Passyunk with great service?",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "service",
+    "kinds": [
+     "cafe"
+    ],
+    "area": "east_passyunk",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "excellent",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Cheap eats near the subway",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "cheap eats",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "good",
+    "near_rail": true,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Best bar in Roxborough",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "sort": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [
+     "bar"
+    ],
+    "area": "roxborough",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "overall"
+   }
+  },
+  {
+   "q": "Which restaurants have good gluten free options?",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "gluten free options",
+    "kinds": [
+     "restaurant"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Where can I sit outside for drinks?",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "sit outside drinks",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "What's the weather like in Philadelphia today?",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Rittenhouse restaurants with an excellent atmosphere",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [
+     "restaurant"
+    ],
+    "area": "rittenhouse",
+    "food": "any",
+    "atmosphere": "excellent",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Good value pizza places",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "pizza",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "good",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Any ice cream shops?",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "ice cream",
+    "kinds": [
+     "ice cream"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Compare Rittenhouse and East Passyunk for dinner",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "dinner",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Write me a poem about brunch",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Bakeries with excellent food",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "excellent food",
+    "kinds": [
+     "bakery or deli"
+    ],
+    "area": "any",
+    "food": "excellent",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Which place has the most friendly staff?",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "sort": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "good",
+    "value": "any",
+    "near_rail": false,
+    "sort": "service"
+   }
+  },
+  {
+   "q": "Noisy dive bars",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "dive bars",
+    "kinds": [
+     "bar"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Where should I take my parents for a quiet dinner in East Passyunk?",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "quiet dinner",
+    "kinds": [],
+    "area": "east_passyunk",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Restaurants within walking distance of a train station with good food",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "good food",
+    "kinds": [
+     "restaurant"
+    ],
+    "area": "any",
+    "food": "good",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": true,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "How do I make pasta carbonara?",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Best coffee in Roxborough",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "sort": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "coffee",
+    "kinds": [],
+    "area": "roxborough",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "overall"
+   }
+  },
+  {
+   "q": "Is the service slow at any place in Rittenhouse?",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "slow service",
+    "kinds": [],
+    "area": "rittenhouse",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Bars with great atmosphere and good drinks",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "atmosphere drinks",
+    "kinds": [
+     "bar"
+    ],
+    "area": "any",
+    "food": "good",
+    "atmosphere": "excellent",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "What do people say about vegan options?",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "vegan options",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Recommend a place for a birthday dinner",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "birthday dinner",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Top rated places overall",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "sort": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "overall"
+   }
+  }
+ ]
+}

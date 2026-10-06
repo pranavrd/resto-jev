@@ -12,9 +12,10 @@ import time
 from pathlib import Path
 
 from streetwalker.aspects import ASPECTS
-from streetwalker.chat import OllamaChat, make_plan
+from streetwalker.chat import PLAN_VERSION, PLANNERS, OllamaChat, make_plan
 
-QUESTIONS = Path(__file__).resolve().parents[2] / "docs" / "chat-eval" / "plan_questions.json"
+EVAL_DIR = Path(__file__).resolve().parents[2] / "docs" / "chat-eval"
+SETS = {"v1": EVAL_DIR / "plan_questions.json", "v2": EVAL_DIR / "plan_questions_v2.json", "v3": EVAL_DIR / "plan_questions_v3.json"}
 
 
 def score(plan, exp: dict, question: str) -> dict[str, bool]:
@@ -33,7 +34,10 @@ def score(plan, exp: dict, question: str) -> dict[str, bool]:
     topic = plan.topic.lower()
     words = len(topic.split())
     if exp["topic_any"]:
-        ok["topic"] = any(k in topic for k in exp["topic_any"]) and words <= 8 and topic != question.lower().rstrip("?")
+        # scorer v2 (2026-10-05): copying the question is wrong only for a long question; a three-word question that IS a topic ("dog friendly patios") is
+        # correctly copied. The first version flagged every copy, which marked correct plans for "Sushi" and "dog friendly patios" wrong.
+        copied = topic == question.lower().rstrip("?") and len(question.split()) > 6
+        ok["topic"] = any(k in topic for k in exp["topic_any"]) and words <= 8 and not copied
     elif exp["topic_empty"]:
         ok["topic"] = topic == ""
     return ok
@@ -43,20 +47,24 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model")
     ap.add_argument("--split", choices=["dev", "test"], default="dev")
+    ap.add_argument("--set", choices=list(SETS), default="v1", dest="qset", help="v1 is the first question set; v2 is the fresh one (decision 0029)")
+    ap.add_argument("--planner", choices=list(PLANNERS), default=PLAN_VERSION)
+    ap.add_argument("--save", type=Path)
     ap.add_argument("--show-misses", action="store_true")
     args = ap.parse_args()
-    qs = [q for q in json.loads(QUESTIONS.read_text())["questions"] if q["split"] == args.split]
+    qs = [q for q in json.loads(SETS[args.qset].read_text())["questions"] if q["split"] == args.split]
     backend = OllamaChat(args.model)
     per_field: dict[str, list[bool]] = {}
-    full, secs = [], []
+    full, secs, rows = [], [], []
     for q in qs:
         t0 = time.time()
-        plan = make_plan(backend, q["q"])
+        plan = make_plan(backend, q["q"], args.planner)
         secs.append(time.time() - t0)
         ok = score(plan, q, q["q"])
         for k, v in ok.items():
             per_field.setdefault(k, []).append(v)
         full.append(all(ok.values()))
+        rows.append({"q": q["q"], "ok": ok, "plan": {"in_scope": plan.in_scope, "topic": plan.topic, "kinds": plan.kinds, "area": plan.area, **plan.levels, "near_rail": plan.near_rail, "sort": plan.sort}})
         if args.show_misses and not all(ok.values()):
             print(f"MISS {q['q']!r}: wrong {[k for k, v in ok.items() if not v]} -> topic={plan.topic!r} kinds={plan.kinds} area={plan.area} "
                   f"levels={ {a: v for a, v in plan.levels.items() if v != 'any'} } rail={plan.near_rail} sort={plan.sort} in_scope={plan.in_scope}")
@@ -64,6 +72,9 @@ def main() -> None:
     for k, v in per_field.items():
         print(f"  {k:10s} {sum(v):2d}/{len(v):2d}")
     print(f"  fully correct plans: {sum(full)}/{len(full)}")
+    if args.save:
+        args.save.parent.mkdir(parents=True, exist_ok=True)
+        args.save.write_text(json.dumps({"model": backend.name, "planner": args.planner, "set": args.qset, "split": args.split, "fully_correct": sum(full), "n": len(full), "rows": rows}, indent=1))
 
 
 if __name__ == "__main__":

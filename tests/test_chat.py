@@ -454,3 +454,74 @@ def test_the_chat_endpoint_style_quotes_uses_the_extractive_writer(fake_world):
     summary = _http(conn, Fake(plan_dict(topic="patio"), honest_writer, verify=lambda messages: "patio" in messages[-1]["content"]))
     plain = summary.post("/tablemap/chat", json={"question": "patio?"}).json()  # the default style is the summary writer
     assert chat.CAVEAT in plain["answer"]
+
+
+# ---- planner p2: code guards over the question (decision 0029) -----------------------------------------------------------------
+
+def guarded(question: str, **plan) -> Plan:
+    from streetwalker.chat import guard_plan
+
+    return guard_plan(parse_plan(plan_dict(**plan)), question)
+
+
+def test_kinds_area_and_rail_are_read_off_the_question_not_taken_from_the_model():
+    p = guarded("Which pubs near the subway in Passyunk serve a fish fry?", kinds=["restaurant"], area="roxborough", near_rail=False, topic="fish fry")
+    assert p.kinds == ["bar"] and p.area == "east_passyunk" and p.near_rail and p.topic == "fish fry"
+    assert guarded("coffee shops or bakeries in Rittenhouse or Roxborough").area == "any"  # two areas named
+    assert guarded("coffee shops or bakeries in Rittenhouse or Roxborough").kinds == ["bakery or deli", "cafe"]  # single words first, then two-word kinds
+    assert guarded("any ice cream or fast food?", kinds=["restaurant"]).kinds == ["ice cream", "fast food"]
+    assert guarded("somewhere to eat", kinds=["bar"], area="rittenhouse").kinds == [] and guarded("somewhere to eat", area="rittenhouse").area == "any"
+
+
+def test_aspect_levels_need_a_quality_word_next_to_an_aspect_word():
+    assert guarded("great service and a decent atmosphere").levels["service"] == "excellent"
+    assert guarded("great service and a decent atmosphere").levels["atmosphere"] == "good"
+    assert guarded("the food is really good").levels["food"] == "good"
+    assert guarded("Thai food in Rittenhouse", food="good").levels["food"] == "any"  # a cuisine is not an aspect, and the model's level has no quality word behind it
+    assert guarded("good tacos", food="good").levels["food"] == "any" and guarded("excellent seafood", food="excellent").levels["food"] == "any"
+    assert guarded("compare the service at bars", service="excellent").levels["service"] == "any"
+    assert guarded("cheap lunch").levels["value"] == "good" and guarded("best value in Roxborough").levels["value"] == "excellent"
+    assert guarded("it was overpriced").levels["value"] == "any" and guarded("pricey place").levels["value"] == "any"  # a complaint is a topic
+    assert guarded("great food but the room is a mess", atmosphere="good").levels["atmosphere"] == "any"  # no atmosphere word
+    assert guarded("terrific staff", service="excellent").levels["service"] == "any"  # no quality word the rules know, so the model's level is not trusted either
+
+
+def test_the_model_level_survives_only_with_an_aspect_word_and_a_quality_word_somewhere():
+    assert guarded("staff who are top notch honestly", service="excellent").levels["service"] == "excellent"  # "top" is a quality word near no aspect word, but staff is present
+
+
+def test_sort_follows_best_top_most_overall_and_names_the_single_aspect():
+    assert guarded("best bar in town", sort="relevance").sort == "overall" and guarded("top rated places").sort == "overall"
+    assert guarded("most welcoming staff", service="excellent").sort in ("service", "overall")
+    assert guarded("best service in Roxborough").sort == "service" and guarded("best food and best service").sort == "overall"
+    assert guarded("compare the service at bars", sort="service").sort == "relevance"  # no trigger word
+
+
+def test_the_topic_is_checked_against_the_question_and_filled_from_what_is_left():
+    assert guarded("any dog friendly places open late?").topic == "dog open late"
+    assert guarded("restaurants in Roxborough", topic="vegan pasta").topic == ""  # a topic with no word in the question is dropped
+    assert guarded("best bakery overall").topic == "" and guarded("top rated places overall in Roxborough").topic == ""
+    assert guarded("what do reviewers say about the staff at cafes?").topic == "staff"  # the aspect word stays when no level was asked
+    assert guarded("excellent service at a cafe, please").topic == ""  # but not when it was used for a level
+    assert guarded("Top 5 places").topic == ""  # a rank number is not a topic
+    assert guarded("fast food with a drive thru").topic == "drive thru" and guarded("ice cream near the train").topic == ""
+
+
+def test_an_out_of_scope_plan_is_left_alone_by_the_guards():
+    p = guarded("write a poem about brunch", in_scope=False, topic="")
+    assert not p.in_scope and p.topic == "" and p.kinds == []
+
+
+def test_p1_is_kept_unchanged_for_reproduction_and_p2_is_the_default_by_decision_0029():
+    assert set(chat.PLANNERS) == {"p1", "p2"} and chat.PLAN_VERSION == "p2"
+    class Echo:
+        name = "echo"
+
+        def generate(self, messages, schema):
+            return plan_dict(topic="x", kinds=["bar"], area="roxborough", food="excellent")
+
+    assert chat.make_plan(Echo(), "something to eat").kinds == []  # the default is p2
+    p1 = chat.make_plan(Echo(), "something to eat", "p1")
+    assert p1.kinds == ["bar"] and p1.area == "roxborough" and p1.levels["food"] == "excellent"  # p1 trusts the model
+    p2 = chat.make_plan(Echo(), "something to eat", "p2")
+    assert p2.kinds == [] and p2.area == "any" and p2.levels["food"] == "any"  # p2 reads the question
