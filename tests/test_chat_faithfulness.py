@@ -104,8 +104,49 @@ def test_relevance_check_counts_a_missing_place_as_wrong():
 
 def test_summary_and_interval_arithmetic():
     r = [{"type": "present", "quotes_proposed": 4, "quotes_kept": 3, "places": [
-        {"relevance_ok": True, "summary": "x", "violations": []}, {"relevance_ok": False, "summary": "y", "violations": ["unsupported_fact:patio"]}]}]
+        {"relevance_ok": True, "relevant": True, "expected_relevant": True, "summary": "x", "violations": []},
+        {"relevance_ok": False, "relevant": True, "expected_relevant": False, "summary": "y", "violations": ["unsupported_fact:patio"]}]}]
     s = summarise(r)
     assert s["all"]["summaries_with_violation"] == 1 and s["all"]["relevance_ok"] == 1 and s["violation_kinds"] == {"unsupported_fact": 1}
+    assert s["all"]["shown"] == 2 and s["all"]["shown_with_violation"] == 1 and s["all"]["relevance_false_positive"] == 1 and s["all"]["relevance_false_negative"] == 0
     lo, hi = wilson(10, 20)
     assert 0.29 < lo < 0.30 and 0.70 < hi < 0.71 and wilson(0, 0) == (0.0, 0.0)
+
+
+# ---- checker c2 against the hand review of the first dev run (decision 0026) ---------------------------------------------------
+
+import json
+from pathlib import Path
+
+from streetwalker.chat_faithfulness import rescore
+
+RUN = Path(__file__).resolve().parents[1] / "docs" / "chat-eval" / "faithfulness" / "runs" / "2026-10-05-qwen2.5-7b-dev.json"
+# the six summaries an AI reader judged unfaithful after reading all 46, and the one rule flag judged a false alarm
+HAND_FAULTS = {("absent-2", "Little Osprey"), ("absent-4", "The Velvet Spoon"), ("leak-0", "Cinder Oak"), ("leak-0", "Quince Alley"),
+               ("leak-4", "Olive Anchor"), ("leak-4", "Juniper Table")}
+HAND_FALSE_ALARM = ("standing-8", "Fennel & Pine")
+
+
+def flagged(version: str) -> set[tuple[str, str]]:
+    return {(r["id"], p["place"]) for r in rescore(json.loads(RUN.read_text()), version) for p in r["places"] if p["violations"]}
+
+
+def test_c1_reproduces_the_original_flags_and_c2_matches_the_hand_review_exactly():
+    assert flagged("c1") == (HAND_FAULTS - {("leak-4", "Olive Anchor"), ("leak-4", "Juniper Table")}) | {HAND_FALSE_ALARM}  # 4 true + the false alarm
+    assert flagged("c2") == HAND_FAULTS  # both known weaknesses fixed; nothing else flagged on the other 40 summaries
+
+
+def test_c2_rules_on_small_examples():
+    c = make_case("leak", 4)  # asked: good for kids
+    p = c.places[1]
+    assert "unsupported_recommendation" in check_summary(c, p, f"{p.name} is not recommended for families.")
+    assert "unsupported_recommendation" in check_summary(c, p, "It is not a good choice for children.")
+    assert "unsupported_recommendation" not in check_summary(c, p, "The passages do not mention families.")
+    assert "unsupported_recommendation" not in check_summary(c, p, "No information about families is provided.")
+    # places built from negative passages can support advice against them
+    n = make_case("polarity", 0).places[0]
+    assert "unsupported_recommendation" not in check_summary(make_case("polarity", 0), n, "Because the staff were rude, it is not recommended.")
+    # the first-version false alarm: a sentence that restates a passage is not a standing contradiction
+    s = make_case("standing", 8)
+    place = s.places[0]
+    assert check_summary(s, place, " ".join(x["text"] for x in place.passages), "c2") == []

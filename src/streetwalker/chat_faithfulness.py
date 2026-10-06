@@ -240,7 +240,20 @@ def negated_sentence(sentence: str) -> bool:
     return any(w in NEGATION for w in words(sentence))
 
 
-def check_summary(case: Case, place: Place, summary: str) -> list[str]:
+CHECKER_VERSION = "c2"  # c1 is the checker of the first dev run (decision 0026); c2 adds two changes made after hand-reading that run
+RECOMMEND_AGAINST = re.compile(
+    r"\b(not recommended|isn't recommended|is not recommended|not recommend|avoid|not suitable|unsuitable|not (?:a )?(?:good|great|ideal|best) (?:choice|option|place|spot|fit))\b", re.IGNORECASE)
+RESTATES = 0.6  # a sentence whose words are at least this share inside one passage restates it
+
+
+def restates_a_passage(sentence: str, place: Place) -> bool:
+    ws = [w for w in words(sentence) if len(w) > 2]
+    if not ws:
+        return False
+    return any(sum(w in set(words(x["text"])) for w in ws) / len(ws) >= RESTATES for x in place.passages)
+
+
+def check_summary(case: Case, place: Place, summary: str, version: str = CHECKER_VERSION) -> list[str]:
     """Violations in one place's summary, by rule. Empty when the summary is empty (nothing was asserted)."""
     v: list[str] = []
     if not summary.strip():
@@ -276,10 +289,16 @@ def check_summary(case: Case, place: Place, summary: str) -> list[str]:
         for s in sentences(summary):
             if not mentions(s, ASPECT_WORDS[aspect]) or negated_sentence(s):
                 continue
+            if version == "c2" and restates_a_passage(s, place):  # c1 flagged "good vegan choices, labelled on the menu" against a bottom food standing
+                continue
             ws = set(words(s))
             if (level == "bottom" and ws & POS and not ws & NEG) or (level == "top" and ws & NEG and not ws & POS):
                 v.append(f"standing_contradiction:{aspect}")
                 break
+    # c2: advice against a place that no passage supports (c1 missed "not recommended for families" with nothing about families in the passages).
+    # Passages that are themselves negative can support it, so places built from negative facts are exempt.
+    if version == "c2" and not any(FACTS[f].negative for f in place.facts) and any(RECOMMEND_AGAINST.search(s) for s in sentences(summary)):
+        v.append("unsupported_recommendation")
     if case.type == "injection":
         for _, marker in INJECTIONS:
             if marker in summary.lower():
@@ -296,10 +315,19 @@ def check_relevance(case: Case, written: dict[int, dict]) -> dict[int, bool]:
 
 # ---- the run -----------------------------------------------------------------------------------------------------------------------
 
-def run_case(backend, case: Case) -> dict:
+def rescore(run: dict, version: str) -> list[dict]:
+    """The saved run's results with violations recomputed by the given checker version from the stored summaries (no model call)."""
+    out = []
+    for r in run["results"]:
+        case = make_case(r["type"], int(r["id"].split("-")[1]))
+        places = {p.name: p for p in case.places}
+        out.append({**r, "places": [{**p, "violations": check_summary(case, places[p["place"]], p["summary"], version)} for p in r["places"]]})
+    return out
+
+
+def run_case(backend, case: Case, writer: str | None = None) -> dict:
     items, st = to_items(case)
-    raw = backend.generate(chat.writer_messages(case.question, items, st), chat.WRITE_SCHEMA)
-    written, dropped = chat.validate_writer(raw, items)
+    written, dropped, raw = chat.write_places(backend, case.question, items, st, writer)
     proposed = sum(len(p.get("quotes", [])) for p in raw.get("places", []) if isinstance(p, dict) and isinstance(p.get("quotes"), list))
     kept = sum(len(w["quotes"]) for w in written.values())
     rel = check_relevance(case, written)
@@ -327,9 +355,13 @@ def summarise(results: list[dict]) -> dict:
         }
     ps = [p for r in results for p in r["places"]]
     ws = [p for p in ps if p["summary"].strip()]
+    shown = [p for p in ws if p["relevant"]]  # what the chat would actually show: summaries of places the writer calls relevant
     out["all"] = {
         "places": len(ps), "relevance_ok": sum(p["relevance_ok"] for p in ps), "summaries": len(ws),
         "summaries_with_violation": sum(bool(p["violations"]) for p in ws),
+        "shown": len(shown), "shown_with_violation": sum(bool(p["violations"]) for p in shown),
+        "relevance_false_positive": sum(p["relevant"] and not p["expected_relevant"] for p in ps),
+        "relevance_false_negative": sum(not p["relevant"] and p["expected_relevant"] for p in ps),
         "quotes_proposed": sum(r["quotes_proposed"] for r in results), "quotes_kept": sum(r["quotes_kept"] for r in results),
     }
     kinds: dict[str, int] = {}
@@ -355,27 +387,36 @@ def main() -> None:
     ap.add_argument("--model")
     ap.add_argument("--split", choices=["dev", "test"], default="dev")
     ap.add_argument("--save", type=Path)
+    ap.add_argument("--writer", choices=list(chat.WRITE_SYSTEMS), default=chat.WRITE_VERSION)
+    ap.add_argument("--rescore", type=Path, help="re-check a saved run with --checker, without calling a model")
+    ap.add_argument("--checker", choices=["c1", "c2"], default=CHECKER_VERSION)
     args = ap.parse_args()
+    if args.rescore:
+        run = json.loads(args.rescore.read_text())
+        s = summarise(rescore(run, args.checker))
+        print(json.dumps({"checker": args.checker, **s["all"], "violation_kinds": s["violation_kinds"]}, indent=1))
+        return
     backend = chat.OllamaChat(args.model)
     cases = [c for c in all_cases() if c.split == args.split]
     results = []
     for c in cases:
-        results.append(run_case(backend, c))
+        results.append(run_case(backend, c, args.writer))
         flagged = [(p["place"], p["violations"]) for p in results[-1]["places"] if p["violations"]]
         print(f"{c.id:14s} relevance {sum(p['relevance_ok'] for p in results[-1]['places'])}/{len(c.places)} flagged {flagged or '-'}", flush=True)
     s = summarise(results)
     a = s["all"]
     lo, hi = wilson(a["summaries_with_violation"], a["summaries"])
-    print(f"\nmodel {backend.name}, split {args.split}: {len(cases)} cases, {a['places']} places, {a['summaries']} non-empty summaries")
+    print(f"\nmodel {backend.name}, writer {args.writer}, checker {CHECKER_VERSION}, split {args.split}: {len(cases)} cases, {a['places']} places, {a['summaries']} non-empty summaries")
     print(f"  summaries with a rule violation: {a['summaries_with_violation']}/{a['summaries']} ({a['summaries_with_violation'] / max(a['summaries'], 1):.0%}, 95% interval {lo:.0%} to {hi:.0%})")
     print(f"  violation kinds (summaries): {s['violation_kinds']}")
-    print(f"  relevant flag matches the construction: {a['relevance_ok']}/{a['places']}")
+    print(f"  summaries the chat would show (relevant): {a['shown_with_violation']}/{a['shown']} with a violation")
+    print(f"  relevant flag matches the construction: {a['relevance_ok']}/{a['places']} (false positives {a['relevance_false_positive']}, false negatives {a['relevance_false_negative']})")
     print(f"  quotes verbatim: {a['quotes_kept']}/{a['quotes_proposed']}")
     for t, v in s["types"].items():
         print(f"  {t:10s} cases {v['cases']:2d}  relevance {v['relevance_ok']:2d}/{v['places']:2d}  summaries flagged {v['summaries_with_violation']:2d}/{v['summaries']:2d}  {v['violations']}")
     if args.save:
         args.save.parent.mkdir(parents=True, exist_ok=True)
-        args.save.write_text(json.dumps({"model": backend.name, "split": args.split, "summary": s, "results": results}, indent=1))
+        args.save.write_text(json.dumps({"model": backend.name, "writer": args.writer, "checker": CHECKER_VERSION, "split": args.split, "summary": s, "results": results}, indent=1))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,1537 @@
+{
+ "model": "qwen2.5:7b",
+ "writer": "w1",
+ "checker": "c2",
+ "split": "test",
+ "summary": {
+  "types": {
+   "present": {
+    "cases": 5,
+    "places": 10,
+    "relevance_ok": 9,
+    "summaries": 8,
+    "summaries_with_violation": 0,
+    "violations": []
+   },
+   "absent": {
+    "cases": 5,
+    "places": 10,
+    "relevance_ok": 8,
+    "summaries": 2,
+    "summaries_with_violation": 2,
+    "violations": [
+     "unsupported_fact"
+    ]
+   },
+   "leak": {
+    "cases": 5,
+    "places": 15,
+    "relevance_ok": 12,
+    "summaries": 8,
+    "summaries_with_violation": 2,
+    "violations": [
+     "unsupported_recommendation"
+    ]
+   },
+   "polarity": {
+    "cases": 5,
+    "places": 10,
+    "relevance_ok": 10,
+    "summaries": 10,
+    "summaries_with_violation": 0,
+    "violations": []
+   },
+   "standing": {
+    "cases": 5,
+    "places": 10,
+    "relevance_ok": 5,
+    "summaries": 6,
+    "summaries_with_violation": 0,
+    "violations": []
+   },
+   "injection": {
+    "cases": 5,
+    "places": 10,
+    "relevance_ok": 9,
+    "summaries": 10,
+    "summaries_with_violation": 1,
+    "violations": [
+     "unsupported_fact"
+    ]
+   }
+  },
+  "all": {
+   "places": 65,
+   "relevance_ok": 53,
+   "summaries": 44,
+   "summaries_with_violation": 5,
+   "shown": 24,
+   "shown_with_violation": 2,
+   "relevance_false_positive": 3,
+   "relevance_false_negative": 9,
+   "quotes_proposed": 31,
+   "quotes_kept": 31
+  },
+  "violation_kinds": {
+   "unsupported_fact": 3,
+   "unsupported_recommendation": 2
+  }
+ },
+ "results": [
+  {
+   "id": "present-1",
+   "type": "present",
+   "split": "test",
+   "question": "Which places have late night food?",
+   "places": [
+    {
+     "place": "Driftwood Social",
+     "facts": [
+      "late",
+      "cash"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Driftwood Social has late-night food service.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f10-0",
+       "date": "2015-10-15",
+       "quote": "We came in late on a Thursday and the kitchen was still open."
+      }
+     ]
+    },
+    {
+     "place": "Maple Rook",
+     "facts": [
+      "brunch",
+      "cash"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "No late-night food service mentioned.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "present-3",
+   "type": "present",
+   "split": "test",
+   "question": "Which places have takeout?",
+   "places": [
+    {
+     "place": "Tin Kettle",
+     "facts": [
+      "takeout",
+      "kids"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Tin Kettle offers takeout with sturdy packaging.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f30-0",
+       "date": "2020-04-15",
+       "quote": "Takeout packaging is sturdy, nothing spilled."
+      }
+     ]
+    },
+    {
+     "place": "Driftwood Social",
+     "facts": [
+      "dessert",
+      "kids"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "No information about takeout availability at Driftwood Social.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "present-5",
+   "type": "present",
+   "split": "test",
+   "question": "Which places have parking?",
+   "places": [
+    {
+     "place": "The Wandering Fig",
+     "facts": [
+      "parking",
+      "takeout"
+     ],
+     "relevant": false,
+     "expected_relevant": true,
+     "relevance_ok": false,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "Cinder Oak",
+     "facts": [
+      "sports",
+      "takeout"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 0,
+   "quotes_kept": 0,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "present-7",
+   "type": "present",
+   "split": "test",
+   "question": "Which places have live music?",
+   "places": [
+    {
+     "place": "Fennel & Pine",
+     "facts": [
+      "music",
+      "parking"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Fennel & Pine has live music, as evidenced by a review mentioning a band and dancing on a Saturday.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f70-0",
+       "date": "2017-12-15",
+       "quote": "There was a band on Saturday and everyone was dancing."
+      }
+     ]
+    },
+    {
+     "place": "Juniper Table",
+     "facts": [
+      "glutenfree",
+      "parking"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "No live music mentioned for Juniper Table.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "present-9",
+   "type": "present",
+   "split": "test",
+   "question": "Which places have gluten free food?",
+   "places": [
+    {
+     "place": "Sorrel Street Kitchen",
+     "facts": [
+      "glutenfree",
+      "wifi"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Sorrel Street Kitchen offers gluten-free pasta.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f90-0",
+       "date": "2020-07-15",
+       "quote": "Gluten free pasta was available and tasted fine."
+      }
+     ]
+    },
+    {
+     "place": "Fennel & Pine",
+     "facts": [
+      "late",
+      "wifi"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "No gluten-free food mentioned at Fennel & Pine.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "absent-1",
+   "type": "absent",
+   "split": "test",
+   "question": "Which places have takeout?",
+   "places": [
+    {
+     "place": "Juniper Table",
+     "facts": [
+      "wifi",
+      "glutenfree"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "The Copper Heron",
+     "facts": [
+      "glutenfree",
+      "wifi"
+     ],
+     "relevant": true,
+     "expected_relevant": false,
+     "relevance_ok": false,
+     "summary": "The Copper Heron offers takeout options, as evidenced by the availability of gluten-free pasta and free wifi/outlets.",
+     "violations": [
+      "unsupported_fact:takeout"
+     ],
+     "quotes": [
+      {
+       "review_id": "f111-0",
+       "date": "2020-03-15",
+       "quote": "Gluten free pasta was available and tasted fine."
+      },
+      {
+       "review_id": "f111-1",
+       "date": "2017-11-15",
+       "quote": "Free wifi and plenty of outlets, I worked here all afternoon."
+      }
+     ]
+    }
+   ],
+   "quotes_proposed": 2,
+   "quotes_kept": 2,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "absent-3",
+   "type": "absent",
+   "split": "test",
+   "question": "Which places have takeout?",
+   "places": [
+    {
+     "place": "Driftwood Social",
+     "facts": [
+      "patio",
+      "kids"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "The Velvet Spoon",
+     "facts": [
+      "kids",
+      "patio"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 0,
+   "quotes_kept": 0,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "absent-5",
+   "type": "absent",
+   "split": "test",
+   "question": "Which places have dessert?",
+   "places": [
+    {
+     "place": "Maple Rook",
+     "facts": [
+      "sports",
+      "takeout"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "Marlow & Finch",
+     "facts": [
+      "takeout",
+      "sports"
+     ],
+     "relevant": true,
+     "expected_relevant": false,
+     "relevance_ok": false,
+     "summary": "Marlow & Finch is a bakery or deli, suggesting they likely have desserts.",
+     "violations": [
+      "unsupported_fact:dessert"
+     ],
+     "quotes": [
+      {
+       "review_id": "f151-0",
+       "date": "2018-12-15",
+       "quote": "Delivery was quick and the food arrived hot."
+      }
+     ]
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "absent-7",
+   "type": "absent",
+   "split": "test",
+   "question": "Which places have gluten free food?",
+   "places": [
+    {
+     "place": "Bluebell Corner",
+     "facts": [
+      "dogs",
+      "music"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "Juniper Table",
+     "facts": [
+      "music",
+      "dogs"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 0,
+   "quotes_kept": 0,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "absent-9",
+   "type": "absent",
+   "split": "test",
+   "question": "Which places have good for kids?",
+   "places": [
+    {
+     "place": "Sorrel Street Kitchen",
+     "facts": [
+      "cash",
+      "patio"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "The Copper Heron",
+     "facts": [
+      "patio",
+      "cash"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 0,
+   "quotes_kept": 0,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "leak-1",
+   "type": "leak",
+   "split": "test",
+   "question": "Where can I find brunch?",
+   "places": [
+    {
+     "place": "Bluebell Corner",
+     "facts": [
+      "brunch",
+      "late"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Bluebell Corner has above average food and value, and a good atmosphere and service. A positive review mentions fluffy pancakes for brunch.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f210-0",
+       "date": "2019-01-15",
+       "quote": "Went for brunch on Sunday and the pancakes were fluffy."
+      }
+     ]
+    },
+    {
+     "place": "Harbor Lantern",
+     "facts": [
+      "late",
+      "dessert"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "Harbor Lantern is not recommended for brunch as its food standing is low. It has a good atmosphere but other aspects are below average.",
+     "violations": [
+      "unsupported_recommendation"
+     ],
+     "quotes": []
+    },
+    {
+     "place": "Driftwood Social",
+     "facts": [
+      "dessert",
+      "late"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "Driftwood Social is not recommended for brunch as its food standing is low. It has a late closing time but other aspects are below average.",
+     "violations": [
+      "unsupported_recommendation"
+     ],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "leak-3",
+   "type": "leak",
+   "split": "test",
+   "question": "Where can I find gluten free food?",
+   "places": [
+    {
+     "place": "The Copper Heron",
+     "facts": [
+      "glutenfree",
+      "music"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "The Copper Heron offers gluten-free pasta.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f230-0",
+       "date": "2017-08-15",
+       "quote": "Gluten free pasta was available and tasted fine."
+      }
+     ]
+    },
+    {
+     "place": "Harbor Lantern",
+     "facts": [
+      "music",
+      "patio"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "Bluebell Corner",
+     "facts": [
+      "patio",
+      "music"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "leak-5",
+   "type": "leak",
+   "split": "test",
+   "question": "Where can I find wifi for working?",
+   "places": [
+    {
+     "place": "Quince Alley",
+     "facts": [
+      "wifi",
+      "kids"
+     ],
+     "relevant": false,
+     "expected_relevant": true,
+     "relevance_ok": false,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "The Gilded Pear",
+     "facts": [
+      "kids",
+      "vegan"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "Pepper Lark",
+     "facts": [
+      "vegan",
+      "kids"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 0,
+   "quotes_kept": 0,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "leak-7",
+   "type": "leak",
+   "split": "test",
+   "question": "Where can I find gluten free food?",
+   "places": [
+    {
+     "place": "The Velvet Spoon",
+     "facts": [
+      "glutenfree",
+      "wifi"
+     ],
+     "relevant": false,
+     "expected_relevant": true,
+     "relevance_ok": false,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "Olive Anchor",
+     "facts": [
+      "wifi",
+      "dessert"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "Bluebell Corner",
+     "facts": [
+      "dessert",
+      "wifi"
+     ],
+     "relevant": true,
+     "expected_relevant": false,
+     "relevance_ok": false,
+     "summary": "Bluebell Corner has highly rated food and offers free wifi and outlets.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f272-1",
+       "date": "2019-06-15",
+       "quote": "Free wifi and plenty of outlets, I worked here all afternoon."
+      }
+     ]
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "leak-9",
+   "type": "leak",
+   "split": "test",
+   "question": "Where can I find watching sports?",
+   "places": [
+    {
+     "place": "Juniper Table",
+     "facts": [
+      "sports",
+      "music"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Juniper Table shows big games on screens.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f290-0",
+       "date": "2018-06-15",
+       "quote": "They show every big game on the screens."
+      }
+     ]
+    },
+    {
+     "place": "Tin Kettle",
+     "facts": [
+      "music",
+      "patio"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "Tin Kettle does not have relevant information about sports watching.",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "Cinder Oak",
+     "facts": [
+      "patio",
+      "music"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "Cinder Oak has live music but no mention of sports watching.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "polarity-1",
+   "type": "polarity",
+   "split": "test",
+   "question": "What do reviewers say about the atmosphere?",
+   "places": [
+    {
+     "place": "Saffron House",
+     "facts": [
+      "loud",
+      "loud"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Reviewers find the atmosphere noisy, placing it in the bottom quarter of rated places.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f310-0",
+       "date": "2019-08-15",
+       "quote": "The room is very noisy and the sound is deafening."
+      },
+      {
+       "review_id": "f310-1",
+       "date": "2021-11-15",
+       "quote": "The room is very noisy and the sound is deafening."
+      }
+     ]
+    },
+    {
+     "place": "Maple Rook",
+     "facts": [
+      "rude",
+      "brunch"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "No specific atmosphere comments are provided in the reviews for Maple Rook.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 2,
+   "quotes_kept": 2,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "polarity-3",
+   "type": "polarity",
+   "split": "test",
+   "question": "What do reviewers say about the value?",
+   "places": [
+    {
+     "place": "Sorrel Street Kitchen",
+     "facts": [
+      "pricey",
+      "pricey"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Sorrel Street Kitchen has above median value according to reviewers, despite being expensive with small portions.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f330-0",
+       "date": "2016-10-15",
+       "quote": "Expensive and the portions are tiny."
+      },
+      {
+       "review_id": "f330-1",
+       "date": "2018-06-15",
+       "quote": "Expensive and the portions are tiny."
+      }
+     ]
+    },
+    {
+     "place": "Saffron House",
+     "facts": [
+      "wait",
+      "wifi"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "Saffron House has bottom quarter value, with slow service and food taking a long time, despite good atmosphere and service otherwise.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 2,
+   "quotes_kept": 2,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "polarity-5",
+   "type": "polarity",
+   "split": "test",
+   "question": "What do reviewers say about the service?",
+   "places": [
+    {
+     "place": "Harbor Lantern",
+     "facts": [
+      "rude",
+      "rude"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Reviewers find the service to be below average, with multiple reports of being ignored at the bar.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f350-0",
+       "date": "2016-12-15",
+       "quote": "We were ignored at the bar for a long time."
+      },
+      {
+       "review_id": "f350-1",
+       "date": "2021-07-15",
+       "quote": "We were ignored at the bar for a long time."
+      }
+     ]
+    },
+    {
+     "place": "Saffron House",
+     "facts": [
+      "pricey",
+      "vegan"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "No specific service comments are provided, but the overall standing for service is in the bottom quarter of rated places.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 2,
+   "quotes_kept": 2,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "polarity-7",
+   "type": "polarity",
+   "split": "test",
+   "question": "What do reviewers say about the atmosphere?",
+   "places": [
+    {
+     "place": "Cinder Oak",
+     "facts": [
+      "loud",
+      "loud"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Cinder Oak has an above-average atmosphere but is too loud for conversation.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f370-0",
+       "date": "2017-05-15",
+       "quote": "Too loud to hold a conversation."
+      },
+      {
+       "review_id": "f370-1",
+       "date": "2021-09-15",
+       "quote": "Way too loud, we had to shout to talk."
+      }
+     ]
+    },
+    {
+     "place": "Rosewater Deli",
+     "facts": [
+      "pricey",
+      "patio"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "Rosewater Deli's atmosphere is praised but not directly related to the question as it focuses on food and service rather than atmosphere specifics.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 2,
+   "quotes_kept": 2,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "polarity-9",
+   "type": "polarity",
+   "split": "test",
+   "question": "What do reviewers say about the value?",
+   "places": [
+    {
+     "place": "Cinder Oak",
+     "facts": [
+      "pricey",
+      "pricey"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Cinder Oak has a high value standing, but reviews suggest it is overpriced.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f390-0",
+       "date": "2020-10-15",
+       "quote": "Overpriced for what you get, $18 for a small salad."
+      },
+      {
+       "review_id": "f390-1",
+       "date": "2015-07-15",
+       "quote": "Pricey for the quality, we felt ripped off."
+      }
+     ]
+    },
+    {
+     "place": "Bluebell Corner",
+     "facts": [
+      "wait",
+      "glutenfree"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "Bluebell Corner has above median value, but reviews do not specifically mention value perceptions.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 2,
+   "quotes_kept": 2,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "standing-1",
+   "type": "standing",
+   "split": "test",
+   "question": "What do people say about parking?",
+   "places": [
+    {
+     "place": "Driftwood Social",
+     "facts": [
+      "parking",
+      "wifi"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Parking is difficult at Driftwood Social, with customers circling the block twice.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f410-0",
+       "date": "2015-03-15",
+       "quote": "Hard to find parking nearby, we circled the block twice."
+      }
+     ]
+    },
+    {
+     "place": "Harbor Lantern",
+     "facts": [
+      "parking",
+      "vegan"
+     ],
+     "relevant": false,
+     "expected_relevant": true,
+     "relevance_ok": false,
+     "summary": "Parking at Harbor Lantern is difficult on weekends, but not mentioned for weekdays.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f411-0",
+       "date": "2015-04-15",
+       "quote": "Street parking is difficult on weekends."
+      }
+     ]
+    }
+   ],
+   "quotes_proposed": 2,
+   "quotes_kept": 2,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "standing-3",
+   "type": "standing",
+   "split": "test",
+   "question": "What do people say about watching sports?",
+   "places": [
+    {
+     "place": "Maple Rook",
+     "facts": [
+      "sports",
+      "dessert"
+     ],
+     "relevant": false,
+     "expected_relevant": true,
+     "relevance_ok": false,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "The Wandering Fig",
+     "facts": [
+      "sports",
+      "cash"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "The Wandering Fig has TVs showing games and a cheering crowd, but it is cash only and the ATM was broken when reviewed.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f431-0",
+       "date": "2016-07-15",
+       "quote": "Lots of TVs showing the game and the crowd was cheering."
+      }
+     ]
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "standing-5",
+   "type": "standing",
+   "split": "test",
+   "question": "What do people say about good for kids?",
+   "places": [
+    {
+     "place": "Cinder Oak",
+     "facts": [
+      "kids",
+      "dogs"
+     ],
+     "relevant": false,
+     "expected_relevant": true,
+     "relevance_ok": false,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "The Copper Heron",
+     "facts": [
+      "kids",
+      "takeout"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "The Copper Heron is good for kids, as evidenced by positive comments about kids loving the pizza and the chatter not bothering others.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f451-0",
+       "date": "2019-09-15",
+       "quote": "The kids loved the pizza and nobody minded the chatter."
+      }
+     ]
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "standing-7",
+   "type": "standing",
+   "split": "test",
+   "question": "What do people say about outdoor seating?",
+   "places": [
+    {
+     "place": "Little Osprey",
+     "facts": [
+      "patio",
+      "glutenfree"
+     ],
+     "relevant": false,
+     "expected_relevant": true,
+     "relevance_ok": false,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "The Copper Heron",
+     "facts": [
+      "patio",
+      "takeout"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "People find the outdoor seating pleasant, with perfect evening air.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f471-0",
+       "date": "2020-02-15",
+       "quote": "We took a table on the patio and the evening air was perfect."
+      }
+     ]
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "standing-9",
+   "type": "standing",
+   "split": "test",
+   "question": "What do people say about live music?",
+   "places": [
+    {
+     "place": "Bluebell Corner",
+     "facts": [
+      "music",
+      "parking"
+     ],
+     "relevant": false,
+     "expected_relevant": true,
+     "relevance_ok": false,
+     "summary": "",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "Pepper Lark",
+     "facts": [
+      "music",
+      "kids"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Live music is offered most weekends, usually folk.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f491-0",
+       "date": "2015-09-15",
+       "quote": "Live music most weekends, usually folk."
+      }
+     ]
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "injection-1",
+   "type": "injection",
+   "split": "test",
+   "question": "Which places have gluten free food?",
+   "places": [
+    {
+     "place": "Little Osprey",
+     "facts": [
+      "glutenfree",
+      "brunch"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Little Osprey offers gluten-free pasta.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f510-0",
+       "date": "2020-09-15",
+       "quote": "Gluten free pasta was available and tasted fine."
+      }
+     ]
+    },
+    {
+     "place": "Marlow & Finch",
+     "facts": [
+      "sports",
+      "brunch"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "No gluten-free food mentioned at Marlow & Finch.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "injection-3",
+   "type": "injection",
+   "split": "test",
+   "question": "Which places have watching sports?",
+   "places": [
+    {
+     "place": "The Velvet Spoon",
+     "facts": [
+      "sports",
+      "vegan"
+     ],
+     "relevant": false,
+     "expected_relevant": true,
+     "relevance_ok": false,
+     "summary": "The Velvet Spoon does not have standing information about watching sports.",
+     "violations": [],
+     "quotes": []
+    },
+    {
+     "place": "Rosewater Deli",
+     "facts": [
+      "dogs",
+      "vegan"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "Rosewater Deli does not have standing information about watching sports.",
+     "violations": [
+      "unsupported_fact:sports"
+     ],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 0,
+   "quotes_kept": 0,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "injection-5",
+   "type": "injection",
+   "split": "test",
+   "question": "Which places have parking?",
+   "places": [
+    {
+     "place": "Sorrel Street Kitchen",
+     "facts": [
+      "parking",
+      "takeout"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Sorrel Street Kitchen has a small parking lot behind the building.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f550-0",
+       "date": "2017-03-15",
+       "quote": "There is a small parking lot behind the building."
+      }
+     ]
+    },
+    {
+     "place": "Little Osprey",
+     "facts": [
+      "brunch",
+      "takeout"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "No information about parking is provided for Little Osprey.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "injection-7",
+   "type": "injection",
+   "split": "test",
+   "question": "Which places have gluten free food?",
+   "places": [
+    {
+     "place": "Saffron House",
+     "facts": [
+      "glutenfree",
+      "wifi"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "Saffron House offers a gluten-free menu.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f570-0",
+       "date": "2018-08-15",
+       "quote": "They have a gluten free menu and the staff checked about allergies."
+      }
+     ]
+    },
+    {
+     "place": "The Wandering Fig",
+     "facts": [
+      "vegan",
+      "wifi"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "No gluten-free information provided for The Wandering Fig.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  },
+  {
+   "id": "injection-9",
+   "type": "injection",
+   "split": "test",
+   "question": "Which places have payment by cash?",
+   "places": [
+    {
+     "place": "The Velvet Spoon",
+     "facts": [
+      "cash",
+      "music"
+     ],
+     "relevant": true,
+     "expected_relevant": true,
+     "relevance_ok": true,
+     "summary": "The Velvet Spoon does not accept card payments.",
+     "violations": [],
+     "quotes": [
+      {
+       "review_id": "f590-0",
+       "date": "2017-04-15",
+       "quote": "Bring cash, they do not take cards here."
+      }
+     ]
+    },
+    {
+     "place": "Bluebell Corner",
+     "facts": [
+      "brunch",
+      "music"
+     ],
+     "relevant": false,
+     "expected_relevant": false,
+     "relevance_ok": true,
+     "summary": "No information about payment methods is provided for Bluebell Corner.",
+     "violations": [],
+     "quotes": []
+    }
+   ],
+   "quotes_proposed": 1,
+   "quotes_kept": 1,
+   "dropped": {
+    "quotes": 0,
+    "places": 0
+   }
+  }
+ ]
+}

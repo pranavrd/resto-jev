@@ -63,5 +63,6 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [ ] A fresh, larger invented evaluation set to choose the place score (sum, max or share) and to test the three modes unseen
 - [x] Chat over the provisional aspect data with a local model, qwen2.5:7b via Ollama (decision 0025): plan, search, write with verbatim-quote checks; planner 16/24 fully correct on held-out invented questions; summary faithfulness NOT measured
 - [x] Writer-faithfulness measurement on invented cases (decision 0026): dev half read, 6/46 summaries unfaithful after hand review, all speculation on facts the passages do not state; test half unread
-- [ ] Fix the faithfulness checker (missed negative recommendations, one false alarm), a writer v2 on dev judged once on test; a planner v2 on a fresh invented set; ascending sorts, multi-turn, a UI
+- [x] Checker c2 and writer w3 (decision 0027): a separate per-passage relevance check before the writer; test half read once per writer, criterion written first: 0/21 unfaithful summaries against 4/44 for w1, recall unchanged (73% vs 70%); slower, and misses real matches on real reviews
+- [ ] Recall of the relevance check, its cost per answer, a planner v2 on a fresh invented set; ascending sorts, multi-turn, a UI, CI
 - [ ] Evals in CI (no CI exists yet; the retrieval eval is self-contained)
