@@ -363,7 +363,7 @@ def test_the_verifier_treats_anything_but_an_explicit_true_as_no_and_its_prompt_
 
 
 def test_the_default_writer_is_w3_by_decision_0027_and_the_prompts_teach_nothing_from_the_test_bank():
-    assert chat.WRITE_VERSION == "w3" and set(chat.WRITE_SYSTEMS) == {"w1", "w2", "w3"}
+    assert chat.WRITE_VERSION == "w3" and set(chat.WRITE_SYSTEMS) == {"w1", "w2", "w3", "w4"}
     shots = " ".join(u for u, _ in chat.VERIFY_SHOTS)
     for text in (chat.WRITE_SYSTEM_W2, chat.VERIFY_SYSTEM, shots):  # nothing from the faithfulness bank is taught in the prompts
         for banned in ("takeout", "dessert", "wifi", "laptop", "patio", "brunch", "vegan", "gluten", "dog", "live music", "cash only"):
@@ -411,3 +411,46 @@ def test_a_filters_only_answer_says_it_is_alphabetical_not_a_ranking():
     ranked, _ = chat.render("q", parse_plan(plan_dict(sort="overall")), items, {}, {"places": {}})
     topical, _ = chat.render("q", parse_plan(plan_dict(topic="patio")), items, {}, {"places": {}})
     assert "alphabetically" not in ranked and "alphabetically" not in topical
+
+
+# ---- w4: extractive, no model-written text (decision 0028) ------------------------------------------------------------------
+
+def test_extract_quote_is_a_verbatim_prefix_of_the_first_usable_fragment_with_no_model():
+    e = {"review_id": "r1", "date": "2021-02-03", "snippet": "Ok. ... The «patio» is the best in the neighborhood and the staff were wonderful to our whole group of friends that night, truly a treat and we will certainly come back again soon"}
+    q = chat.extract_quote(e)
+    assert q and q["review_id"] == "r1" and q["date"] == "2021-02-03" and len(q["quote"].split()) == chat.MAX_QUOTE_WORDS
+    assert chat.check_quote(q["quote"], "r1", [e])  # it passes the same verbatim check as a model's quote would
+    assert chat.extract_quote({"review_id": "r", "date": "d", "snippet": "Too short."}) is None
+    assert chat.extract_quote({"review_id": "r", "date": "d", "snippet": "Short but fine here"})["quote"] == "Short but fine here"
+
+
+def test_w4_runs_only_the_check_and_shows_a_verbatim_quote_for_each_verified_place():
+    fake = Scripted({1: True, 2: False}, lambda m: pytest.fail("no writer under w4"))
+    written, dropped, raw = chat.write_places(fake, "Which places have takeout?", ITEMS, {"places": {}}, "w4")
+    assert fake.calls == ["verify1", "verify2"] and raw == {"places": []} and dropped == {"quotes": 0, "places": 0}
+    assert written[1]["relevant"] and written[1]["summary"] == "" and written[1]["quotes"][0]["quote"] == "Delivery was quick and the food arrived hot."
+    assert written[2] == {"relevant": False, "summary": "", "quotes": []} and written[3] == {"relevant": False, "summary": "", "quotes": []}
+
+
+@needs_db
+def test_the_whole_flow_under_w4_has_no_summaries_a_verbatim_quote_and_its_own_caveat(fake_world):
+    conn, _ = fake_world
+    fake = Fake(plan_dict(topic="patio"), lambda m: pytest.fail("no writer under w4"), verify=lambda messages: "patio" in messages[-1]["content"])
+    out = chat.answer(conn, fake, "Where is there a patio?", tablemap_api.run, "w4")
+    assert "write" not in fake.calls and "Summary (model-written" not in out.answer
+    assert chat.CAVEAT_EXTRACTIVE in out.answer and chat.CAVEAT not in out.answer and "PROVISIONAL" in out.answer
+    q = out.places[0]["quotes"][0]["quote"]
+    assert out.places[0]["name"] == "Quokka Table" and f'> "{q}"' in out.answer
+
+
+@needs_db
+def test_the_chat_endpoint_style_quotes_uses_the_extractive_writer(fake_world):
+    conn, _ = fake_world
+    fake = Fake(plan_dict(topic="patio"), lambda m: pytest.fail("no writer in quotes style"), verify=lambda messages: "patio" in messages[-1]["content"])
+    c = _http(conn, fake)
+    r = c.post("/tablemap/chat", json={"question": "patio?", "style": "quotes"}).json()
+    assert chat.CAVEAT_EXTRACTIVE in r["answer"] and "write" not in fake.calls and r["places"][0]["quotes"]
+    assert c.post("/tablemap/chat", json={"question": "patio?", "style": "poem"}).status_code == 422
+    summary = _http(conn, Fake(plan_dict(topic="patio"), honest_writer, verify=lambda messages: "patio" in messages[-1]["content"]))
+    plain = summary.post("/tablemap/chat", json={"question": "patio?"}).json()  # the default style is the summary writer
+    assert chat.CAVEAT in plain["answer"]
