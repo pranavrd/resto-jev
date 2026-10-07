@@ -23,7 +23,7 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 
 ## Restaurant census (Week 4 item, done early)
 - [x] `place` table from OSM x licences, 195 places (184 public eating or drinking), matching validated by hand, Jev place kinds (decision 0016)
-- [ ] Yelp comparison: blocked on the licence decision in 0001
+- [x] Yelp comparison: done at the level the evidence allows (decision 0033; figures private): recall bounds from licence closure records, no human labels; the matcher, not the census, is the weak part
 
 ## TableMap half, non-Yelp parts (Week 5 item, done early)
 - [x] SEPTA GTFS stops and weekday service near the areas, City neighborhoods, per-place transit context (decision 0017); stop counts verified against raw GTFS
@@ -52,7 +52,7 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [x] **Owner decision 2026-10-04: no more manual labelling** (10 of 180 aspect items done; the 145 building labels were never started). Replaced by a constructed test set and hard cases (decision 0022); the rating stays provisional
 - [x] Constructed probe set (176 invented reviews) and 20 hard cases run: mention and level handling good, no leakage, small halo (+0.23 of a level), implicit value and atmosphere mentions missed
 - [ ] Optional, no labels needed: prompt-stability check, a lexicon baseline, a second AI annotator stored apart from human labels
-- [ ] Dropped for lack of labels: baseline model vs Jev on human labels; the building ground-truth check and human review time
+- [x] Dropped for lack of labels (owner decision): baseline model vs Jev on human labels; the building ground-truth check and human review time
 - [ ] Confirm which agreement version Yelp showed at the 2026-10-03 download (0001); the Data's term ends 2027-10-03
 
 
@@ -67,8 +67,9 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [x] Relevance-check recall and cost (decision 0028): fresh 12-topic set, seven variants on dev, candidate failed its pre-registered test criterion and was not adopted; the writer is three quarters of the time, so an opt-in extractive style (`quotes`, ~3x faster, no model-written text) was added
 - [x] A fix for incidental mentions that holds on new topics: built (k2, "strict matching"), cut place false positives from 9-10 to 3 of 54 on two fresh halves, but lost 6.3 points of recall on the test half against a bar of 5, so it is an option, not the default (decision 0032)
 - [x] Ascending sorts: lowest provisional scores first for "worst" questions, by code, for scores only (decision 0032)
-- [ ] Evals in CI (no CI exists yet; the retrieval eval is self-contained)
+- [x] Evals in CI (decision 0030; first GitHub run passed 2026-10-06)
 - [x] Planner p2 (decision 0029): a hybrid of model (scope, topic) and rules (kinds, area, rail, aspect levels, sort); judged on a third question set written after the freeze: 29/32 vs 19/32 for p1, criterion met, 3 known misses left
 - [x] Evals in CI (decision 0030): workflow written and checked locally from a clean environment against an empty database (340 passed, 23 skipped); published figures recomputed from committed runs; not yet run on GitHub (no remote)
 - [x] Chat view `#/chat` with multi-turn follow-ups (decision 0031): rewrite into a standalone question, judged on a fresh set (14/16 vs 7/16 without history, criterion met); checked by clicking in the browser; found and fixed a misleading error message
 - [x] Gaps from 0031 closed (decision 0032): progress stream and a Cancel that stops the model, a conversation kept in the browser, follow-ups that add a condition (the cause was a code guard, not the model), and a live-found defect fixed (complete questions merged with the last turn: r1 did it to a quarter of 24, r3 to none of 24 held-out); planner p3/p4 and strict matching missed their bars and are options
+- [x] Write-up: the README, the decision records and `docs/chat-eval/` are the write-up (owner decision 2026-10-07); hotspots and a hosted demo are skipped for now
