@@ -51,7 +51,8 @@ Jev notes (from the SDK docs): package `typesafe-sdk`, key read from `TYPESAFE_A
 - [x] Provisional place-level rating (Bayesian shrinkage, recency, frozen composite weights w1, credible intervals and rank intervals), status enforced `provisional`
 - [x] **Owner decision 2026-10-04: no more manual labelling** (10 of 180 aspect items done; the 145 building labels were never started). Replaced by a constructed test set and hard cases (decision 0022); the rating stays provisional
 - [x] Constructed probe set (176 invented reviews) and 20 hard cases run: mention and level handling good, no leakage, small halo (+0.23 of a level), implicit value and atmosphere mentions missed
-- [ ] Optional, no labels needed: prompt-stability check, a lexicon baseline, a second AI annotator stored apart from human labels
+- [x] No-label reliability checks (decision 0034): stability of a review's score under repeat, sentence shuffle, typographic noise, reworded questions and paraphrase (invented set: committed; real reviews: private), and split-half reliability and ICC of place scores against Yelp's stars as the benchmark (private)
+- [ ] Optional, no labels needed: a lexicon baseline, a second AI annotator stored apart from human labels (agreement with an independent scorer)
 - [x] Dropped for lack of labels (owner decision): baseline model vs Jev on human labels; the building ground-truth check and human review time
 - [ ] Confirm which agreement version Yelp showed at the 2026-10-03 download (0001); the Data's term ends 2027-10-03
 
