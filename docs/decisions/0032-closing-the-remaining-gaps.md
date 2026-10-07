@@ -16,7 +16,7 @@
 | A message that only adds a condition ("and good service as well") is not seen as a follow-up | **Done**, and the cause was not the one decision 0031 gave. A second defect found on the way (complete questions turned into follow-ups) is fixed too. |
 | Planner misses ("terrific staff", "Broad Street Line", "the three best bars") | **Fixed in p3/p4 and covered by tests, but the held-out criteria were not met, so the default stays p2.** |
 | The check accepts a passage that only mentions the topic | **A candidate (k2) removes most of it; it failed its recall criterion, so it is an option** ("strict matching"), not the default. |
-| CI had never run on GitHub | The workflow ran on the first push; see `docs/ci.md` for its status. |
+| CI had never run on GitHub | **Done.** The first push ran it and both jobs (`python`, `web`) passed ([run 37550809861](https://github.com/pranavrd/resto-jev/actions/runs/37550809861)). The repository is public; the history was scanned first. |
 
 ## Ascending sorts: the lowest provisional scores first
 

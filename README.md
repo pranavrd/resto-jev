@@ -94,7 +94,7 @@ STREETWALKER_TABLEMAP=1 .venv/bin/uvicorn streetwalker.api:app --port 8000      
 
 ## Continuous integration
 
-`.github/workflows/ci.yml` runs lint, the web checks and the Python suite (about 340 tests, including the retrieval evals and a test that recomputes every published figure from the committed run files) on invented data only. What needs a model or the real database stays local: see [docs/ci.md](docs/ci.md) and [decision 0030](docs/decisions/0030-ci.md). Its first GitHub run: see [docs/ci.md](docs/ci.md).
+`.github/workflows/ci.yml` runs lint, the web checks and the Python suite (several hundred tests, including the retrieval evals and a test that recomputes every published figure from the committed run files) on invented data only. What needs a model or the real database stays local: see [docs/ci.md](docs/ci.md) and [decision 0030](docs/decisions/0030-ci.md). Its first run on GitHub passed (both jobs): see [docs/ci.md](docs/ci.md).
 
 ## Attribution
 

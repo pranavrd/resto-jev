@@ -9,7 +9,7 @@
 | `python` | check that nothing under `data/`, `docs/private/` or `.env` is tracked; start Postgres from `db/Dockerfile` (PostGIS, pgvector, pg_trgm); install the package; `ruff check .`; apply every migration to the empty database; `pytest -q -rs` |
 | `web` | `npm ci`, `npx tsc --noEmit`, `npx vitest run`, `npm run build` |
 
-`pytest` is where the evals run. On the empty CI database that is about 340 tests:
+`pytest` is where the evals run. On the empty CI database that is several hundred tests (the ones that need the real database skip):
 
 - **Unit tests** of the walk, frontage, evidence, features, cascade, rating, census, search, transit and API code.
 - **Retrieval evals** (`tests/test_tablemap.py`): five invented places and eleven invented reviews inside one rolled-back transaction; the lexical eval (exact match on nine queries), the known synonym misses recorded as tests, filters, aspect thresholds, ranking rules, the default app staying free of Yelp fields, injection strings only ever travelling as bound parameters.
@@ -37,4 +37,6 @@ Each of these has its own read-once rule for held-out splits (see `docs/chat-eva
 
 ## Status of this workflow
 
-It has not run on GitHub: the repository has no remote yet. What was checked locally: the YAML parses; the data-hygiene step passes; the web steps pass; and the Python steps pass from a brand-new virtual environment (`pip install -e . pytest ruff httpx matplotlib`) against a database created empty from `db/init/01-extensions.sql` and the migrations: lint clean, migrations applied, 340 passed, 23 skipped. The first real run may still find differences (the amd64 image build, action versions).
+**Its first run on GitHub (2026-10-06, push of commit 77a1939 to `main`, [run 37550809861](https://github.com/pranavrd/resto-jev/actions/runs/37550809861)) passed: both the `python` and the `web` job, on `ubuntu-latest`.** That includes building the Postgres image from `db/Dockerfile`, applying every migration to the empty database, lint, and the whole test suite. The step logs need a login to read, so the number of tests that ran there is not recorded here; locally, from a brand-new virtual environment against an empty database, the suite before decision 0032 gave 340 passed and 23 skipped, and the local suite is now 440 passed and 2 skipped against the real database (the database tests skip on the empty CI one).
+
+The repository is public. What that means for what may be in it: nothing under `data/`, `docs/private/` or `.env` (the first step of the `python` job fails if any is tracked), no secrets (the history was scanned before the first push), and only invented data in the committed evaluation sets and runs.
