@@ -1,0 +1,1960 @@
+{
+ "note": "Invented. Written before rewrite r3 was built or run (decision 0032), after a live check found r2 turning complete questions into follow-ups.",
+ "conversations": [
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "Where can I sit outside for a drink?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "Cheap eats near the subway",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Bars in Roxborough with outdoor seating",
+     "searched_for": "bar, roxborough, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Hilltop Tap",
+      "The Porch Light"
+     ]
+    }
+   ],
+   "message": "What do reviewers say about parking?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Cheap tacos in East Passyunk",
+     "searched_for": "reviews mentioning \"tacos\", east passyunk, value good",
+     "places": [
+      "Casa Lupe",
+      "Taco Stand 9"
+     ]
+    }
+   ],
+   "message": "Is there a good place for oysters?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Best bakery in Roxborough",
+     "searched_for": "bakery or deli, roxborough, sorted by overall",
+     "places": [
+      "Rise Bakery",
+      "Flour Door"
+     ]
+    }
+   ],
+   "message": "Which bakeries open early in Rittenhouse?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Brunch in Rittenhouse",
+     "searched_for": "reviews mentioning \"brunch\", rittenhouse",
+     "places": [
+      "Sunny Plate",
+      "Egg & Co"
+     ]
+    }
+   ],
+   "message": "Pizza places with a kids menu",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "Are there any vegan-friendly restaurants in East Passyunk?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Bars in Roxborough with outdoor seating",
+     "searched_for": "bar, roxborough, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Hilltop Tap",
+      "The Porch Light"
+     ]
+    }
+   ],
+   "message": "Where do locals go for a late night snack?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "Best bar in Roxborough",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Cheap tacos in East Passyunk",
+     "searched_for": "reviews mentioning \"tacos\", east passyunk, value good",
+     "places": [
+      "Casa Lupe",
+      "Taco Stand 9"
+     ]
+    }
+   ],
+   "message": "Who has the friendliest bartenders?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "Quiet cafes in Roxborough",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Bars in Roxborough with outdoor seating",
+     "searched_for": "bar, roxborough, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Hilltop Tap",
+      "The Porch Light"
+     ]
+    }
+   ],
+   "message": "How do I get to Rittenhouse Square?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "change",
+   "history": [
+    {
+     "question": "Brunch in Rittenhouse",
+     "searched_for": "reviews mentioning \"brunch\", rittenhouse",
+     "places": [
+      "Sunny Plate",
+      "Egg & Co"
+     ]
+    }
+   ],
+   "message": "what about for lunch?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "lunch"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "add",
+   "history": [
+    {
+     "question": "Bars in Roxborough with outdoor seating",
+     "searched_for": "bar, roxborough, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Hilltop Tap",
+      "The Porch Light"
+     ]
+    }
+   ],
+   "message": "only the ones with a patio",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "patio",
+    "outdoor"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "add",
+   "history": [
+    {
+     "question": "Best bakery in Roxborough",
+     "searched_for": "bakery or deli, roxborough, sorted by overall",
+     "places": [
+      "Rise Bakery",
+      "Flour Door"
+     ]
+    }
+   ],
+   "message": "and are they open on Sundays?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bakery or deli"
+    ]
+   ],
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "sunday",
+    "open"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "ref",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "is the second one expensive?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "bean"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "change",
+   "history": [
+    {
+     "question": "Cheap tacos in East Passyunk",
+     "searched_for": "reviews mentioning \"tacos\", east passyunk, value good",
+     "places": [
+      "Casa Lupe",
+      "Taco Stand 9"
+     ]
+    }
+   ],
+   "message": "same but in Roxborough",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "good"
+   ],
+   "sort": null,
+   "topic_any": [
+    "taco"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "ref",
+   "history": [
+    {
+     "question": "Brunch in Rittenhouse",
+     "searched_for": "reviews mentioning \"brunch\", rittenhouse",
+     "places": [
+      "Sunny Plate",
+      "Egg & Co"
+     ]
+    }
+   ],
+   "message": "any of them take reservations?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "reserv"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "add",
+   "history": [
+    {
+     "question": "Cheap tacos in East Passyunk",
+     "searched_for": "reviews mentioning \"tacos\", east passyunk, value good",
+     "places": [
+      "Casa Lupe",
+      "Taco Stand 9"
+     ]
+    }
+   ],
+   "message": "make it cheaper",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "east_passyunk",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "good"
+   ],
+   "sort": null,
+   "topic_any": [
+    "taco"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "ref",
+   "history": [
+    {
+     "question": "Bars in Roxborough with outdoor seating",
+     "searched_for": "bar, roxborough, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Hilltop Tap",
+      "The Porch Light"
+     ]
+    }
+   ],
+   "message": "which of those is closest to the subway?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "roxborough",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "change",
+   "history": [
+    {
+     "question": "Bars in Roxborough with outdoor seating",
+     "searched_for": "bar, roxborough, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Hilltop Tap",
+      "The Porch Light"
+     ]
+    }
+   ],
+   "message": "and bakeries?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bakery or deli"
+    ]
+   ],
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "add",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "also somewhere with good drinks",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "cafe"
+    ]
+   ],
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "good",
+    "excellent"
+   ],
+   "service": [
+    "good",
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "quiet",
+    "drink"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "name",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "tell me about Bean Hall",
+   "followup_ok": [
+    true,
+    false
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "bean"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "dev",
+   "kind": "chain",
+   "history": [
+    {
+     "question": "Bars in Rittenhouse",
+     "searched_for": "bar, rittenhouse",
+     "places": [
+      "Rooftop 19",
+      "The Stoop"
+     ]
+    },
+    {
+     "question": "with outdoor seating",
+     "searched_for": "bar, rittenhouse, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Rooftop 19"
+     ]
+    }
+   ],
+   "message": "and cheap drinks too",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "good"
+   ],
+   "sort": null,
+   "topic_any": [
+    "outdoor",
+    "drink",
+    "seating"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "Where's a good place to take my parents for dinner?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Bars in Roxborough with outdoor seating",
+     "searched_for": "bar, roxborough, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Hilltop Tap",
+      "The Porch Light"
+     ]
+    }
+   ],
+   "message": "Gluten free options near the train?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Brunch in Rittenhouse",
+     "searched_for": "reviews mentioning \"brunch\", rittenhouse",
+     "places": [
+      "Sunny Plate",
+      "Egg & Co"
+     ]
+    }
+   ],
+   "message": "Which cafes have wifi?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Cheap tacos in East Passyunk",
+     "searched_for": "reviews mentioning \"tacos\", east passyunk, value good",
+     "places": [
+      "Casa Lupe",
+      "Taco Stand 9"
+     ]
+    }
+   ],
+   "message": "Do any bars have a rooftop?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Best bakery in Roxborough",
+     "searched_for": "bakery or deli, roxborough, sorted by overall",
+     "places": [
+      "Rise Bakery",
+      "Flour Door"
+     ]
+    }
+   ],
+   "message": "What's the best ramen around?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Bars in Roxborough with outdoor seating",
+     "searched_for": "bar, roxborough, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Hilltop Tap",
+      "The Porch Light"
+     ]
+    }
+   ],
+   "message": "Seafood restaurants in East Passyunk",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "Can I bring a dog to a brunch place?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Cheap tacos in East Passyunk",
+     "searched_for": "reviews mentioning \"tacos\", east passyunk, value good",
+     "places": [
+      "Casa Lupe",
+      "Taco Stand 9"
+     ]
+    }
+   ],
+   "message": "Is there a cheap place for breakfast in Rittenhouse?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Brunch in Rittenhouse",
+     "searched_for": "reviews mentioning \"brunch\", rittenhouse",
+     "places": [
+      "Sunny Plate",
+      "Egg & Co"
+     ]
+    }
+   ],
+   "message": "A place to watch the game with friends",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Best bakery in Roxborough",
+     "searched_for": "bakery or deli, roxborough, sorted by overall",
+     "places": [
+      "Rise Bakery",
+      "Flour Door"
+     ]
+    }
+   ],
+   "message": "Where can I find good dumplings?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Where can I get good pierogi?",
+     "searched_for": "reviews mentioning \"pierogi\"",
+     "places": [
+      "Babushka Table"
+     ]
+    },
+    {
+     "question": "Which restaurants in Rittenhouse have the worst service?",
+     "searched_for": "restaurant, rittenhouse, sorted by service, lowest first",
+     "places": [
+      "Lantern Grill",
+      "Corner Tavern"
+     ]
+    }
+   ],
+   "message": "Quiet places for a first date",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "standalone",
+   "history": [
+    {
+     "question": "Brunch in Rittenhouse",
+     "searched_for": "reviews mentioning \"brunch\", rittenhouse",
+     "places": [
+      "Sunny Plate",
+      "Egg & Co"
+     ]
+    }
+   ],
+   "message": "What's the weather like this weekend?",
+   "followup_ok": [
+    false
+   ],
+   "score_plan": false,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "change",
+   "history": [
+    {
+     "question": "Brunch in Rittenhouse",
+     "searched_for": "reviews mentioning \"brunch\", rittenhouse",
+     "places": [
+      "Sunny Plate",
+      "Egg & Co"
+     ]
+    }
+   ],
+   "message": "and for dinner?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "dinner"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "add",
+   "history": [
+    {
+     "question": "Bars in Roxborough with outdoor seating",
+     "searched_for": "bar, roxborough, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Hilltop Tap",
+      "The Porch Light"
+     ]
+    }
+   ],
+   "message": "just the ones near the train",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "roxborough",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "ref",
+   "history": [
+    {
+     "question": "Best bakery in Roxborough",
+     "searched_for": "bakery or deli, roxborough, sorted by overall",
+     "places": [
+      "Rise Bakery",
+      "Flour Door"
+     ]
+    }
+   ],
+   "message": "do either of them deliver?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bakery or deli"
+    ]
+   ],
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "deliver"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "change",
+   "history": [
+    {
+     "question": "Cheap tacos in East Passyunk",
+     "searched_for": "reviews mentioning \"tacos\", east passyunk, value good",
+     "places": [
+      "Casa Lupe",
+      "Taco Stand 9"
+     ]
+    }
+   ],
+   "message": "how about Roxborough instead?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "good"
+   ],
+   "sort": null,
+   "topic_any": [
+    "taco"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "add",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "that also have vegetarian food",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "cafe"
+    ]
+   ],
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "good",
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "vegetarian",
+    "quiet"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "ref",
+   "history": [
+    {
+     "question": "Brunch in Rittenhouse",
+     "searched_for": "reviews mentioning \"brunch\", rittenhouse",
+     "places": [
+      "Sunny Plate",
+      "Egg & Co"
+     ]
+    }
+   ],
+   "message": "which one has the best service?",
+   "followup_ok": [
+    true,
+    false
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "add",
+   "history": [
+    {
+     "question": "Cheap tacos in East Passyunk",
+     "searched_for": "reviews mentioning \"tacos\", east passyunk, value good",
+     "places": [
+      "Casa Lupe",
+      "Taco Stand 9"
+     ]
+    }
+   ],
+   "message": "not too expensive",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "east_passyunk",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "good"
+   ],
+   "sort": null,
+   "topic_any": [
+    "taco",
+    "expensive"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "ref",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "what's the first one like?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "aroma"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "add",
+   "history": [
+    {
+     "question": "Bars in Rittenhouse",
+     "searched_for": "bar, rittenhouse",
+     "places": [
+      "Rooftop 19",
+      "The Stoop"
+     ]
+    },
+    {
+     "question": "with outdoor seating",
+     "searched_for": "bar, rittenhouse, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Rooftop 19"
+     ]
+    }
+   ],
+   "message": "only cafes",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "cafe"
+    ]
+   ],
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "outdoor",
+    "seating"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "add",
+   "history": [
+    {
+     "question": "Quiet cafes in Rittenhouse with good service",
+     "searched_for": "cafe, rittenhouse, reviews mentioning \"quiet\", service good",
+     "places": [
+      "Aroma Corner",
+      "Bean Hall"
+     ]
+    }
+   ],
+   "message": "plus a good view",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "cafe"
+    ]
+   ],
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "good",
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "view",
+    "quiet"
+   ],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "chain",
+   "history": [
+    {
+     "question": "Where can I get good pierogi?",
+     "searched_for": "reviews mentioning \"pierogi\"",
+     "places": [
+      "Babushka Table"
+     ]
+    },
+    {
+     "question": "Which restaurants in Rittenhouse have the worst service?",
+     "searched_for": "restaurant, rittenhouse, sorted by service, lowest first",
+     "places": [
+      "Lantern Grill",
+      "Corner Tavern"
+     ]
+    }
+   ],
+   "message": "and what about the best service?",
+   "followup_ok": [
+    true,
+    false
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [],
+   "topic_empty": false
+  },
+  {
+   "split": "test",
+   "kind": "change",
+   "history": [
+    {
+     "question": "Bars in Roxborough with outdoor seating",
+     "searched_for": "bar, roxborough, reviews mentioning \"outdoor seating\"",
+     "places": [
+      "Hilltop Tap",
+      "The Porch Light"
+     ]
+    }
+   ],
+   "message": "and what about East Passyunk?",
+   "followup_ok": [
+    true
+   ],
+   "score_plan": true,
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "east_passyunk",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "outdoor",
+    "seating"
+   ],
+   "topic_empty": false
+  }
+ ]
+}

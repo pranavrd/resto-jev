@@ -1,0 +1,212 @@
+{
+ "model": "qwen2.5:7b",
+ "planner": "p2",
+ "rewrite": "r2",
+ "set": "v1",
+ "split": "dev",
+ "summary": {
+  "n": 16,
+  "with_history_fully_correct": 15,
+  "plan_correct": 15,
+  "baseline_plan_correct": 9,
+  "followup_flag_ok": 16,
+  "controls": 4,
+  "controls_unchanged": 4
+ },
+ "rows": [
+  {
+   "kind": "",
+   "message": "what about in Roxborough?",
+   "standalone": "Where can I get good tacos in Roxborough?",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "",
+   "message": "only the cheap ones",
+   "standalone": "Brunch spots in Rittenhouse that are cheap",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "",
+   "message": "what do reviewers say about Aroma Corner?",
+   "standalone": "what do reviewers say about Aroma Corner?",
+   "followup": false,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "",
+   "message": "any of them near the subway?",
+   "standalone": "Are any of the bars in Rittenhouse with great service near the subway?",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "",
+   "message": "and for ramen?",
+   "standalone": "Where can I get ramen?",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "",
+   "message": "which of those take reservations?",
+   "standalone": "Which of Barkside or Green Fern take reservations?",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "",
+   "message": "which one is best?",
+   "standalone": "Which ice cream shop in East Passyunk is best?",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "",
+   "message": "How do I make carbonara?",
+   "standalone": "How do I make carbonara?",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "",
+   "message": "and bakeries?",
+   "standalone": "Cafes and bakeries in Roxborough",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": false,
+   "wrong": [
+    "kinds"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "",
+   "message": "with great service too",
+   "standalone": "Vegetarian options with great service",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "",
+   "message": "Cheap lunch spots in Rittenhouse",
+   "standalone": "Cheap lunch spots in Rittenhouse",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "",
+   "message": "thanks!",
+   "standalone": "thanks!",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "",
+   "message": "is Slice House any good?",
+   "standalone": "is Slice House any good?",
+   "followup": false,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "",
+   "message": "same but in East Passyunk",
+   "standalone": "Gluten free bakeries in East Passyunk",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "",
+   "message": "not too loud though",
+   "standalone": "Bars with live music that are not too loud",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "",
+   "message": "restaurants in Brooklyn",
+   "standalone": "restaurants in Brooklyn",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  }
+ ]
+}

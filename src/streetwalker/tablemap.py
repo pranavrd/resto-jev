@@ -43,6 +43,7 @@ class TableQuery:
     min_reviews: int | None = None
     reviewed_only: bool = False  # drop places with no linked Yelp reviews
     rank_by: str | None = None  # opt-in sort by a provisional score; otherwise the place sort applies
+    lowest_first: bool = False  # rank_by a score from the LOWEST end (composite or an aspect; never text). Decision 0032
     excerpts: int = 0  # matching review passages to return per place, when text is given
     mode: str = "lexical"  # lexical | dense | hybrid (the router defaults to hybrid)
     query_vec: list[float] | None = None  # the embedded question, for dense and hybrid
@@ -67,6 +68,8 @@ def _check(tq: TableQuery) -> None:
         raise BadQuery(f"rank_by must be one of {', '.join(RANK_BY)}")
     if tq.rank_by == "text" and not tq.text:
         raise BadQuery("rank_by=text needs text")
+    if tq.lowest_first and tq.rank_by in (None, "text"):
+        raise BadQuery("lowest-first needs rank_by composite or an aspect: a text match has no low end")
     if not 0 <= tq.excerpts <= MAX_EXCERPTS:
         raise BadQuery(f"excerpts must be 0 to {MAX_EXCERPTS}")
     if tq.excerpts and not tq.text:
@@ -161,6 +164,7 @@ EXTRA_COLS = (
 RANK_SQL = {"composite": "rr.composite DESC NULLS LAST, p.id", "text": "text_score DESC NULLS LAST, p.id"} | {
     a: f"asp.{a}_mean DESC NULLS LAST, p.id" for a in ASPECTS
 }
+RANK_SQL_LOWEST = {"composite": "rr.composite ASC NULLS LAST, p.id"} | {a: f"asp.{a}_mean ASC NULLS LAST, p.id" for a in ASPECTS}  # unrated places still go last
 
 
 def build(tq: TableQuery) -> tuple[str, dict]:
@@ -197,7 +201,7 @@ def build(tq: TableQuery) -> tuple[str, dict]:
         extra += ", NULL::bigint AS n_hits, NULL::float AS text_score"
 
     if tq.rank_by:
-        order = RANK_SQL[tq.rank_by]
+        order = (RANK_SQL_LOWEST if tq.lowest_first else RANK_SQL)[tq.rank_by]
     elif tq.text and tq.place.sort is None:
         order = RANK_SQL["text"]
     else:

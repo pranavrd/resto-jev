@@ -1,0 +1,1329 @@
+{
+ "note": "Invented. Written before planner p3 was built or run (decision 0032).",
+ "questions": [
+  {
+   "split": "dev",
+   "q": "Stellar service at a bar in Rittenhouse",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "quality word"
+  },
+  {
+   "split": "dev",
+   "q": "top-notch food in Roxborough",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "excellent"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "quality word"
+  },
+  {
+   "split": "dev",
+   "q": "Fabulous atmosphere for a date night",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "excellent"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "date"
+   ],
+   "topic_empty": false,
+   "note": "quality word"
+  },
+  {
+   "split": "dev",
+   "q": "Where is the crew friendliest in East Passyunk?",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "east_passyunk",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "good",
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "service noun"
+  },
+  {
+   "split": "dev",
+   "q": "A wine bar with attentive waitstaff",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "good",
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "service noun"
+  },
+  {
+   "split": "dev",
+   "q": "Cafes where the team is welcoming",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "cafe"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "good",
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "service noun"
+  },
+  {
+   "split": "dev",
+   "q": "Pizza by the Market-Frankford Line",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "pizza"
+   ],
+   "topic_empty": false,
+   "note": "rail line"
+  },
+  {
+   "split": "dev",
+   "q": "Somewhere close to the El for a late dinner",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "late",
+    "dinner"
+   ],
+   "topic_empty": false,
+   "note": "rail line"
+  },
+  {
+   "split": "dev",
+   "q": "bars within walking distance of Regional Rail",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "any",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "control"
+  },
+  {
+   "split": "dev",
+   "q": "Restaurants near the Orange Line",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "restaurant"
+    ]
+   ],
+   "area": "any",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "rail line"
+  },
+  {
+   "split": "dev",
+   "q": "the three best bars in Rittenhouse",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": [
+    "overall"
+   ],
+   "topic_any": null,
+   "topic_empty": true,
+   "note": "number word"
+  },
+  {
+   "split": "dev",
+   "q": "Top five bakeries",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bakery or deli"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": [
+    "overall"
+   ],
+   "topic_any": null,
+   "topic_empty": true,
+   "note": "number word"
+  },
+  {
+   "split": "dev",
+   "q": "Two good brunch spots in East Passyunk",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "east_passyunk",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "brunch"
+   ],
+   "topic_empty": false,
+   "note": "number word"
+  },
+  {
+   "split": "dev",
+   "q": "A couple of cheap eats in Roxborough",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "good",
+    "excellent"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "number word"
+  },
+  {
+   "split": "dev",
+   "q": "highly rated gelato",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "ice cream"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": [
+    "overall"
+   ],
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "kind word"
+  },
+  {
+   "split": "dev",
+   "q": "gastropub with great food",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ],
+    [
+     "restaurant"
+    ],
+    [
+     "bar",
+     "restaurant"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "excellent"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "kind word"
+  },
+  {
+   "split": "dev",
+   "q": "A coffeehouse where I can work",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "cafe"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "work"
+   ],
+   "topic_empty": false,
+   "note": "kind word"
+  },
+  {
+   "split": "dev",
+   "q": "a patisserie in Rittenhouse",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bakery or deli"
+    ]
+   ],
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "kind word"
+  },
+  {
+   "split": "dev",
+   "q": "cocktail lounge with a good vibe",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "good",
+    "excellent"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "kind word"
+  },
+  {
+   "split": "dev",
+   "q": "creamery open late",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "ice cream"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "late",
+    "open"
+   ],
+   "topic_empty": false,
+   "note": "kind word"
+  },
+  {
+   "split": "dev",
+   "q": "reasonably priced sushi",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "good",
+    "excellent"
+   ],
+   "sort": null,
+   "topic_any": [
+    "sushi"
+   ],
+   "topic_empty": false,
+   "note": "price word"
+  },
+  {
+   "split": "dev",
+   "q": "Bars in Fishtown",
+   "in_scope": false,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "outside the areas"
+  },
+  {
+   "split": "dev",
+   "q": "What's the history of Rittenhouse Square?",
+   "in_scope": false,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "out of scope"
+  },
+  {
+   "split": "dev",
+   "q": "How do I get from Roxborough to the airport?",
+   "in_scope": false,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "out of scope"
+  },
+  {
+   "split": "test",
+   "q": "Marvelous service at a restaurant in East Passyunk",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "restaurant"
+    ]
+   ],
+   "area": "east_passyunk",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "quality word"
+  },
+  {
+   "split": "test",
+   "q": "first-rate food in Rittenhouse",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "excellent"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "quality word"
+  },
+  {
+   "split": "test",
+   "q": "Magnificent atmosphere for a birthday",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "excellent"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "birthday"
+   ],
+   "topic_empty": false,
+   "note": "quality word"
+  },
+  {
+   "split": "test",
+   "q": "Is the waitstaff pleasant at any cafes in Roxborough?",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "cafe"
+    ]
+   ],
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "good",
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "service noun"
+  },
+  {
+   "split": "test",
+   "q": "Bars where the people working are kind",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "good",
+    "excellent"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "service noun"
+  },
+  {
+   "split": "test",
+   "q": "Great pierogi near SEPTA's subway",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "pierogi"
+   ],
+   "topic_empty": false,
+   "note": "control"
+  },
+  {
+   "split": "test",
+   "q": "tacos near PATCO",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "taco"
+   ],
+   "topic_empty": false,
+   "note": "rail line"
+  },
+  {
+   "split": "test",
+   "q": "brunch within a block of the Broad Street Line",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "brunch"
+   ],
+   "topic_empty": false,
+   "note": "rail line"
+  },
+  {
+   "split": "test",
+   "q": "dinner near the trolley",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "dinner"
+   ],
+   "topic_empty": false,
+   "note": "control"
+  },
+  {
+   "split": "test",
+   "q": "the five best cafes in Roxborough",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "cafe"
+    ]
+   ],
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": [
+    "overall"
+   ],
+   "topic_any": null,
+   "topic_empty": true,
+   "note": "number word"
+  },
+  {
+   "split": "test",
+   "q": "Name three great bakeries",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bakery or deli"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": true,
+   "note": "number word"
+  },
+  {
+   "split": "test",
+   "q": "Two cheap brunch places in Rittenhouse",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "good",
+    "excellent"
+   ],
+   "sort": null,
+   "topic_any": [
+    "brunch"
+   ],
+   "topic_empty": false,
+   "note": "number word"
+  },
+  {
+   "split": "test",
+   "q": "A pair of bars with outdoor seating",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "outdoor"
+   ],
+   "topic_empty": false,
+   "note": "number word"
+  },
+  {
+   "split": "test",
+   "q": "top-rated ice cream",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "ice cream"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": [
+    "overall"
+   ],
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "kind word"
+  },
+  {
+   "split": "test",
+   "q": "brewpub with excellent food",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "bar"
+    ],
+    [
+     "restaurant"
+    ],
+    [
+     "bar",
+     "restaurant"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "excellent"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "kind word"
+  },
+  {
+   "split": "test",
+   "q": "sandwich shop in Roxborough",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "restaurant"
+    ],
+    [
+     "bakery or deli"
+    ],
+    [
+     "restaurant",
+     "bakery or deli"
+    ]
+   ],
+   "area": "roxborough",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "kind word"
+  },
+  {
+   "split": "test",
+   "q": "hoagies near the subway",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": true,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "hoagie"
+   ],
+   "topic_empty": false,
+   "note": "control"
+  },
+  {
+   "split": "test",
+   "q": "a coffee bar that is quiet",
+   "in_scope": true,
+   "kinds_ok": [
+    [
+     "cafe"
+    ]
+   ],
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": [
+    "quiet"
+   ],
+   "topic_empty": false,
+   "note": "kind word"
+  },
+  {
+   "split": "test",
+   "q": "inexpensive tapas in East Passyunk",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "east_passyunk",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "good",
+    "excellent"
+   ],
+   "sort": null,
+   "topic_any": [
+    "tapas"
+   ],
+   "topic_empty": false,
+   "note": "price word"
+  },
+  {
+   "split": "test",
+   "q": "affordably priced wine in Rittenhouse",
+   "in_scope": true,
+   "kinds_ok": null,
+   "area": "rittenhouse",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "good",
+    "excellent"
+   ],
+   "sort": null,
+   "topic_any": [
+    "wine"
+   ],
+   "topic_empty": false,
+   "note": "price word"
+  },
+  {
+   "split": "test",
+   "q": "Bars in Manayunk",
+   "in_scope": false,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "outside the areas"
+  },
+  {
+   "split": "test",
+   "q": "What is a good recipe for scrapple?",
+   "in_scope": false,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "out of scope"
+  },
+  {
+   "split": "test",
+   "q": "Can you recommend a hotel in Rittenhouse?",
+   "in_scope": false,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "out of scope"
+  },
+  {
+   "split": "test",
+   "q": "Tell me a joke about waiters",
+   "in_scope": false,
+   "kinds_ok": null,
+   "area": "any",
+   "near_rail": false,
+   "food": [
+    "any"
+   ],
+   "service": [
+    "any"
+   ],
+   "atmosphere": [
+    "any"
+   ],
+   "value": [
+    "any"
+   ],
+   "sort": null,
+   "topic_any": null,
+   "topic_empty": false,
+   "note": "out of scope"
+  }
+ ]
+}

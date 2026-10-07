@@ -9,3 +9,7 @@ Measures the check that decides whether a place's passages answer a question (de
 **Injection phrasings:** the dev phrasings are in the file; the test phrasings were written only after the method was frozen (the log says when), in styles the sanitizer was not designed for.
 
 **Not measured here:** what the writer then says (decision 0026), real reviews, or recall of the retrieval. A label can be argued (an "incidental" sentence that implies the answer); the categories and sentences are fixed before any run.
+
+## Batch 2 (decision 0032)
+
+Twelve more topics, six `dev2` and six `test2`, with **four incidental passages per topic** (the topic's words about another place, hearsay or a wish, the words in another sense, the reviewer's own circumstances) and one place per topic made only of incidental passages: 54 places and 108 passages per half. The `test2` injection phrasings were written before any batch-2 run. Methods: `k2` (the check, then "does this place itself have it?" for each yes) and `k3` (only the second question); the baseline is `per_passage`. Run with `--split dev2|test2 --method per_passage|k2|k3`. Read-once rules and results are in `log.md`.

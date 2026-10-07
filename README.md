@@ -90,11 +90,11 @@ STREETWALKER_TABLEMAP=1 .venv/bin/uvicorn streetwalker.api:app --port 8000      
 
 ## Chat view
 
-`#/chat` in the web app is a chat over the above with follow-ups ([decision 0031](docs/decisions/0031-chat-view-and-multi-turn.md)): a follow-up is rewritten into a standalone question with the earlier turns as context (14/16 plans right on held-out invented conversations against 7/16 without history). See [web/README.md](web/README.md).
+`#/chat` in the web app is a chat over the above with follow-ups ([decision 0031](docs/decisions/0031-chat-view-and-multi-turn.md)): a follow-up is rewritten into a standalone question with the earlier turns as context (14/16 plans right on held-out invented conversations against 7/16 without history). Decision [0032](docs/decisions/0032-closing-the-remaining-gaps.md) closed the gaps that left: progress while waiting and a Cancel that stops the model, a conversation that survives a reload (in the browser), "worst" questions answered as the lowest provisional scores first, follow-ups that only add a condition, and complete questions no longer merged with the last turn (a defect in the first rewrite, found by clicking). Three further candidates (planner p4, strict matching, a rewrite variant) missed their own pre-registered bars and are options, not defaults. See [web/README.md](web/README.md).
 
 ## Continuous integration
 
-`.github/workflows/ci.yml` runs lint, the web checks and the Python suite (about 340 tests, including the retrieval evals and a test that recomputes every published figure from the committed run files) on invented data only. What needs a model or the real database stays local: see [docs/ci.md](docs/ci.md) and [decision 0030](docs/decisions/0030-ci.md). It has not run on GitHub yet (no remote).
+`.github/workflows/ci.yml` runs lint, the web checks and the Python suite (about 340 tests, including the retrieval evals and a test that recomputes every published figure from the committed run files) on invented data only. What needs a model or the real database stays local: see [docs/ci.md](docs/ci.md) and [decision 0030](docs/decisions/0030-ci.md). Its first GitHub run: see [docs/ci.md](docs/ci.md).
 
 ## Attribution
 

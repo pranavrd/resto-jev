@@ -1,0 +1,611 @@
+{
+ "model": "qwen2.5:7b",
+ "planner": "p2",
+ "set": "v5",
+ "split": "test",
+ "fully_correct": 17,
+ "n": 24,
+ "rows": [
+  {
+   "q": "Wonderfully attentive waiters at an Italian place in East Passyunk",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "attentive waiters Italian",
+    "kinds": [],
+    "area": "east_passyunk",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "good",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Super helpful hosts at brunch places in Rittenhouse",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": false,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "brunch hosts",
+    "kinds": [],
+    "area": "rittenhouse",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "A cafe with excellent pastries near a train station",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "pastries",
+    "kinds": [
+     "cafe"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": true,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Cheap but tasty tacos",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "tacos",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "good",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "decent prices for sushi in Roxborough",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "sushi",
+    "kinds": [],
+    "area": "roxborough",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "good",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Bars with a great vibe near the Frankford line",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": false,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "vibe",
+    "kinds": [
+     "bar"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "excellent",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Which two cafes have the best coffee?",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "sort": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "coffee",
+    "kinds": [
+     "cafe"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "overall"
+   }
+  },
+  {
+   "q": "Name 3 good pizzerias in East Passyunk",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": false
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "pizzerias",
+    "kinds": [
+     "restaurant"
+    ],
+    "area": "east_passyunk",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Do any gastropubs have a decent happy hour?",
+   "ok": {
+    "in_scope": true,
+    "kinds": false,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "happy hour",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "someplace walkable from 15th Street Station",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": false
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "walkable 15th street",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": true,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "bars near the Broad St line",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": false,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "broad st line",
+    "kinds": [
+     "bar"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Is the staff at the tavern near Rittenhouse Square rude?",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "rude staff",
+    "kinds": [
+     "bar"
+    ],
+    "area": "rittenhouse",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "excellent value lunch spots",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "lunch",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "excellent",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Where's the nicest atmosphere for brunch?",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": false,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "brunch atmosphere",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "pricey but worth it steakhouses",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "steak",
+    "kinds": [
+     "restaurant"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "good",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "anywhere that does a great Sunday roast",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "Sunday roast",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "coffee and a pastry at a quiet cafe in Roxborough",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "coffee pastry quiet",
+    "kinds": [
+     "cafe"
+    ],
+    "area": "roxborough",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "top 3 ice cream places",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "sort": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [
+     "ice cream"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "overall"
+   }
+  },
+  {
+   "q": "friendliest bartenders",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "sort": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "excellent",
+    "value": "any",
+    "near_rail": false,
+    "sort": "service"
+   }
+  },
+  {
+   "q": "Best pizza in Camden",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "pizza",
+    "kinds": [
+     "restaurant"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Who won the Eagles game?",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "How much does a taxi to Roxborough cost?",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "",
+    "kinds": [],
+    "area": "roxborough",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Recommend a good wine to pair with salmon",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "",
+    "kinds": [],
+    "area": "any",
+    "food": "excellent",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "food"
+   }
+  },
+  {
+   "q": "what do people say about the noise level",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "noise level",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  }
+ ]
+}

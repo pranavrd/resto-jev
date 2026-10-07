@@ -1,0 +1,609 @@
+{
+ "model": "qwen2.5:7b",
+ "planner": "p3",
+ "set": "v4",
+ "split": "test",
+ "fully_correct": 23,
+ "n": 24,
+ "rows": [
+  {
+   "q": "Marvelous service at a restaurant in East Passyunk",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [
+     "restaurant"
+    ],
+    "area": "east_passyunk",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "excellent",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "first-rate food in Rittenhouse",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [],
+    "area": "rittenhouse",
+    "food": "excellent",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Magnificent atmosphere for a birthday",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "birthday",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "excellent",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Is the waitstaff pleasant at any cafes in Roxborough?",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [
+     "cafe"
+    ],
+    "area": "roxborough",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "good",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Bars where the people working are kind",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": false,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "staff",
+    "kinds": [
+     "bar"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Great pierogi near SEPTA's subway",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "pierogi",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": true,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "tacos near PATCO",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "tacos",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": true,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "brunch within a block of the Broad Street Line",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "brunch",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": true,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "dinner near the trolley",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "dinner",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": true,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "the five best cafes in Roxborough",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "sort": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [
+     "cafe"
+    ],
+    "area": "roxborough",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "overall"
+   }
+  },
+  {
+   "q": "Name three great bakeries",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [
+     "bakery or deli"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Two cheap brunch places in Rittenhouse",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "brunch",
+    "kinds": [],
+    "area": "rittenhouse",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "good",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "A pair of bars with outdoor seating",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "outdoor seating",
+    "kinds": [
+     "bar"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "top-rated ice cream",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "sort": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [
+     "ice cream"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "overall"
+   }
+  },
+  {
+   "q": "brewpub with excellent food",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "",
+    "kinds": [
+     "bar"
+    ],
+    "area": "any",
+    "food": "excellent",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "sandwich shop in Roxborough",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "sandwich",
+    "kinds": [
+     "bakery or deli"
+    ],
+    "area": "roxborough",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "hoagies near the subway",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "hoagies",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": true,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "a coffee bar that is quiet",
+   "ok": {
+    "in_scope": true,
+    "kinds": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "quiet",
+    "kinds": [
+     "cafe"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "inexpensive tapas in East Passyunk",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "tapas",
+    "kinds": [],
+    "area": "east_passyunk",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "good",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "affordably priced wine in Rittenhouse",
+   "ok": {
+    "in_scope": true,
+    "area": true,
+    "near_rail": true,
+    "food": true,
+    "atmosphere": true,
+    "service": true,
+    "value": true,
+    "topic": true
+   },
+   "plan": {
+    "in_scope": true,
+    "topic": "wine",
+    "kinds": [],
+    "area": "rittenhouse",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "good",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Bars in Manayunk",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "",
+    "kinds": [
+     "bar"
+    ],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "What is a good recipe for scrapple?",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Can you recommend a hotel in Rittenhouse?",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "",
+    "kinds": [],
+    "area": "rittenhouse",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  },
+  {
+   "q": "Tell me a joke about waiters",
+   "ok": {
+    "in_scope": true
+   },
+   "plan": {
+    "in_scope": false,
+    "topic": "",
+    "kinds": [],
+    "area": "any",
+    "food": "any",
+    "atmosphere": "any",
+    "service": "any",
+    "value": "any",
+    "near_rail": false,
+    "sort": "relevance"
+   }
+  }
+ ]
+}

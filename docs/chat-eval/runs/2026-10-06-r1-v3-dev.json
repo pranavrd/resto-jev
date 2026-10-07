@@ -1,0 +1,328 @@
+{
+ "model": "qwen2.5:7b",
+ "planner": "p2",
+ "rewrite": "r1",
+ "set": "v3",
+ "split": "dev",
+ "summary": {
+  "n": 24,
+  "with_history_fully_correct": 14,
+  "plan_correct": 14,
+  "baseline_plan_correct": 9,
+  "followup_flag_ok": 18,
+  "controls": 12,
+  "controls_unchanged": 8
+ },
+ "rows": [
+  {
+   "kind": "standalone",
+   "message": "Where can I sit outside for a drink?",
+   "standalone": "Quiet cafes in Rittenhouse with good service that allow sitting outside for a drink",
+   "followup": true,
+   "followup_ok": false,
+   "control": true,
+   "unchanged": false,
+   "plan_ok": false,
+   "wrong": [
+    "unchanged"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "standalone",
+   "message": "Cheap eats near the subway",
+   "standalone": "Cheap eats near the subway",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "standalone",
+   "message": "What do reviewers say about parking?",
+   "standalone": "What do reviewers say about parking at bars in Roxborough with outdoor seating?",
+   "followup": true,
+   "followup_ok": false,
+   "control": true,
+   "unchanged": false,
+   "plan_ok": false,
+   "wrong": [
+    "unchanged"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "standalone",
+   "message": "Is there a good place for oysters?",
+   "standalone": "Is there a good place for oysters?",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "standalone",
+   "message": "Which bakeries open early in Rittenhouse?",
+   "standalone": "Which bakeries in Rittenhouse open early?",
+   "followup": true,
+   "followup_ok": false,
+   "control": true,
+   "unchanged": false,
+   "plan_ok": false,
+   "wrong": [
+    "unchanged"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "standalone",
+   "message": "Pizza places with a kids menu",
+   "standalone": "Pizza places with a kids menu",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "standalone",
+   "message": "Are there any vegan-friendly restaurants in East Passyunk?",
+   "standalone": "Are there any vegan-friendly restaurants in East Passyunk?",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "standalone",
+   "message": "Where do locals go for a late night snack?",
+   "standalone": "Where do locals go for a late night snack?",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "standalone",
+   "message": "Best bar in Roxborough",
+   "standalone": "Best bar in Roxborough",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "standalone",
+   "message": "Who has the friendliest bartenders?",
+   "standalone": "Who has the friendliest bartenders?",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "standalone",
+   "message": "Quiet cafes in Roxborough",
+   "standalone": "Quiet cafes in Roxborough with good service",
+   "followup": true,
+   "followup_ok": false,
+   "control": true,
+   "unchanged": false,
+   "plan_ok": false,
+   "wrong": [
+    "unchanged"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "standalone",
+   "message": "How do I get to Rittenhouse Square?",
+   "standalone": "How do I get to Rittenhouse Square?",
+   "followup": false,
+   "followup_ok": true,
+   "control": true,
+   "unchanged": true,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "change",
+   "message": "what about for lunch?",
+   "standalone": "what about for lunch?",
+   "followup": false,
+   "followup_ok": false,
+   "control": false,
+   "unchanged": true,
+   "plan_ok": false,
+   "wrong": [
+    "area"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "add",
+   "message": "only the ones with a patio",
+   "standalone": "Bars in Roxborough with outdoor seating and a patio",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "add",
+   "message": "and are they open on Sundays?",
+   "standalone": "Are Rise Bakery and Flour Door open on Sundays?",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": false,
+   "wrong": [
+    "area"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "ref",
+   "message": "is the second one expensive?",
+   "standalone": "Is Bean Hall expensive?",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": false,
+   "wrong": [
+    "topic"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "change",
+   "message": "same but in Roxborough",
+   "standalone": "Cheap tacos in Roxborough",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "ref",
+   "message": "any of them take reservations?",
+   "standalone": "Do Sunny Plate or Egg & Co take reservations?",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": false,
+   "wrong": [
+    "area"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "add",
+   "message": "make it cheaper",
+   "standalone": "make it cheaper",
+   "followup": false,
+   "followup_ok": false,
+   "control": false,
+   "unchanged": true,
+   "plan_ok": false,
+   "wrong": [
+    "area",
+    "topic"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "ref",
+   "message": "which of those is closest to the subway?",
+   "standalone": "Which of Hilltop Tap or The Porch Light is closest to the subway?",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": false,
+   "wrong": [
+    "kinds",
+    "area"
+   ],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "change",
+   "message": "and bakeries?",
+   "standalone": "Bakeries in Roxborough with outdoor seating",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "add",
+   "message": "also somewhere with good drinks",
+   "standalone": "Quiet cafes in Rittenhouse with good service and good drinks",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  },
+  {
+   "kind": "name",
+   "message": "tell me about Bean Hall",
+   "standalone": "What do reviewers say about Bean Hall?",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": true
+  },
+  {
+   "kind": "chain",
+   "message": "and cheap drinks too",
+   "standalone": "Bars in Rittenhouse with outdoor seating and cheap drinks",
+   "followup": true,
+   "followup_ok": true,
+   "control": false,
+   "unchanged": false,
+   "plan_ok": true,
+   "wrong": [],
+   "baseline_plan_ok": false
+  }
+ ]
+}

@@ -22,7 +22,12 @@ STREETWALKER_TABLEMAP=1 .venv/bin/uvicorn streetwalker.api:app --port 8000     #
 
 - A provisional banner is always on top. Each answer shows how a follow-up was understood, what was searched, place cards (model-written summaries labelled unchecked, verbatim quotes, provisional rating words), what the search returned but the check did not accept, and the caveat.
 - **Summaries** or **Quotes only** (faster, no model-written text), Cancel while waiting, Try again after an error, New chat. Answers take 10 to 60 seconds.
-- All server text is rendered as text, never HTML. The conversation lives in the page only.
+- **Strict matching** (off by default, decision 0032): asks a second question of every place the check accepts. Fewer wrong places, but it also misses more right ones (25 of 30 against 28 of 30 on an invented test set); an answer that used it says so. The default stays as it was because the strict check lost more recall than its pre-registered bar allowed.
+- **Progress while waiting** (decision 0032): the page reads the server's stream (`POST /tablemap/chat/stream`, newline-delimited JSON) and shows what the server is doing: how a follow-up was understood, what is being searched, the places found, and which place is being checked ("Checking place 2 of 5"). The answer itself still arrives whole, at the end.
+- **Cancel stops the server's work**, not just the wait: leaving the connection ends the model's generation at its next token and no further step runs. (A step that is only reading its prompt, or a model that is still loading, finishes that first.)
+- **The conversation is kept in this browser** (`localStorage`, finished turns and the answer style only, at most 20 turns) so a reload keeps it. **New chat clears it.** It holds review quotes, so it stays on this machine like the rest; the server stores nothing.
+- "Worst" and "lowest" questions about food, service, atmosphere, value or overall are answered with the **lowest provisional scores first** (places with at least 10 reviews), under a line saying it is an AI scorer's reading and not a verdict on the place. "Worst" of a dish or other topic is refused with the reason.
+- All server text is rendered as text, never HTML.
 
 ## Review queue (`#/review`)
 

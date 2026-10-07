@@ -15,7 +15,7 @@ from streetwalker.aspects import ASPECTS
 from streetwalker.chat import PLAN_VERSION, PLANNERS, OllamaChat, make_plan
 
 EVAL_DIR = Path(__file__).resolve().parents[2] / "docs" / "chat-eval"
-SETS = {"v1": EVAL_DIR / "plan_questions.json", "v2": EVAL_DIR / "plan_questions_v2.json", "v3": EVAL_DIR / "plan_questions_v3.json"}
+SETS = {"v1": EVAL_DIR / "plan_questions.json", "v2": EVAL_DIR / "plan_questions_v2.json", "v3": EVAL_DIR / "plan_questions_v3.json", "v4": EVAL_DIR / "plan_questions_v4.json", "v5": EVAL_DIR / "plan_questions_v5.json", "v6": EVAL_DIR / "plan_questions_v6.json"}
 
 
 def score(plan, exp: dict, question: str) -> dict[str, bool]:

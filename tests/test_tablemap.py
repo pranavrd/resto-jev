@@ -260,6 +260,18 @@ def test_rank_by_is_opt_in_descending_and_unrated_places_go_last(world):
     assert names(conn, TableQuery()) == sorted(WORLD, key=str.lower)  # the default stays alphabetical, not a ranking
 
 
+@needs_db
+def test_lowest_first_reverses_a_rank_but_keeps_unrated_places_last_and_refuses_text(world):
+    conn, _ = world
+    low = names(conn, TableQuery(rank_by="composite", lowest_first=True))
+    assert low[:5] == sorted(COMPOSITE, key=COMPOSITE.get) and low[-1] == "Walrus Diner"
+    assert names(conn, TableQuery(rank_by="value", lowest_first=True))[0] == "Marmot Kitchen"
+    assert names(conn, TableQuery(rank_by="value", lowest_first=True, min_reviews=3))[0] != "Walrus Diner"
+    for bad in (TableQuery(lowest_first=True), TableQuery(text="patio", rank_by="text", lowest_first=True)):
+        with pytest.raises(BadQuery):
+            build(bad)
+
+
 # ---- over HTTP --------------------------------------------------------------------------------------------------------
 
 @pytest.fixture

@@ -8,10 +8,17 @@ PROVISIONAL. The ratings are the provisional ones of decision 0021 (aspect score
 not validated against people). Every response says so, and every rated place repeats it.
 """
 
+import asyncio
+import json
+import logging
+import queue
+import threading
 from dataclasses import asdict
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+import anyio
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
 from streetwalker import chat as chat_mod
@@ -30,6 +37,7 @@ from streetwalker.tablemap import (
     shape_rating,
 )
 
+log = logging.getLogger("uvicorn.error")  # uvicorn shows this at INFO, so a cancel is visible in the server's console
 router = APIRouter(prefix="/tablemap", tags=["tablemap (private, provisional)"])
 
 YELP_NOTICE = (
@@ -105,6 +113,7 @@ def search(
     min_reviews: Annotated[int | None, Query(ge=1)] = None,
     reviewed_only: Annotated[bool, Query(description="Drop places with no linked reviews")] = False,
     rank_by: Annotated[Literal["text", "composite", "food", "atmosphere", "service", "value"] | None, Query(description="Opt-in sort by a PROVISIONAL score; replaces `sort`")] = None,
+    lowest_first: Annotated[bool, Query(description="With rank_by composite or an aspect: the LOWEST provisional scores first (use min_reviews). Still AI-scored, not a verdict")] = False,
     excerpts: Annotated[int, Query(ge=0, le=MAX_EXCERPTS, description="Matching review passages per place (needs text)")] = 0,
     mode: Annotated[Literal["lexical", "dense", "hybrid"], Query(description="How `text` finds reviews: words, meaning, or both fused")] = "hybrid",
     min_similarity: Annotated[float | None, Query(ge=-1, le=1, description="Cosine floor for dense matches; unset keeps the closest reviews whatever their similarity")] = None,
@@ -112,7 +121,7 @@ def search(
 ) -> dict:
     """Places, filtered by the census filters of /places plus aspect thresholds and review text. Aspect and text results are provisional."""
     mins = {a: v for a, v in {"food": min_food, "atmosphere": min_atmosphere, "service": min_service, "value": min_value}.items() if v is not None}
-    tq = TableQuery(pq, text, mins, min_by, min_reviews, reviewed_only, rank_by, excerpts, mode, None, None, min_similarity, dense_k)
+    tq = TableQuery(pq, text, mins, min_by, min_reviews, reviewed_only, rank_by, lowest_first, excerpts, mode, None, None, min_similarity, dense_k)
     items, total, env = run(conn, tq)
     return {**env, "total": total, "limit": pq.limit, "offset": pq.offset, "items": items, "attribution": [*ATTRIBUTION, YELP_NOTICE]}
 
@@ -154,6 +163,8 @@ class TurnIn(BaseModel):
 class Ask(BaseModel):
     question: str = Field(min_length=1, max_length=chat_mod.MAX_QUESTION)
     history: list[TurnIn] = Field(default_factory=list, max_length=10, description="Earlier turns, oldest first, each as returned in `turn`; the last three are used")
+    strict: bool = Field(
+        default=False, description="Strict matching (decision 0032): every passage the check accepts gets a second question, 'does this place itself have it?'. Fewer wrong places, more missed ones")
     style: Literal["summary", "quotes"] = Field(
         default="summary", description="summary: a model-written sentence per place plus quotes (writer w3). quotes: verbatim quotes only, no model-written text, about three times faster (w4)")
 
@@ -163,16 +174,70 @@ def get_chat_backend() -> chat_mod.ChatBackend:
     return chat_mod.OllamaChat()
 
 
-@router.post("/chat")
-def chat(body: Ask, conn: Conn, backend: Annotated[chat_mod.ChatBackend, Depends(get_chat_backend)]) -> dict:
-    """Ask a question about the places and their reviews. The server keeps no conversation: for a follow-up the client sends the earlier turns in
-    `history` (each the `turn` of an earlier response), and the message is rewritten into a standalone question first (decision 0031). The answer says
-    what search it ran, shows verbatim quotes, and always carries the provisional caveat. Review text goes only to the local model."""
+def run_chat(conn, backend: chat_mod.ChatBackend, body: Ask) -> dict:
+    """One answer, as the JSON the endpoints return. Model failures become the HTTP errors the JSON endpoint has always used."""
     try:
         history = [chat_mod.Turn(t.question, t.searched_for, list(t.places)) for t in body.history]
-        out = chat_mod.answer(conn, backend, body.question, run, "w4" if body.style == "quotes" else None, history=history)
+        out = chat_mod.answer(conn, backend, body.question, run, "w4" if body.style == "quotes" else None, history=history,
+                              check_version="k2" if body.strict else None)
     except chat_mod.ChatUnavailable as e:
         raise HTTPException(503, f"{e}. Start Ollama and pull the model, or use /tablemap/search.") from e
     except chat_mod.ChatBadOutput as e:
         raise HTTPException(502, f"{e}; try rephrasing the question") from e
     return {**asdict(out), "attribution": [*ATTRIBUTION, YELP_NOTICE]}
+
+
+@router.post("/chat")
+def chat(body: Ask, conn: Conn, backend: Annotated[chat_mod.ChatBackend, Depends(get_chat_backend)]) -> dict:
+    """Ask a question about the places and their reviews. The server keeps no conversation: for a follow-up the client sends the earlier turns in
+    `history` (each the `turn` of an earlier response), and the message is rewritten into a standalone question first (decision 0031). The answer says
+    what search it ran, shows verbatim quotes, and always carries the provisional caveat. Review text goes only to the local model."""
+    return run_chat(conn, backend, body)
+
+
+STREAM_POLL_S = 0.25
+
+
+@router.post("/chat/stream")
+async def chat_stream(body: Ask, request: Request, conn: Conn, backend: Annotated[chat_mod.ChatBackend, Depends(get_chat_backend)]) -> StreamingResponse:
+    """The same answer as /chat, sent as newline-delimited JSON: `stage` events while it works (what is being done, what was searched, the places found,
+    which place is being checked), then one `answer` event with exactly the JSON /chat returns, or one `error` event with the status /chat would have
+    used. If the client goes away the work is cancelled: the model's generation is stopped at its next token and no further step runs (decision 0032)."""
+    events: queue.Queue = queue.Queue()
+    cancel = threading.Event()
+
+    def work() -> None:
+        with chat_mod.listening(events.put, cancel):
+            try:
+                events.put({"event": "answer", "data": run_chat(conn, backend, body)})
+            except HTTPException as e:
+                events.put({"event": "error", "status": e.status_code, "detail": e.detail})
+            except chat_mod.Cancelled:
+                log.info("chat stream: the client left, so the answer was cancelled before it finished")
+                events.put({"event": "cancelled"})
+            except Exception:  # noqa: BLE001  the stream must end with an event, never hang
+                events.put({"event": "error", "status": 500, "detail": "the server failed while answering"})
+        events.put(None)
+
+    worker = threading.Thread(target=work, daemon=True)
+    worker.start()
+
+    async def lines():
+        try:
+            while True:
+                try:
+                    ev = await asyncio.to_thread(events.get, True, STREAM_POLL_S)
+                except queue.Empty:
+                    if await request.is_disconnected():
+                        return
+                    yield "\n"  # a blank line keeps proxies from closing an idle stream; the client skips it
+                    continue
+                if ev is None:
+                    return
+                yield json.dumps(ev) + "\n"
+        finally:
+            cancel.set()  # a client that left, or any early exit: stop the model and the remaining steps
+            with anyio.CancelScope(shield=True):  # the database connection must outlive the worker, even when this task is being cancelled
+                await anyio.to_thread.run_sync(worker.join, 30)
+
+    return StreamingResponse(lines(), media_type="application/x-ndjson", headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})

@@ -160,7 +160,9 @@ kbd { display: inline-block; min-width: 20px; padding: 1px 5px; text-align: cent
 .chat-error { margin: 0; color: #fca5a5; overflow-wrap: anywhere; }
 .chat-compose { flex: none; padding: 10px 20px 16px; border-top: 1px solid var(--line); background: var(--panel); }
 .chat-compose > * { max-width: 820px; margin-inline: auto; }
-.chat-options { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.chat-options { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.chat-options > button.on { border-color: var(--accent); color: var(--accent); }
+.chat-options > button:nth-of-type(1) { margin-left: auto; }
 .chat-options .seg { margin: 0; }
 .chat-options .seg button { flex: none; padding: 5px 12px; }
 .chat-row { display: flex; gap: 8px; align-items: flex-end; }

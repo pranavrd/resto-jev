@@ -32,3 +32,13 @@ Tune the planner prompt on `dev` only. `test` is run once, at the end, and logge
 ## Follow-ups (multi-turn), `followups_v1.json`
 
 32 invented one-turn histories with a follow-up message (16 dev, 16 test), written **before the follow-up rewrite was built or run** (decision 0031). Each has the earlier question, what was searched, and the places shown (invented names), then the new message, which of `followup` true or false is acceptable, and the plan expected for the question the message means (same fields and scorer as the planner sets). Types: a change of area, kind or topic ("what about in Roxborough?", "and bakeries?"), a narrowing ("only the cheap ones", "with great service too"), a reference to the results ("which one is best?", "which of those take reservations?", "tell me about Aroma Corner"), a bare place name, and controls that are NOT follow-ups (a new complete question, thanks, an off-topic question, a prompt-injection) and must pass through unchanged. The baseline is the same planner on the bare message with no history.
+
+## Sets added by decision 0032 (all invented, shareable)
+
+- **`plan_questions_v4.json`** (48: 24 dev, 24 test): written before planner p3 existed, in the categories of 0029's three known misses. **All of it is development data** for p3 and p4: the author wrote both halves knowing the categories and then added words from the "test" half to the word lists.
+- **`plan_questions_v5.json`** (24, all held out): written after p3 was frozen. Read once for p2 and once for p3, then spent.
+- **`plan_questions_v6.json`** (24, all held out): written after p4 was frozen. Read once for p2 and once for p4, then spent.
+- **`followups_v2.json`** (32: 16 dev, 16 test): messages that only add a condition, conversations with two and three earlier turns, a subject that changes mid-conversation, four controls per half. Read once for r1 and once for r2 on test.
+- **`followups_v3.json`** (48: 24 dev, 24 test): per half **12 complete questions after an earlier turn (they must come back unchanged)** and 12 genuine follow-ups. Written after a live check found complete questions being merged with the last turn. Read once each for r1, r2 and r3 on test. Its complete questions are judged on coming back unchanged, not on a plan.
+
+The runs are in `runs/` with the date in the name, and every number in decision 0032 is recomputed from them by `tests/test_published_numbers.py`. The verifier's batch 2 is described in `verifier/README.md`. A phrase that one of these sets' test halves has in common with a prompt is listed in `tests/test_chat.py` (`KNOWN_OVERLAP`) and disclosed in decision 0032.
